@@ -31,24 +31,23 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DungeonTeller));
             this.Check = new System.Windows.Forms.Timer(this.components);
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lbl_LFDStatus = new System.Windows.Forms.Label();
             this.lbl_LFRStatus = new System.Windows.Forms.Label();
             this.grbx_Main = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.cb_antiAfk = new System.Windows.Forms.CheckBox();
             this.grbx_options = new System.Windows.Forms.GroupBox();
             this.cb_autoJoin = new System.Windows.Forms.CheckBox();
             this.timer_antiAFK = new System.Windows.Forms.Timer(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.Restore = new System.Windows.Forms.ToolStripMenuItem();
             this.Exit = new System.Windows.Forms.ToolStripMenuItem();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.grbx_Main.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.grbx_options.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -56,15 +55,6 @@
             // Check
             // 
             this.Check.Tick += new System.EventHandler(this.Check_Tick);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::Dungeon_Teller.Properties.Resources.NotInQueue;
-            this.pictureBox1.Location = new System.Drawing.Point(27, 21);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(72, 72);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
             // 
             // lbl_LFDStatus
             // 
@@ -121,6 +111,15 @@
             this.label1.TabIndex = 7;
             this.label1.Text = "Dungeon Finder:";
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::Dungeon_Teller.Properties.Resources.NotInQueue;
+            this.pictureBox1.Location = new System.Drawing.Point(27, 21);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(72, 72);
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            // 
             // cb_antiAfk
             // 
             this.cb_antiAfk.AutoSize = true;
@@ -162,16 +161,6 @@
             // 
             this.timer_antiAFK.Interval = 30000;
             this.timer_antiAFK.Tick += new System.EventHandler(this.timer_antiAFK_Tick);
-            // 
-            // printPreviewDialog1
-            // 
-            this.printPreviewDialog1.AutoScrollMargin = new System.Drawing.Size(0, 0);
-            this.printPreviewDialog1.AutoScrollMinSize = new System.Drawing.Size(0, 0);
-            this.printPreviewDialog1.ClientSize = new System.Drawing.Size(400, 300);
-            this.printPreviewDialog1.Enabled = true;
-            this.printPreviewDialog1.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog1.Icon")));
-            this.printPreviewDialog1.Name = "printPreviewDialog1";
-            this.printPreviewDialog1.Visible = false;
             // 
             // notifyIcon1
             // 
@@ -223,9 +212,9 @@
             this.LocationChanged += new System.EventHandler(this.DungeonTeller_LocationChanged);
             this.VisibleChanged += new System.EventHandler(this.DungeonTeller_VisibleChanged);
             this.Resize += new System.EventHandler(this.DungeonTeller_Resize);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.grbx_Main.ResumeLayout(false);
             this.grbx_Main.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.grbx_options.ResumeLayout(false);
             this.grbx_options.PerformLayout();
             this.contextMenuStrip1.ResumeLayout(false);
@@ -246,7 +235,6 @@
         private System.Windows.Forms.GroupBox grbx_options;
         private System.Windows.Forms.Timer timer_antiAFK;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.PrintPreviewDialog printPreviewDialog1;
         private System.Windows.Forms.CheckBox cb_autoJoin;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;

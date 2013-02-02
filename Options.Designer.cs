@@ -36,14 +36,14 @@
             this.btn_apply = new System.Windows.Forms.Button();
             this.btn_cancel = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.cb_sounds = new System.Windows.Forms.CheckBox();
+            this.cb_sound = new System.Windows.Forms.CheckBox();
             this.num_opacity = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
             this.rb_windowTray = new System.Windows.Forms.RadioButton();
             this.rb_windowTop = new System.Windows.Forms.RadioButton();
             this.rb_windowNormal = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
-            this.cb_lock = new System.Windows.Forms.CheckBox();
+            this.cb_lockWindow = new System.Windows.Forms.CheckBox();
             this.cb_balloonTips = new System.Windows.Forms.CheckBox();
             this.cb_desktopNotification = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -53,10 +53,10 @@
             this.tb_prowl = new System.Windows.Forms.TextBox();
             this.lnk_nma = new System.Windows.Forms.LinkLabel();
             this.lbl_prowl = new System.Windows.Forms.Label();
-            this.cb_prowl = new System.Windows.Forms.CheckBox();
+            this.cb_prowlNotification = new System.Windows.Forms.CheckBox();
             this.tb_nma = new System.Windows.Forms.TextBox();
             this.lbl_nma = new System.Windows.Forms.Label();
-            this.cb_nma = new System.Windows.Forms.CheckBox();
+            this.cb_nmaNotification = new System.Windows.Forms.CheckBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.btn_mailTest = new System.Windows.Forms.Button();
@@ -64,7 +64,7 @@
             this.lbl_mailSMTP = new System.Windows.Forms.Label();
             this.tb_mailTo = new System.Windows.Forms.TextBox();
             this.lbl_mailAddress = new System.Windows.Forms.Label();
-            this.cb_mail = new System.Windows.Forms.CheckBox();
+            this.cb_mailNotification = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_opacity)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -128,14 +128,14 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.cb_sounds);
+            this.groupBox1.Controls.Add(this.cb_sound);
             this.groupBox1.Controls.Add(this.num_opacity);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.rb_windowTray);
             this.groupBox1.Controls.Add(this.rb_windowTop);
             this.groupBox1.Controls.Add(this.rb_windowNormal);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.cb_lock);
+            this.groupBox1.Controls.Add(this.cb_lockWindow);
             this.groupBox1.Controls.Add(this.cb_balloonTips);
             this.groupBox1.Controls.Add(this.cb_desktopNotification);
             this.groupBox1.Controls.Add(this.cb_antiAfk);
@@ -147,17 +147,17 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "General options";
             // 
-            // cb_sounds
+            // cb_sound
             // 
-            this.cb_sounds.AutoSize = true;
-            this.cb_sounds.Checked = true;
-            this.cb_sounds.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cb_sounds.Location = new System.Drawing.Point(16, 88);
-            this.cb_sounds.Name = "cb_sounds";
-            this.cb_sounds.Size = new System.Drawing.Size(96, 17);
-            this.cb_sounds.TabIndex = 19;
-            this.cb_sounds.Text = "Enable sounds";
-            this.cb_sounds.UseVisualStyleBackColor = true;
+            this.cb_sound.AutoSize = true;
+            this.cb_sound.Checked = true;
+            this.cb_sound.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cb_sound.Location = new System.Drawing.Point(16, 88);
+            this.cb_sound.Name = "cb_sound";
+            this.cb_sound.Size = new System.Drawing.Size(96, 17);
+            this.cb_sound.TabIndex = 19;
+            this.cb_sound.Text = "Enable sounds";
+            this.cb_sound.UseVisualStyleBackColor = true;
             // 
             // num_opacity
             // 
@@ -221,17 +221,17 @@
             this.label1.TabIndex = 13;
             this.label1.Text = "Window preferences";
             // 
-            // cb_lock
+            // cb_lockWindow
             // 
-            this.cb_lock.AutoSize = true;
-            this.cb_lock.Checked = true;
-            this.cb_lock.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cb_lock.Location = new System.Drawing.Point(16, 307);
-            this.cb_lock.Name = "cb_lock";
-            this.cb_lock.Size = new System.Drawing.Size(143, 17);
-            this.cb_lock.TabIndex = 12;
-            this.cb_lock.Text = "Lock application window";
-            this.cb_lock.UseVisualStyleBackColor = true;
+            this.cb_lockWindow.AutoSize = true;
+            this.cb_lockWindow.Checked = true;
+            this.cb_lockWindow.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cb_lockWindow.Location = new System.Drawing.Point(16, 307);
+            this.cb_lockWindow.Name = "cb_lockWindow";
+            this.cb_lockWindow.Size = new System.Drawing.Size(143, 17);
+            this.cb_lockWindow.TabIndex = 12;
+            this.cb_lockWindow.Text = "Lock application window";
+            this.cb_lockWindow.UseVisualStyleBackColor = true;
             // 
             // cb_balloonTips
             // 
@@ -265,10 +265,10 @@
             this.groupBox2.Controls.Add(this.tb_prowl);
             this.groupBox2.Controls.Add(this.lnk_nma);
             this.groupBox2.Controls.Add(this.lbl_prowl);
-            this.groupBox2.Controls.Add(this.cb_prowl);
+            this.groupBox2.Controls.Add(this.cb_prowlNotification);
             this.groupBox2.Controls.Add(this.tb_nma);
             this.groupBox2.Controls.Add(this.lbl_nma);
-            this.groupBox2.Controls.Add(this.cb_nma);
+            this.groupBox2.Controls.Add(this.cb_nmaNotification);
             this.groupBox2.Location = new System.Drawing.Point(228, 12);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(322, 200);
@@ -302,10 +302,11 @@
             this.lnk_prowl.Enabled = false;
             this.lnk_prowl.Location = new System.Drawing.Point(41, 175);
             this.lnk_prowl.Name = "lnk_prowl";
-            this.lnk_prowl.Size = new System.Drawing.Size(102, 13);
+            this.lnk_prowl.Size = new System.Drawing.Size(139, 13);
             this.lnk_prowl.TabIndex = 7;
             this.lnk_prowl.TabStop = true;
-            this.lnk_prowl.Text = "Get a Prowl API key";
+            this.lnk_prowl.Text = "Register for a Prowl API key";
+            this.lnk_prowl.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnk_prowl_LinkClicked);
             // 
             // tb_prowl
             // 
@@ -321,10 +322,11 @@
             this.lnk_nma.Enabled = false;
             this.lnk_nma.Location = new System.Drawing.Point(38, 82);
             this.lnk_nma.Name = "lnk_nma";
-            this.lnk_nma.Size = new System.Drawing.Size(100, 13);
+            this.lnk_nma.Size = new System.Drawing.Size(137, 13);
             this.lnk_nma.TabIndex = 5;
             this.lnk_nma.TabStop = true;
-            this.lnk_nma.Text = "Get a NMA API key";
+            this.lnk_nma.Text = "Register for a NMA API key";
+            this.lnk_nma.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnk_nma_LinkClicked);
             // 
             // lbl_prowl
             // 
@@ -336,16 +338,16 @@
             this.lbl_prowl.TabIndex = 4;
             this.lbl_prowl.Text = "Your Prowl API key:";
             // 
-            // cb_prowl
+            // cb_prowlNotification
             // 
-            this.cb_prowl.AutoSize = true;
-            this.cb_prowl.Location = new System.Drawing.Point(15, 111);
-            this.cb_prowl.Name = "cb_prowl";
-            this.cb_prowl.Size = new System.Drawing.Size(185, 17);
-            this.cb_prowl.TabIndex = 3;
-            this.cb_prowl.Text = "Use iOS push notifications (Prowl)";
-            this.cb_prowl.UseVisualStyleBackColor = true;
-            this.cb_prowl.CheckedChanged += new System.EventHandler(this.cb_prowl_CheckedChanged);
+            this.cb_prowlNotification.AutoSize = true;
+            this.cb_prowlNotification.Location = new System.Drawing.Point(15, 111);
+            this.cb_prowlNotification.Name = "cb_prowlNotification";
+            this.cb_prowlNotification.Size = new System.Drawing.Size(185, 17);
+            this.cb_prowlNotification.TabIndex = 3;
+            this.cb_prowlNotification.Text = "Use iOS push notifications (Prowl)";
+            this.cb_prowlNotification.UseVisualStyleBackColor = true;
+            this.cb_prowlNotification.CheckedChanged += new System.EventHandler(this.cb_prowl_CheckedChanged);
             // 
             // tb_nma
             // 
@@ -365,16 +367,16 @@
             this.lbl_nma.TabIndex = 1;
             this.lbl_nma.Text = "Your NMA API key:";
             // 
-            // cb_nma
+            // cb_nmaNotification
             // 
-            this.cb_nma.AutoSize = true;
-            this.cb_nma.Location = new System.Drawing.Point(15, 19);
-            this.cb_nma.Name = "cb_nma";
-            this.cb_nma.Size = new System.Drawing.Size(202, 17);
-            this.cb_nma.TabIndex = 0;
-            this.cb_nma.Text = "Use Android push notifications (NMA)";
-            this.cb_nma.UseVisualStyleBackColor = true;
-            this.cb_nma.CheckedChanged += new System.EventHandler(this.cb_nma_CheckedChanged);
+            this.cb_nmaNotification.AutoSize = true;
+            this.cb_nmaNotification.Location = new System.Drawing.Point(15, 19);
+            this.cb_nmaNotification.Name = "cb_nmaNotification";
+            this.cb_nmaNotification.Size = new System.Drawing.Size(202, 17);
+            this.cb_nmaNotification.TabIndex = 0;
+            this.cb_nmaNotification.Text = "Use Android push notifications (NMA)";
+            this.cb_nmaNotification.UseVisualStyleBackColor = true;
+            this.cb_nmaNotification.CheckedChanged += new System.EventHandler(this.cb_nma_CheckedChanged);
             // 
             // contextMenuStrip1
             // 
@@ -388,7 +390,7 @@
             this.groupBox3.Controls.Add(this.lbl_mailSMTP);
             this.groupBox3.Controls.Add(this.tb_mailTo);
             this.groupBox3.Controls.Add(this.lbl_mailAddress);
-            this.groupBox3.Controls.Add(this.cb_mail);
+            this.groupBox3.Controls.Add(this.cb_mailNotification);
             this.groupBox3.Location = new System.Drawing.Point(228, 218);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(322, 153);
@@ -442,16 +444,16 @@
             this.lbl_mailAddress.TabIndex = 1;
             this.lbl_mailAddress.Text = "Mail address:";
             // 
-            // cb_mail
+            // cb_mailNotification
             // 
-            this.cb_mail.AutoSize = true;
-            this.cb_mail.Location = new System.Drawing.Point(16, 22);
-            this.cb_mail.Name = "cb_mail";
-            this.cb_mail.Size = new System.Drawing.Size(126, 17);
-            this.cb_mail.TabIndex = 0;
-            this.cb_mail.Text = "Send mail notification";
-            this.cb_mail.UseVisualStyleBackColor = true;
-            this.cb_mail.CheckedChanged += new System.EventHandler(this.cb_mail_CheckedChanged);
+            this.cb_mailNotification.AutoSize = true;
+            this.cb_mailNotification.Location = new System.Drawing.Point(16, 22);
+            this.cb_mailNotification.Name = "cb_mailNotification";
+            this.cb_mailNotification.Size = new System.Drawing.Size(126, 17);
+            this.cb_mailNotification.TabIndex = 0;
+            this.cb_mailNotification.Text = "Send mail notification";
+            this.cb_mailNotification.UseVisualStyleBackColor = true;
+            this.cb_mailNotification.CheckedChanged += new System.EventHandler(this.cb_mail_CheckedChanged);
             // 
             // Options
             // 
@@ -464,8 +466,12 @@
             this.Controls.Add(this.btn_cancel);
             this.Controls.Add(this.btn_apply);
             this.Controls.Add(this.btn_ok);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Options";
+            this.ShowInTaskbar = false;
             this.Text = "Dungeon Teller - Options";
             this.Load += new System.EventHandler(this.Options_Load);
             this.groupBox1.ResumeLayout(false);
@@ -490,13 +496,13 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox tb_nma;
         private System.Windows.Forms.Label lbl_nma;
-        private System.Windows.Forms.CheckBox cb_nma;
-        private System.Windows.Forms.CheckBox cb_prowl;
+        private System.Windows.Forms.CheckBox cb_nmaNotification;
+        private System.Windows.Forms.CheckBox cb_prowlNotification;
         private System.Windows.Forms.RadioButton rb_windowTray;
         private System.Windows.Forms.RadioButton rb_windowTop;
         private System.Windows.Forms.RadioButton rb_windowNormal;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.CheckBox cb_lock;
+        private System.Windows.Forms.CheckBox cb_lockWindow;
         private System.Windows.Forms.CheckBox cb_balloonTips;
         private System.Windows.Forms.CheckBox cb_desktopNotification;
         private System.Windows.Forms.Button btn_prowlTest;
@@ -512,8 +518,8 @@
         private System.Windows.Forms.Label lbl_mailSMTP;
         private System.Windows.Forms.TextBox tb_mailTo;
         private System.Windows.Forms.Label lbl_mailAddress;
-        private System.Windows.Forms.CheckBox cb_mail;
-        private System.Windows.Forms.CheckBox cb_sounds;
+        private System.Windows.Forms.CheckBox cb_mailNotification;
+        private System.Windows.Forms.CheckBox cb_sound;
         private System.Windows.Forms.NumericUpDown num_opacity;
         private System.Windows.Forms.Label label2;
     }

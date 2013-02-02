@@ -46,5 +46,161 @@ namespace Dungeon_Teller.Properties {
                 this["AutoJoin"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Sound {
+            get {
+                return ((bool)(this["Sound"]));
+            }
+            set {
+                this["Sound"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool DesktopNotification {
+            get {
+                return ((bool)(this["DesktopNotification"]));
+            }
+            set {
+                this["DesktopNotification"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool BalloonTips {
+            get {
+                return ((bool)(this["BalloonTips"]));
+            }
+            set {
+                this["BalloonTips"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("AlwaysTop")]
+        public string WindowPreferences {
+            get {
+                return ((string)(this["WindowPreferences"]));
+            }
+            set {
+                this["WindowPreferences"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        public int Opacity {
+            get {
+                return ((int)(this["Opacity"]));
+            }
+            set {
+                this["Opacity"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool LockWindow {
+            get {
+                return ((bool)(this["LockWindow"]));
+            }
+            set {
+                this["LockWindow"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool NmaNotification {
+            get {
+                return ((bool)(this["NmaNotification"]));
+            }
+            set {
+                this["NmaNotification"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string NmaAPIKey {
+            get {
+                return ((string)(this["NmaAPIKey"]));
+            }
+            set {
+                this["NmaAPIKey"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ProwlNotification {
+            get {
+                return ((bool)(this["ProwlNotification"]));
+            }
+            set {
+                this["ProwlNotification"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ProwlAPIKey {
+            get {
+                return ((string)(this["ProwlAPIKey"]));
+            }
+            set {
+                this["ProwlAPIKey"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool MailNotification {
+            get {
+                return ((bool)(this["MailNotification"]));
+            }
+            set {
+                this["MailNotification"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string MailAddress {
+            get {
+                return ((string)(this["MailAddress"]));
+            }
+            set {
+                this["MailAddress"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("localhost:25")]
+        public string MailSmpt {
+            get {
+                return ((string)(this["MailSmpt"]));
+            }
+            set {
+                this["MailSmpt"] = value;
+            }
+        }
     }
 }

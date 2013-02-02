@@ -19,3 +19,5 @@ C:\Users\Lorus\Projects\Dungeon Teller\obj\x86\Release\Dungeon_Teller.Properties
 C:\Users\Lorus\Projects\Dungeon Teller\obj\x86\Release\Dungeon Teller.csproj.GenerateResource.Cache
 C:\Users\Lorus\Projects\Dungeon Teller\obj\x86\Release\Dungeon Teller.csprojResolveAssemblyReference.cache
 C:\Users\Lorus\Projects\Dungeon Teller\obj\x86\Release\Dungeon_Teller.Options.resources
+C:\Users\Lorus\Projects\Dungeon Teller\bin\Release\NMALib.dll
+C:\Users\Lorus\Projects\Dungeon Teller\bin\Release\NMALib.pdb
