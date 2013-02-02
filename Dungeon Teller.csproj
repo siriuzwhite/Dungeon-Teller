@@ -135,7 +135,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Ability_warrior_focusedrage.ico" />
-    <None Include="bin\Release\Ready.wav" />
+    <None Include="Resources\Ready.wav" />
     <None Include="Resources\QueueReady.png" />
     <None Include="Resources\InQueue.png" />
     <None Include="Resources\NotInQueue.png" />
@@ -161,6 +161,16 @@
       <ProductName>Windows Installer 4.5</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="NMALib\NMALib.csproj">
+      <Project>{51649dbb-4772-491f-966f-6ed4e41e584e}</Project>
+      <Name>NMALib</Name>
+    </ProjectReference>
+    <ProjectReference Include="Prowl\Prowl.csproj">
+      <Project>{ad45fac0-6cef-45cd-b55f-e764bf7724cd}</Project>
+      <Name>Prowl</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

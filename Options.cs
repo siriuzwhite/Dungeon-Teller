@@ -14,6 +14,32 @@ namespace Dungeon_Teller
         public Options()
         {
             InitializeComponent();
+
+            foreach (Control ctl in this.Controls)
+            {
+                if (ctl is CheckBox)
+                {
+                    ((CheckBox)ctl).CheckedChanged += new EventHandler(Button_Enable);
+                }
+                else if (ctl is RadioButton)
+                {
+                    ((RadioButton)ctl).CheckedChanged += new EventHandler(Button_Enable);
+                }
+                else if (ctl is TextBox)
+                {
+                    ((TextBox)ctl).TextChanged += new EventHandler(Button_Enable);
+                }
+                else if (ctl is NumericUpDown)
+                {
+                    ((NumericUpDown)ctl).ValueChanged += new EventHandler(Button_Enable);
+                }
+            }
+
+        }
+
+        void Button_Enable(object obj, EventArgs e)
+        {
+            btn_apply.Enabled = true;
         }
 
         private void Options_Load(object sender, EventArgs e)
