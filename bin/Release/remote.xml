@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<config>
+	<setting name="var1">test1</setting>
+	<setting name="var2">test2</setting>
+	<setting name="var3">test3</setting>
+</config>

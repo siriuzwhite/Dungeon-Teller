@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <offsets>
+    <inQueueLFD>14084696</inQueueLFD>
+    <inQueueLFR>14084752</inQueueLFR>
+    <isQueueReady>14084849</isQueueReady>
+    <playerName>14845032</playerName>
+    <playerRealm>14845430</playerRealm>
+  </offsets>
+</Config>
