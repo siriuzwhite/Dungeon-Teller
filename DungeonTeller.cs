@@ -31,6 +31,7 @@ namespace Dungeon_Teller
 
         SoundPlayer ready = new SoundPlayer(Properties.Resources.Ready);
         Random rand = new Random();
+        Properties.Settings settings = Properties.Settings.Default;
 
         int pid_wow;
         IntPtr hWnd_wow;
@@ -49,9 +50,7 @@ namespace Dungeon_Teller
 
         private void DungeonTeller_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Properties.Settings.Default.AntiAFK = cb_antiAfk.Checked;
-            Properties.Settings.Default.AutoJoin = cb_autoJoin.Checked;
-            Properties.Settings.Default.Save();
+            settings.Save();
             Application.Exit();
         }
 
@@ -77,7 +76,7 @@ namespace Dungeon_Teller
         public void dungeonReady()
         {
 
-            if (cb_autoJoin.Checked)
+            if (settings.AutoJoin)
             {
                 Object saveClipboard = Clipboard.GetDataObject();
                 Clipboard.SetText("/click LFGDungeonReadyDialogEnterDungeonButton");
@@ -126,11 +125,11 @@ namespace Dungeon_Teller
         {
             try
             {
-                playerName = Memory.Read<string>(Memory.BaseAddress + offset.playerName);
+                playerName = Memory.Read<string>(Memory.BaseAddress + Offset.playerName);
 
-                int inQueueLFD = Convert.ToInt32(Memory.Read<uint>(Memory.BaseAddress + offset.inQueueLFD));
-                int inQueueLFR = Convert.ToInt32(Memory.Read<uint>(Memory.BaseAddress + offset.inQueueLFR));
-                byte isQueueReady = Convert.ToByte(Memory.Read<byte>(Memory.BaseAddress + offset.isQueueReady));
+                int inQueueLFD = Convert.ToInt32(Memory.Read<uint>(Memory.BaseAddress + Offset.inQueueLFD));
+                int inQueueLFR = Convert.ToInt32(Memory.Read<uint>(Memory.BaseAddress + Offset.inQueueLFR));
+                byte isQueueReady = Convert.ToByte(Memory.Read<byte>(Memory.BaseAddress + Offset.isQueueReady));
 
                 if (isQueueReady == 1)
                 {
@@ -169,7 +168,7 @@ namespace Dungeon_Teller
                     {
                         pictureBox1.Image = Properties.Resources.InQueue;
 
-                        if (cb_antiAfk.Checked)
+                        if (settings.AntiAFK)
                         {
                             if (!timer_antiAFK.Enabled) timer_antiAFK.Start();
                         }
@@ -245,9 +244,6 @@ namespace Dungeon_Teller
             pid_wow = Memory.ProcessId;
             hWnd_wow = Process.GetProcessById(pid_wow).MainWindowHandle;
 
-            cb_antiAfk.Checked = Properties.Settings.Default.AntiAFK;
-            cb_autoJoin.Checked = Properties.Settings.Default.AutoJoin;
-
             this.Text = this.Text + " (attaced to PID " + pid_wow + ")";
             Check.Start();
         }
@@ -294,6 +290,12 @@ namespace Dungeon_Teller
                 Application.Exit();
             }
 
+        }
+
+        private void lnk_options_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Options opt = new Options();
+            opt.Show();
         }
 
     }

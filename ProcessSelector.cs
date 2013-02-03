@@ -36,8 +36,8 @@ namespace Dungeon_Teller
                 pList.Clear();
                 Memory.OpenProcess(p.Id);
 
-                string playerName = Memory.Read<string>(Memory.BaseAddress + offset.playerName);
-                string playerRealm = Memory.Read<string>(Memory.BaseAddress + offset.playerRealm);
+                string playerName = Memory.Read<string>(Memory.BaseAddress + Offset.playerName);
+                string playerRealm = Memory.Read<string>(Memory.BaseAddress + Offset.playerRealm);
 
                 if (playerName.Length != 0 && playerRealm.Length != 0)
                 {

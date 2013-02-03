@@ -16,8 +16,8 @@ namespace Dungeon_Teller
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Options());
-            //Application.Run(new ProcessSelector());
+            //Application.Run(new Options());
+            Application.Run(new ProcessSelector());
             //Application.Run(new DungeonTeller());
 
         }

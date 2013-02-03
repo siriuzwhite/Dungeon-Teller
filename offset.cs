@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Dungeon_Teller
 {
-    class offset
+    class Offset
     {
 
         public static UInt32 inQueueLFD = 0xD6EA58;

@@ -18,6 +18,8 @@ namespace Dungeon_Teller
             AddEvents(this.Controls);
         }
 
+        Properties.Settings settings = Properties.Settings.Default;
+
         void AddEvents(System.Windows.Forms.Control.ControlCollection Controls)
         {
             foreach (Control c in Controls)
@@ -58,11 +60,93 @@ namespace Dungeon_Teller
             btn_apply.Enabled = true;
         }
 
-        private void Options_Load(object sender, EventArgs e)
+        private void cb_nma_CheckedChanged(object sender, EventArgs e)
+        {
+            tb_nma.Enabled = !tb_nma.Enabled;
+            lnk_nma.Enabled = !lnk_nma.Enabled;
+            lbl_nma.Enabled = !lbl_nma.Enabled;
+            btn_nmaTest.Enabled = !btn_nmaTest.Enabled;
+        }
+
+        
+        private void cb_prowl_CheckedChanged(object sender, EventArgs e)
+        {
+            tb_prowl.Enabled = !tb_prowl.Enabled;
+            lnk_prowl.Enabled = !lnk_prowl.Enabled;
+            lbl_prowl.Enabled = !lbl_prowl.Enabled;
+            btn_prowlTest.Enabled = !btn_prowlTest.Enabled;
+        }
+
+        private void cb_mail_CheckedChanged(object sender, EventArgs e)
+        {
+            lbl_mailSMTP.Enabled = !lbl_mailSMTP.Enabled;
+            lbl_mailAddress.Enabled = !lbl_mailAddress.Enabled;
+            tb_mailTo.Enabled = !tb_mailTo.Enabled;
+            tb_mailSMTP.Enabled = !tb_mailSMTP.Enabled;
+            btn_mailTest.Enabled = !btn_mailTest.Enabled;
+        }
+
+        private void btn_cancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void applySettings()
+        {
+            settings.AntiAFK = cb_antiAfk.Checked;
+            settings.AutoJoin = cb_autoJoin.Checked;
+
+            settings.Sound = cb_sound.Checked;
+            settings.DesktopNotification = cb_desktopNotification.Checked;
+            settings.BalloonTips = cb_balloonTips.Checked;
+
+            settings.Opacity = (int)num_opacity.Value;
+            settings.LockWindow = cb_lockWindow.Checked;
+
+            if (rb_windowNormal.Checked) settings.WindowPreferences = "Normal";
+            if (rb_windowTop.Checked) settings.WindowPreferences = "AlwaysTop";
+            if (rb_windowTray.Checked) settings.WindowPreferences = "TrayOnly";
+
+            settings.NmaNotification = cb_nmaNotification.Checked;
+            settings.NmaAPIKey = tb_nma.Text;
+
+            settings.ProwlNotification = cb_prowlNotification.Checked;
+            settings.ProwlAPIKey = tb_prowl.Text;
+
+            settings.MailNotification = cb_mailNotification.Checked;
+            settings.MailAddress = tb_mailTo.Text;
+            settings.MailSmpt = tb_mailSMTP.Text;
+        }
+
+        private void btn_ok_Click(object sender, EventArgs e)
+        {
+            applySettings();
+            this.Close();
+        }
+
+        private void btn_apply_Click(object sender, EventArgs e)
+        {
+            btn_apply.Enabled = false;
+            applySettings();
+        }
+
+        private void lnk_nma_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://www.notifymyandroid.com/register.jsp");
+        }
+
+        private void lnk_prowl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://www.prowlapp.com/register.php");
+        }
+
+        private void btn_nmaTest_Click(object sender, EventArgs e)
         {
 
-            Properties.Settings settings = Properties.Settings.Default;
+        }
 
+        public void overwriteControlsFromSettings()
+        {
             cb_antiAfk.Checked = settings.AntiAFK;
             cb_autoJoin.Checked = settings.AutoJoin;
 
@@ -71,6 +155,7 @@ namespace Dungeon_Teller
             cb_balloonTips.Checked = settings.BalloonTips;
 
             num_opacity.Value = settings.Opacity;
+            cb_lockWindow.Checked = settings.LockWindow;
 
             switch (settings.WindowPreferences)
             {
@@ -128,88 +213,15 @@ namespace Dungeon_Teller
             btn_apply.Enabled = false;
         }
 
-
-        private void cb_nma_CheckedChanged(object sender, EventArgs e)
+        private void Options_Load(object sender, EventArgs e)
         {
-            tb_nma.Enabled = !tb_nma.Enabled;
-            lnk_nma.Enabled = !lnk_nma.Enabled;
-            lbl_nma.Enabled = !lbl_nma.Enabled;
-            btn_nmaTest.Enabled = !btn_nmaTest.Enabled;
+            overwriteControlsFromSettings();
         }
 
-        
-        private void cb_prowl_CheckedChanged(object sender, EventArgs e)
+        private void btn_restore_Click(object sender, EventArgs e)
         {
-            tb_prowl.Enabled = !tb_prowl.Enabled;
-            lnk_prowl.Enabled = !lnk_prowl.Enabled;
-            lbl_prowl.Enabled = !lbl_prowl.Enabled;
-            btn_prowlTest.Enabled = !btn_prowlTest.Enabled;
+            settings.Reset();
+            overwriteControlsFromSettings();
         }
-
-        private void cb_mail_CheckedChanged(object sender, EventArgs e)
-        {
-            lbl_mailSMTP.Enabled = !lbl_mailSMTP.Enabled;
-            lbl_mailAddress.Enabled = !lbl_mailAddress.Enabled;
-            tb_mailTo.Enabled = !tb_mailTo.Enabled;
-            tb_mailSMTP.Enabled = !tb_mailSMTP.Enabled;
-            btn_mailTest.Enabled = !btn_mailTest.Enabled;
-        }
-
-        private void btn_cancel_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-        }
-
-        private void applySettings()
-        {
-            Properties.Settings settings = Properties.Settings.Default;
-
-            settings.AntiAFK = cb_antiAfk.Checked;
-            settings.AutoJoin = cb_autoJoin.Checked;
-
-            settings.Sound = cb_sound.Checked;
-            settings.DesktopNotification = cb_desktopNotification.Checked;
-            settings.BalloonTips = cb_balloonTips.Checked;
-
-            settings.Opacity = (int)num_opacity.Value;
-
-            if (rb_windowNormal.Checked) settings.WindowPreferences = "Normal";
-            if (rb_windowTop.Checked) settings.WindowPreferences = "AlwaysTop";
-            if (rb_windowTray.Checked) settings.WindowPreferences = "TrayOnly";
-
-            settings.NmaNotification = cb_nmaNotification.Checked;
-            settings.NmaAPIKey = tb_nma.Text;
-
-            settings.ProwlNotification = cb_prowlNotification.Checked;
-            settings.ProwlAPIKey = tb_prowl.Text;
-
-            settings.MailNotification = cb_mailNotification.Checked;
-            settings.MailAddress = tb_mailTo.Text;
-            settings.MailSmpt = tb_mailSMTP.Text;
-        }
-
-        private void btn_ok_Click(object sender, EventArgs e)
-        {
-            applySettings();
-            this.Hide();
-        }
-
-        private void btn_apply_Click(object sender, EventArgs e)
-        {
-            btn_apply.Enabled = false;
-            applySettings();
-        }
-
-        private void lnk_nma_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            Process.Start("https://www.notifymyandroid.com/register.jsp");
-        }
-
-        private void lnk_prowl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            Process.Start("https://www.prowlapp.com/register.php");
-        }
-
-
     }
 }

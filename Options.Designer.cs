@@ -65,6 +65,7 @@
             this.tb_mailTo = new System.Windows.Forms.TextBox();
             this.lbl_mailAddress = new System.Windows.Forms.Label();
             this.cb_mailNotification = new System.Windows.Forms.CheckBox();
+            this.btn_restore = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_opacity)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -295,6 +296,7 @@
             this.btn_nmaTest.TabIndex = 8;
             this.btn_nmaTest.Text = "Test";
             this.btn_nmaTest.UseVisualStyleBackColor = true;
+            this.btn_nmaTest.Click += new System.EventHandler(this.btn_nmaTest_Click);
             // 
             // lnk_prowl
             // 
@@ -455,11 +457,22 @@
             this.cb_mailNotification.UseVisualStyleBackColor = true;
             this.cb_mailNotification.CheckedChanged += new System.EventHandler(this.cb_mail_CheckedChanged);
             // 
+            // btn_restore
+            // 
+            this.btn_restore.Location = new System.Drawing.Point(12, 386);
+            this.btn_restore.Name = "btn_restore";
+            this.btn_restore.Size = new System.Drawing.Size(119, 23);
+            this.btn_restore.TabIndex = 19;
+            this.btn_restore.Text = "Restore defaults";
+            this.btn_restore.UseVisualStyleBackColor = true;
+            this.btn_restore.Click += new System.EventHandler(this.btn_restore_Click);
+            // 
             // Options
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(565, 424);
+            this.Controls.Add(this.btn_restore);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -522,5 +535,6 @@
         private System.Windows.Forms.CheckBox cb_sound;
         private System.Windows.Forms.NumericUpDown num_opacity;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btn_restore;
     }
 }
