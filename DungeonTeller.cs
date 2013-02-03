@@ -32,6 +32,7 @@ namespace Dungeon_Teller
         SoundPlayer ready = new SoundPlayer(Properties.Resources.Ready);
         Random rand = new Random();
         Properties.Settings settings = Properties.Settings.Default;
+        Options opt = null;
 
         int pid_wow;
         IntPtr hWnd_wow;
@@ -292,10 +293,17 @@ namespace Dungeon_Teller
 
         }
 
+        public bool optOpen = false;
+
         private void lnk_options_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Options opt = new Options();
-            opt.Show();
+            if (optOpen == false)
+            {
+                optOpen = true;
+                opt = new Options(this);
+                opt.Show();
+            }
+            else opt.Focus();
         }
 
     }

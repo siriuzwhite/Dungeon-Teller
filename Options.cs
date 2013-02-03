@@ -12,10 +12,13 @@ namespace Dungeon_Teller
 {
     public partial class Options : Form
     {
-        public Options()
+        DungeonTeller dt;
+
+        public Options(DungeonTeller dt)
         {
             InitializeComponent();
             AddEvents(this.Controls);
+            this.dt = dt;
         }
 
         Properties.Settings settings = Properties.Settings.Default;
@@ -116,6 +119,10 @@ namespace Dungeon_Teller
             settings.MailNotification = cb_mailNotification.Checked;
             settings.MailAddress = tb_mailTo.Text;
             settings.MailSmpt = tb_mailSMTP.Text;
+
+            dt.Opacity = (double)settings.Opacity/100;
+            dt.Refresh();
+
         }
 
         private void btn_ok_Click(object sender, EventArgs e)
@@ -138,11 +145,6 @@ namespace Dungeon_Teller
         private void lnk_prowl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start("https://www.prowlapp.com/register.php");
-        }
-
-        private void btn_nmaTest_Click(object sender, EventArgs e)
-        {
-
         }
 
         public void overwriteControlsFromSettings()
@@ -222,6 +224,22 @@ namespace Dungeon_Teller
         {
             settings.Reset();
             overwriteControlsFromSettings();
+        }
+
+        private void btn_nmaTest_Click(object sender, EventArgs e)
+        {
+            //PushNotification.sendMessageNMA("Test", tb_nma.Text, "Dungeon Teller Test");
+            dt.Enabled = true;
+        }
+
+        private void btn_prowlTest_Click(object sender, EventArgs e)
+        {
+            PushNotification.sendMessageProwl("Test", tb_nma.Text, "Dungeon Teller Test");
+        }
+
+        private void Options_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            dt.optOpen = false;
         }
     }
 }

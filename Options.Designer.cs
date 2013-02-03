@@ -286,6 +286,7 @@
             this.btn_prowlTest.TabIndex = 9;
             this.btn_prowlTest.Text = "Test";
             this.btn_prowlTest.UseVisualStyleBackColor = true;
+            this.btn_prowlTest.Click += new System.EventHandler(this.btn_prowlTest_Click);
             // 
             // btn_nmaTest
             // 
@@ -486,6 +487,7 @@
             this.Name = "Options";
             this.ShowInTaskbar = false;
             this.Text = "Dungeon Teller - Options";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Options_FormClosed);
             this.Load += new System.EventHandler(this.Options_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
