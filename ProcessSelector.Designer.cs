@@ -117,8 +117,9 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ProcessSelector";
-            this.Text = "Dungeon Teller";
+            this.Text = "Dungeon Teller - Process selector";
             this.Load += new System.EventHandler(this.ProcessSelector_Load);
+            this.Shown += new System.EventHandler(this.ProcessSelector_Shown);
             this.ResumeLayout(false);
 
         }

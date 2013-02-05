@@ -13,7 +13,6 @@ using System.Xml;
 using System.IO;
 using System.Configuration;
 using System.Collections.Specialized;
-using DT;
 
 namespace Dungeon_Teller
 {
@@ -55,182 +54,247 @@ namespace Dungeon_Teller
             Application.Exit();
         }
 
-        private void DungeonTeller_Load(object sender, EventArgs e)
+        public void lockToBottomRight()
         {
             int TaskbarHeight = Screen.PrimaryScreen.Bounds.Height - Screen.PrimaryScreen.WorkingArea.Height;
             int ScreenHeight = Screen.PrimaryScreen.Bounds.Height - this.Height - TaskbarHeight;
             int ScreenWidth = Screen.PrimaryScreen.Bounds.Width - this.Width;
             Point StartLoc = new Point(ScreenWidth, ScreenHeight);
             this.Location = StartLoc;
-            this.TopMost = true;
+        }
+
+        private void DungeonTeller_Load(object sender, EventArgs e)
+        {
+            lockToBottomRight();
+            pid_wow = Memory.ProcessId;
+            hWnd_wow = Process.GetProcessById(pid_wow).MainWindowHandle;
+
+            this.Text = this.Text + " (attaced to PID " + pid_wow + ")";
+            Check.Start();
         }
 
         private void DungeonTeller_LocationChanged(object sender, EventArgs e)
         {
-            int TaskbarHeight = Screen.PrimaryScreen.Bounds.Height - Screen.PrimaryScreen.WorkingArea.Height;
-            int ScreenHeight = Screen.PrimaryScreen.Bounds.Height - this.Height - TaskbarHeight;
-            int ScreenWidth = Screen.PrimaryScreen.Bounds.Width - this.Width;
-            Point StartLoc = new Point(ScreenWidth, ScreenHeight);
-            this.Location = StartLoc; 
+            if (settings.LockWindow)
+            {
+                lockToBottomRight();
+            }
         }
 
-        public void dungeonReady()
+        private byte isQueueReady = 0;
+        public byte IsQueueReady
         {
-
-            if (settings.AutoJoin)
+            get { return isQueueReady; }
+            set
             {
-                Object saveClipboard = Clipboard.GetDataObject();
-                Clipboard.SetText("/click LFGDungeonReadyDialogEnterDungeonButton");
-
-                SendMessage(hWnd_wow, WM_KEYDOWN, VK_RETURN, IntPtr.Zero);
-                SendMessage(hWnd_wow, WM_KEYUP, VK_RETURN, IntPtr.Zero);
-
-                SendMessage(hWnd_wow, WM_KEYDOWN, VK_CONTROL, IntPtr.Zero);
-                SendMessage(hWnd_wow, WM_KEYDOWN, 0x56, IntPtr.Zero);
-
-                SendMessage(hWnd_wow, WM_KEYUP, 0x56, IntPtr.Zero);
-                SendMessage(hWnd_wow, WM_KEYUP, VK_CONTROL, IntPtr.Zero);
-
-                SendMessage(hWnd_wow, WM_KEYDOWN, VK_RETURN, IntPtr.Zero);
-                SendMessage(hWnd_wow, WM_KEYUP, VK_RETURN, IntPtr.Zero);
-
-                Clipboard.SetDataObject(saveClipboard);
+                if (isQueueReady != value)
+                {
+                    isQueueReady = value;
+                    IsQueueReady_Changed();
+                }
             }
+        }
 
-            Check.Stop();
-
-            this.TopMost = true;
-            this.Show();
-            this.WindowState = FormWindowState.Normal;
-
-            DialogResult result = MessageBox.Show(this, "Your queue is ready!\n\n Do you want to switch to WoW and exit Dungeon Teller?", "Queue ready", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
-
-            if (result == DialogResult.Yes)
+        private uint inQueueLFD = 0;
+        public uint InQueueLFD
+        {
+            get { return inQueueLFD; }
+            set
             {
-                SetForegroundWindow(hWnd_wow);
-                ShowWindow(hWnd_wow, SW_RESTORE);
-                this.Close();
+                if (inQueueLFD != value)
+                {
+                    inQueueLFD = value;
+                    InQueueLFD_Changed();
+                }
+            }
+        }
+
+        private uint inQueueLFR = 0;
+        public uint InQueueLFR
+        {
+            get { return inQueueLFR; }
+            set
+            {
+                if (inQueueLFR != value)
+                {
+                    inQueueLFR = value;
+                    InQueueLFR_Changed();
+                }
+            }
+        }
+
+
+        private void InQueueLFD_Changed()
+        {
+            if (InQueueLFD != 0)
+            {
+                if(settings.AntiAFK)
+                    if (!timer_antiAFK.Enabled) timer_antiAFK.Start();
+
+                pictureBox1.Image = Properties.Resources.InQueue;
+
+                lbl_LFDStatus.ForeColor = System.Drawing.Color.Blue;
+                lbl_LFDStatus.Text = "queued";
+                notifyIcon1.Text = "Dungeon Teller - 1 active queue";
+                notifyIcon1.BalloonTipText = "Dungeon Finder queue is now active.";
+
+                if (settings.BalloonTips) notifyIcon1.ShowBalloonTip(500);
+
+                if (InQueueLFR != 0) notifyIcon1.Text = "Dungeon Teller - 2 active queues";
             }
             else
             {
-                Check.Start();
+                lbl_LFDStatus.ForeColor = System.Drawing.Color.Red;
+                lbl_LFDStatus.Text = "not queued";
+                if (InQueueLFR != 0)
+                    notifyIcon1.Text = "Dungeon Teller - 1 active queue";
+                else
+                    resetAll();
             }
-
         }
 
-        bool trayInfoLFRShowed = false;
-        bool trayInfoLFDShowed = false;
-        bool readySoundPlayed = false;
-        string playerName;
+        private void InQueueLFR_Changed()
+        {
+            if (InQueueLFR != 0)
+            {
+                if (settings.AntiAFK)
+                    if (!timer_antiAFK.Enabled) timer_antiAFK.Start();
+
+                pictureBox1.Image = Properties.Resources.InQueue;
+
+                lbl_LFRStatus.ForeColor = System.Drawing.Color.Blue;
+                lbl_LFRStatus.Text = "queued";
+                notifyIcon1.Text = "Dungeon Teller - 1 active queue";
+                notifyIcon1.BalloonTipText = "Raid Finder queue is now active.";
+
+                if (settings.BalloonTips) notifyIcon1.ShowBalloonTip(500);
+
+                if (InQueueLFD != 0) notifyIcon1.Text = "Dungeon Teller - 2 active queues";
+            }
+            else
+            {
+                lbl_LFRStatus.ForeColor = System.Drawing.Color.Red;
+                lbl_LFRStatus.Text = "not queued";
+                if (InQueueLFD != 0)
+                    notifyIcon1.Text = "Dungeon Teller - 1 active queue";
+                else
+                    resetAll();
+            }
+        }
+
+        string notifyMessage;
+        bool resetLFD = false;
+        bool resetLFR = false;
+
+        private void IsQueueReady_Changed()
+        {
+            if (IsQueueReady != 0)
+            {
+                if (IsQueueReady == 1)
+                {
+                    resetLFD = true;
+                    lbl_LFDStatus.ForeColor = System.Drawing.Color.Green;
+                    lbl_LFDStatus.Text = "ready";
+                    notifyIcon1.BalloonTipText = "Dungeon Finder queue is ready!";
+                    notifyMessage = "Your Dungeon Finder queue is now ready!";
+                }
+
+                if (IsQueueReady == 2)
+                {
+                    resetLFR = true;
+                    lbl_LFRStatus.ForeColor = System.Drawing.Color.Green;
+                    lbl_LFRStatus.Text = "ready";
+                    notifyIcon1.BalloonTipText = "Raid Finder queue is ready!";
+                    notifyMessage = "Your Raid Finder queue is now ready!";
+                }
+
+                timer_antiAFK.Stop();
+
+                if (settings.BalloonTips) notifyIcon1.ShowBalloonTip(500);
+
+                if (settings.Sound) ready.Play();
+
+                if (settings.AutoJoin)
+                {
+                    Object saveClipboard = Clipboard.GetDataObject();
+                    Clipboard.SetText("/click LFGDungeonReadyDialogEnterDungeonButton");
+
+                    SendMessage(hWnd_wow, WM_KEYDOWN, VK_RETURN, IntPtr.Zero);
+                    SendMessage(hWnd_wow, WM_KEYUP, VK_RETURN, IntPtr.Zero);
+
+                    SendMessage(hWnd_wow, WM_KEYDOWN, VK_CONTROL, IntPtr.Zero);
+                    SendMessage(hWnd_wow, WM_KEYDOWN, 0x56, IntPtr.Zero);
+
+                    SendMessage(hWnd_wow, WM_KEYUP, 0x56, IntPtr.Zero);
+                    SendMessage(hWnd_wow, WM_KEYUP, VK_CONTROL, IntPtr.Zero);
+
+                    SendMessage(hWnd_wow, WM_KEYDOWN, VK_RETURN, IntPtr.Zero);
+                    SendMessage(hWnd_wow, WM_KEYUP, VK_RETURN, IntPtr.Zero);
+
+                    Clipboard.SetDataObject(saveClipboard);
+                }
+
+                if (!settings.TrayOnly)
+                {
+                    this.Show();
+                    this.WindowState = FormWindowState.Normal;
+                }
+
+                if (settings.BringToFront)
+                {
+                    SetForegroundWindow(hWnd_wow);
+                    ShowWindow(hWnd_wow, SW_RESTORE);
+                }
+
+                if (settings.DesktopNotification)
+                {
+
+                    DialogResult result = MessageBox.Show(this, "Your queue is ready!\n\n Do you want to quit Dungeon Teller?", "Queue ready", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+                    if (result == DialogResult.Yes) this.Close();
+                }
+
+                if (settings.NmaNotification)
+                {
+                    Notification.pushNMA(settings.NmaAPIKey, "Queue ready", notifyMessage);
+                }
+
+                if (settings.ProwlNotification)
+                {
+                    Notification.pushProwl(settings.ProwlAPIKey, "Queue ready", notifyMessage);
+                }
+
+            }
+            else
+            {
+                if (resetLFD)
+                {
+                    lbl_LFDStatus.ForeColor = System.Drawing.Color.Red;
+                    lbl_LFDStatus.Text = "not queued";
+                }
+                if (resetLFR)
+                {
+                    lbl_LFRStatus.ForeColor = System.Drawing.Color.Red;
+                    lbl_LFRStatus.Text = "not queued";
+                }
+            }
+        }
+
+        private void resetAll()
+        {
+            pictureBox1.Image = Properties.Resources.NotInQueue;
+            notifyIcon1.Text = "Dungeon Teller";
+            if (timer_antiAFK.Enabled) timer_antiAFK.Stop();
+        }
+
         private void Check_Tick(object sender, EventArgs e)
         {
             try
             {
-                playerName = Memory.Read<string>(Memory.BaseAddress + Offset.playerName);
+                InQueueLFD = Convert.ToUInt32(Memory.Read<uint>(Memory.BaseAddress + Offset.inQueueLFD));
+                InQueueLFR = Convert.ToUInt32(Memory.Read<uint>(Memory.BaseAddress + Offset.inQueueLFR));
+                IsQueueReady = Convert.ToByte(Memory.Read<byte>(Memory.BaseAddress + Offset.isQueueReady));
 
-                int inQueueLFD = Convert.ToInt32(Memory.Read<uint>(Memory.BaseAddress + Offset.inQueueLFD));
-                int inQueueLFR = Convert.ToInt32(Memory.Read<uint>(Memory.BaseAddress + Offset.inQueueLFR));
-                byte isQueueReady = Convert.ToByte(Memory.Read<byte>(Memory.BaseAddress + Offset.isQueueReady));
 
-                if (isQueueReady == 1)
-                {
-                    pictureBox1.Image = Properties.Resources.QueueReady;
-                    lbl_LFDStatus.ForeColor = System.Drawing.Color.Green;
-                    lbl_LFDStatus.Text = "ready";
-
-                    if (readySoundPlayed == false)
-                    {
-                        readySoundPlayed = true;
-                        ready.Play();
-                        timer_antiAFK.Stop();
-                        dungeonReady();
-                    }
-                }
-                else if (isQueueReady == 2)
-                {
-                    pictureBox1.Image = Properties.Resources.QueueReady;
-                    lbl_LFRStatus.ForeColor = System.Drawing.Color.Green;
-                    lbl_LFRStatus.Text = "ready";
-
-                    if (readySoundPlayed == false)
-                    {
-                        readySoundPlayed = true;
-                        ready.Play();
-                        timer_antiAFK.Stop();
-                        dungeonReady();
-                    }
-
-                }
-                else
-                {
-                    readySoundPlayed = false;
-
-                    if (inQueueLFD != 0 || inQueueLFR != 0)
-                    {
-                        pictureBox1.Image = Properties.Resources.InQueue;
-
-                        if (settings.AntiAFK)
-                        {
-                            if (!timer_antiAFK.Enabled) timer_antiAFK.Start();
-                        }
-                        else
-                        {
-                            if (timer_antiAFK.Enabled) timer_antiAFK.Stop();
-                        }
-
-                        if (inQueueLFD != 0 && inQueueLFR != 0)
-                        {
-                            notifyIcon1.Text = "Dungeon Teller - 2 active queues";
-                        }
-                        else
-                        {
-                            notifyIcon1.Text = "Dungeon Teller - 1 active queue";
-                        }
-
-                        //LFD active tooltip
-                        if (inQueueLFD != 0)
-                        {
-                            if (!trayInfoLFDShowed)
-                            {
-                                notifyIcon1.BalloonTipText = "LFD queue is now active.";
-                                notifyIcon1.ShowBalloonTip(500);
-                                trayInfoLFDShowed = true;
-                            }
-
-                            if (inQueueLFR == 0) trayInfoLFRShowed = false;
-                        }
-
-                        //LFR active tooltip
-                        if (inQueueLFR != 0)
-                        {
-                            if (!trayInfoLFRShowed)
-                            {
-                                notifyIcon1.BalloonTipText = "LFR queue is now active.";
-                                notifyIcon1.ShowBalloonTip(500);
-                                trayInfoLFRShowed = true;
-                            }
-
-                            if (inQueueLFD == 0) trayInfoLFDShowed = false;
-                        }
-
-                        lbl_LFDStatus.ForeColor = (inQueueLFD != 0) ? System.Drawing.Color.Blue : System.Drawing.Color.Red;
-                        lbl_LFRStatus.ForeColor = (inQueueLFR != 0) ? System.Drawing.Color.Blue : System.Drawing.Color.Red;
-                        lbl_LFDStatus.Text = (inQueueLFD != 0) ? "queued" : "not queued";
-                        lbl_LFRStatus.Text = (inQueueLFR != 0) ? "queued" : "not queued";
-                    }
-                    else
-                    {
-                        trayInfoLFDShowed = false;
-                        trayInfoLFRShowed = false;
-                        pictureBox1.Image = Properties.Resources.NotInQueue;
-                        lbl_LFDStatus.ForeColor = System.Drawing.Color.Red;
-                        lbl_LFRStatus.ForeColor = System.Drawing.Color.Red;
-                        lbl_LFDStatus.Text = "not queued";
-                        lbl_LFRStatus.Text = "not queued";
-                        notifyIcon1.Text = "Dungeon Teller";
-                        if (timer_antiAFK.Enabled) timer_antiAFK.Stop();
-                    }
-                }
             }
             catch
             {
@@ -238,15 +302,6 @@ namespace Dungeon_Teller
                 MessageBox.Show("World of Warcraft has quit!\nThe program will now quit!", "DT", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Application.Exit();
             }
-        }
-
-        private void DungeonTeller_VisibleChanged(object sender, EventArgs e)
-        {
-            pid_wow = Memory.ProcessId;
-            hWnd_wow = Process.GetProcessById(pid_wow).MainWindowHandle;
-
-            this.Text = this.Text + " (attaced to PID " + pid_wow + ")";
-            Check.Start();
         }
 
         private void timer_antiAFK_Tick(object sender, EventArgs e)
@@ -270,8 +325,11 @@ namespace Dungeon_Teller
         {
             if (e.Button == MouseButtons.Left)
             {
-                this.Show();
-                this.WindowState = FormWindowState.Normal;
+                if (!settings.TrayOnly)
+                {
+                    this.Show();
+                    this.WindowState = FormWindowState.Normal;
+                }
             }
 
         }
@@ -295,15 +353,41 @@ namespace Dungeon_Teller
 
         public bool optOpen = false;
 
-        private void lnk_options_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void showOptions()
         {
             if (optOpen == false)
             {
-                optOpen = true;
                 opt = new Options(this);
                 opt.Show();
+                optOpen = true;
             }
-            else opt.Focus();
+            else
+                opt.Focus();
+        }
+
+        private void lnk_options_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            showOptions();
+        }
+
+        private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            showOptions();
+        }
+
+        private void contextMenuStrip1_Opened(object sender, EventArgs e)
+        {
+            Restore.Visible = !settings.TrayOnly;
+        }
+
+        private void DungeonTeller_Shown(object sender, EventArgs e)
+        {
+            if (settings.TrayOnly)
+            {
+                notifyIcon1.BalloonTipText = "Dungeon Teller is now active!";
+                notifyIcon1.ShowBalloonTip(500);
+                this.Hide();
+            }
         }
 
     }

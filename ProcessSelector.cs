@@ -8,7 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Diagnostics;
-using DT;
 using System.Runtime.InteropServices;
 
 namespace Dungeon_Teller
@@ -22,6 +21,7 @@ namespace Dungeon_Teller
         }
 
         List<ListBoxObject> pList = new List<ListBoxObject> { };
+        Properties.Settings settings = Properties.Settings.Default;
 
         private void updateProcessList()
         {
@@ -69,15 +69,20 @@ namespace Dungeon_Teller
             lbx_WoWIds.ValueMember = "Value";
         }
 
+        private void openDungeonTeller(int pid)
+        {
+            Memory.OpenProcess(pid);
+            DungeonTeller dt = new DungeonTeller();
+            dt.Show();
+            this.Hide();
+        }
+
         private void btn_Attach_Click(object sender, EventArgs e)
         {
             if (lbx_WoWIds.SelectedItem != null)
             {
-                int pId = (int)lbx_WoWIds.SelectedValue;
-                Memory.OpenProcess(pId);
-                DungeonTeller dt = new DungeonTeller();
-                dt.Show();
-                this.Hide();
+                int pid = (int)lbx_WoWIds.SelectedValue;
+                openDungeonTeller(pid);
             }
             else
             {
@@ -115,8 +120,8 @@ namespace Dungeon_Teller
             {
                 try
                 {
-                    int pId = (int)lbx_WoWIds.SelectedValue;
-                    IntPtr handle = Process.GetProcessById(pId).MainWindowHandle;
+                    int pid = (int)lbx_WoWIds.SelectedValue;
+                    IntPtr handle = Process.GetProcessById(pid).MainWindowHandle;
                     SetForegroundWindow(handle);
                     ShowWindow(handle, SW_RESTORE);
                 }
@@ -129,6 +134,19 @@ namespace Dungeon_Teller
                     {
                         lbx_WoWIds.Items.Add(p.Id);
                     }
+                }
+            }
+        }
+
+        private void ProcessSelector_Shown(object sender, EventArgs e)
+        {
+            if (settings.AutoSelect)
+            {
+                Process[] pr = Process.GetProcessesByName("WoW");
+
+                if (pr.Length != 0)
+                {
+                    openDungeonTeller(pr[0].Id);
                 }
             }
         }

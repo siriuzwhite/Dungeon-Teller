@@ -27,16 +27,10 @@ namespace Dungeon_Teller
         {
             foreach (Control c in Controls)
             {
-                if (c is GroupBox)
+                if (c.HasChildren)
                 {
-                    AddEvents(((GroupBox)c).Controls);
+                    AddEvents(c.Controls);
                 }
-                else if (c is Panel)
-                {
-                    AddEvents(((Panel)c).Controls);
-                }
-                //Expand this series of if...else... to include any 
-                //other type of container control
                 else if (c is TextBox)
                 {
                     ((TextBox)c).TextChanged += new EventHandler(SettingsChanged);
@@ -65,7 +59,7 @@ namespace Dungeon_Teller
 
         private void cb_nma_CheckedChanged(object sender, EventArgs e)
         {
-            tb_nma.Enabled = !tb_nma.Enabled;
+            tb_nmaAPIKey.Enabled = !tb_nmaAPIKey.Enabled;
             lnk_nma.Enabled = !lnk_nma.Enabled;
             lbl_nma.Enabled = !lbl_nma.Enabled;
             btn_nmaTest.Enabled = !btn_nmaTest.Enabled;
@@ -74,7 +68,7 @@ namespace Dungeon_Teller
         
         private void cb_prowl_CheckedChanged(object sender, EventArgs e)
         {
-            tb_prowl.Enabled = !tb_prowl.Enabled;
+            tb_prowlAPIKey.Enabled = !tb_prowlAPIKey.Enabled;
             lnk_prowl.Enabled = !lnk_prowl.Enabled;
             lbl_prowl.Enabled = !lbl_prowl.Enabled;
             btn_prowlTest.Enabled = !btn_prowlTest.Enabled;
@@ -82,10 +76,8 @@ namespace Dungeon_Teller
 
         private void cb_mail_CheckedChanged(object sender, EventArgs e)
         {
-            lbl_mailSMTP.Enabled = !lbl_mailSMTP.Enabled;
             lbl_mailAddress.Enabled = !lbl_mailAddress.Enabled;
             tb_mailTo.Enabled = !tb_mailTo.Enabled;
-            tb_mailSMTP.Enabled = !tb_mailSMTP.Enabled;
             btn_mailTest.Enabled = !btn_mailTest.Enabled;
         }
 
@@ -94,41 +86,74 @@ namespace Dungeon_Teller
             this.Close();
         }
 
-        private void applySettings()
+        private bool applySettings()
         {
-            settings.AntiAFK = cb_antiAfk.Checked;
-            settings.AutoJoin = cb_autoJoin.Checked;
+            if (cb_nmaNotification.Checked && tb_nmaAPIKey.Text == "")
+            {
+                MessageBox.Show("NMA push notifications are checked but no API Key is given!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            else if (cb_prowlNotification.Checked && tb_prowlAPIKey.Text == "")
+            {
+                MessageBox.Show("Prowl push notifications are checked but no API Key is given!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
 
-            settings.Sound = cb_sound.Checked;
-            settings.DesktopNotification = cb_desktopNotification.Checked;
-            settings.BalloonTips = cb_balloonTips.Checked;
+            else if (cb_mailNotification.Checked && tb_mailTo.Text == "")
+            {
+                MessageBox.Show("Mail notifications are checked but no mail address is given!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            else
+            {
+                settings.AntiAFK = cb_antiAfk.Checked;
+                settings.AutoJoin = cb_autoJoin.Checked;
 
-            settings.Opacity = (int)num_opacity.Value;
-            settings.LockWindow = cb_lockWindow.Checked;
+                settings.Sound = cb_sound.Checked;
+                settings.DesktopNotification = cb_desktopNotification.Checked;
+                settings.BalloonTips = cb_balloonTips.Checked;
 
-            if (rb_windowNormal.Checked) settings.WindowPreferences = "Normal";
-            if (rb_windowTop.Checked) settings.WindowPreferences = "AlwaysTop";
-            if (rb_windowTray.Checked) settings.WindowPreferences = "TrayOnly";
 
-            settings.NmaNotification = cb_nmaNotification.Checked;
-            settings.NmaAPIKey = tb_nma.Text;
+                settings.TrayOnly = cb_trayOnly.Checked;
+                settings.LockWindow = cb_lockWindow.Checked;
+                settings.BringToFront = cb_bringToFront.Checked;
+                settings.Opacity = (int)num_opacity.Value;
 
-            settings.ProwlNotification = cb_prowlNotification.Checked;
-            settings.ProwlAPIKey = tb_prowl.Text;
+                settings.AutoSelect = cb_autoSelect.Checked;
 
-            settings.MailNotification = cb_mailNotification.Checked;
-            settings.MailAddress = tb_mailTo.Text;
-            settings.MailSmpt = tb_mailSMTP.Text;
+                settings.NmaNotification = cb_nmaNotification.Checked;
+                settings.NmaAPIKey = tb_nmaAPIKey.Text;
 
-            dt.Opacity = (double)settings.Opacity/100;
-            dt.Refresh();
+                settings.ProwlNotification = cb_prowlNotification.Checked;
+                settings.ProwlAPIKey = tb_prowlAPIKey.Text;
 
+                settings.MailNotification = cb_mailNotification.Checked;
+                settings.MailAddress = tb_mailTo.Text;
+
+                if (settings.LockWindow) dt.lockToBottomRight();
+
+                if (settings.TrayOnly)
+                {
+                    dt.Hide();
+                    this.Focus();
+                }
+                else
+                {
+                    dt.Show();
+                    this.Focus();
+                }
+
+                dt.Opacity = (double)settings.Opacity / 100;
+                dt.Refresh();
+
+                return true;
+            }
         }
 
         private void btn_ok_Click(object sender, EventArgs e)
         {
-            applySettings();
-            this.Close();
+            if ( applySettings() )
+                this.Close();
         }
 
         private void btn_apply_Click(object sender, EventArgs e)
@@ -156,59 +181,39 @@ namespace Dungeon_Teller
             cb_desktopNotification.Checked = settings.DesktopNotification;
             cb_balloonTips.Checked = settings.BalloonTips;
 
+            cb_lockWindow.Checked = settings.LockWindow;
+            cb_trayOnly.Checked = settings.TrayOnly;
+            cb_bringToFront.Checked = settings.BringToFront;
             num_opacity.Value = settings.Opacity;
-            cb_lockWindow.Checked = settings.LockWindow;
 
-            switch (settings.WindowPreferences)
-            {
-                case "normal":
-                    rb_windowNormal.Checked = true;
-                    rb_windowTop.Checked = false;
-                    rb_windowTray.Checked = false;
-                    break;
-                case "AlwaysTop":
-                    rb_windowNormal.Checked = false;
-                    rb_windowTop.Checked = true;
-                    rb_windowTray.Checked = false;
-                    break;
-                case "TrayOnly":
-                    rb_windowNormal.Checked = false;
-                    rb_windowTop.Checked = false;
-                    rb_windowTray.Checked = true;
-                    break;
-            }
-
-            cb_lockWindow.Checked = settings.LockWindow;
+            cb_autoSelect.Checked = settings.AutoSelect;
 
             cb_nmaNotification.Checked = settings.NmaNotification;
-            tb_nma.Text = settings.NmaAPIKey;
+            tb_nmaAPIKey.Text = settings.NmaAPIKey;
             if (settings.NmaNotification)
             {
                 lbl_nma.Enabled = true;
-                tb_nma.Enabled = true;
+                tb_nmaAPIKey.Enabled = true;
                 lnk_nma.Enabled = true;
                 btn_nmaTest.Enabled = true;
             }
 
             cb_prowlNotification.Checked = settings.ProwlNotification;
-            tb_prowl.Text = settings.ProwlAPIKey;
+            tb_prowlAPIKey.Text = settings.ProwlAPIKey;
             if (settings.ProwlNotification)
             {
                 lbl_prowl.Enabled = true;
-                tb_prowl.Enabled = true;
+                tb_prowlAPIKey.Enabled = true;
                 lnk_prowl.Enabled = true;
                 btn_prowlTest.Enabled = true;
             }
 
             cb_mailNotification.Checked = settings.MailNotification;
             tb_mailTo.Text = settings.MailAddress;
-            tb_mailSMTP.Text = settings.MailSmpt;
             if (settings.MailNotification)
             {
                 lbl_mailAddress.Enabled = true;
-                lbl_mailSMTP.Enabled = true;
                 tb_mailTo.Enabled = true;
-                tb_mailSMTP.Enabled = true;
                 btn_mailTest.Enabled = true;
             }
 
@@ -228,18 +233,22 @@ namespace Dungeon_Teller
 
         private void btn_nmaTest_Click(object sender, EventArgs e)
         {
-            //PushNotification.sendMessageNMA("Test", tb_nma.Text, "Dungeon Teller Test");
-            dt.Enabled = true;
+            Notification.pushNMA(tb_nmaAPIKey.Text, "Test Event", "Test message");
         }
 
         private void btn_prowlTest_Click(object sender, EventArgs e)
         {
-            PushNotification.sendMessageProwl("Test", tb_nma.Text, "Dungeon Teller Test");
+            Notification.pushProwl(tb_prowlAPIKey.Text, "Test Event", "Test message");
         }
 
         private void Options_FormClosed(object sender, FormClosedEventArgs e)
         {
             dt.optOpen = false;
+        }
+
+        private void btn_mailTest_Click(object sender, EventArgs e)
+        {
+            Notification.sendMail(tb_mailTo.Text, "Dungeon Teller Test", "This is just a test");
         }
     }
 }

@@ -17,8 +17,8 @@
     <Setting Name="BalloonTips" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="WindowPreferences" Type="System.String" Scope="User">
-      <Value Profile="(Default)">AlwaysTop</Value>
+    <Setting Name="TrayOnly" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="Opacity" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">100</Value>
@@ -44,8 +44,11 @@
     <Setting Name="MailAddress" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="MailSmpt" Type="System.String" Scope="User">
-      <Value Profile="(Default)">localhost:25</Value>
+    <Setting Name="AutoSelect" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="BringToFront" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
 </SettingsFile>

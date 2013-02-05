@@ -42,9 +42,8 @@
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.Restore = new System.Windows.Forms.ToolStripMenuItem();
+            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Exit = new System.Windows.Forms.ToolStripMenuItem();
-            this.label4 = new System.Windows.Forms.Label();
-            this.lbl_bgStatus = new System.Windows.Forms.Label();
             this.lnk_options = new System.Windows.Forms.LinkLabel();
             this.grbx_Main.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -59,28 +58,26 @@
             // 
             this.lbl_LFDStatus.AutoSize = true;
             this.lbl_LFDStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_LFDStatus.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lbl_LFDStatus.Location = new System.Drawing.Point(259, 31);
+            this.lbl_LFDStatus.ForeColor = System.Drawing.Color.Red;
+            this.lbl_LFDStatus.Location = new System.Drawing.Point(257, 42);
             this.lbl_LFDStatus.Name = "lbl_LFDStatus";
-            this.lbl_LFDStatus.Size = new System.Drawing.Size(91, 20);
+            this.lbl_LFDStatus.Size = new System.Drawing.Size(90, 20);
             this.lbl_LFDStatus.TabIndex = 5;
-            this.lbl_LFDStatus.Text = "LFD Status";
+            this.lbl_LFDStatus.Text = "not queued";
             // 
             // lbl_LFRStatus
             // 
             this.lbl_LFRStatus.AutoSize = true;
             this.lbl_LFRStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_LFRStatus.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lbl_LFRStatus.Location = new System.Drawing.Point(259, 60);
+            this.lbl_LFRStatus.ForeColor = System.Drawing.Color.Red;
+            this.lbl_LFRStatus.Location = new System.Drawing.Point(259, 72);
             this.lbl_LFRStatus.Name = "lbl_LFRStatus";
-            this.lbl_LFRStatus.Size = new System.Drawing.Size(91, 20);
+            this.lbl_LFRStatus.Size = new System.Drawing.Size(90, 20);
             this.lbl_LFRStatus.TabIndex = 6;
-            this.lbl_LFRStatus.Text = "LFR Status";
+            this.lbl_LFRStatus.Text = "not queued";
             // 
             // grbx_Main
             // 
-            this.grbx_Main.Controls.Add(this.lbl_bgStatus);
-            this.grbx_Main.Controls.Add(this.label4);
             this.grbx_Main.Controls.Add(this.label2);
             this.grbx_Main.Controls.Add(this.label1);
             this.grbx_Main.Controls.Add(this.lbl_LFRStatus);
@@ -88,7 +85,7 @@
             this.grbx_Main.Controls.Add(this.pictureBox1);
             this.grbx_Main.Location = new System.Drawing.Point(12, 3);
             this.grbx_Main.Name = "grbx_Main";
-            this.grbx_Main.Size = new System.Drawing.Size(360, 139);
+            this.grbx_Main.Size = new System.Drawing.Size(360, 129);
             this.grbx_Main.TabIndex = 5;
             this.grbx_Main.TabStop = false;
             this.grbx_Main.Text = "Queue Status";
@@ -97,7 +94,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(123, 60);
+            this.label2.Location = new System.Drawing.Point(123, 72);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(95, 20);
             this.label2.TabIndex = 8;
@@ -107,7 +104,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(123, 31);
+            this.label1.Location = new System.Drawing.Point(123, 42);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(128, 20);
             this.label1.TabIndex = 7;
@@ -140,48 +137,36 @@
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.Restore,
+            this.optionsToolStripMenuItem,
             this.Exit});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(114, 48);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(117, 70);
+            this.contextMenuStrip1.Opened += new System.EventHandler(this.contextMenuStrip1_Opened);
             this.contextMenuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.contextMenuStrip1_ItemClicked);
             // 
             // Restore
             // 
             this.Restore.Name = "Restore";
-            this.Restore.Size = new System.Drawing.Size(113, 22);
+            this.Restore.Size = new System.Drawing.Size(116, 22);
             this.Restore.Text = "Restore";
+            // 
+            // optionsToolStripMenuItem
+            // 
+            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.optionsToolStripMenuItem.Text = "Options";
+            this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
             // 
             // Exit
             // 
             this.Exit.Name = "Exit";
-            this.Exit.Size = new System.Drawing.Size(113, 22);
+            this.Exit.Size = new System.Drawing.Size(116, 22);
             this.Exit.Text = "Exit";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(123, 89);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(105, 20);
-            this.label4.TabIndex = 10;
-            this.label4.Text = "Battleground:";
-            // 
-            // lbl_bgStatus
-            // 
-            this.lbl_bgStatus.AutoSize = true;
-            this.lbl_bgStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_bgStatus.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lbl_bgStatus.Location = new System.Drawing.Point(259, 89);
-            this.lbl_bgStatus.Name = "lbl_bgStatus";
-            this.lbl_bgStatus.Size = new System.Drawing.Size(84, 20);
-            this.lbl_bgStatus.TabIndex = 12;
-            this.lbl_bgStatus.Text = "BG Status";
             // 
             // lnk_options
             // 
             this.lnk_options.AutoSize = true;
-            this.lnk_options.Location = new System.Drawing.Point(12, 145);
+            this.lnk_options.Location = new System.Drawing.Point(12, 143);
             this.lnk_options.Name = "lnk_options";
             this.lnk_options.Size = new System.Drawing.Size(43, 13);
             this.lnk_options.TabIndex = 6;
@@ -204,10 +189,11 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Dungeon Teller";
+            this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DungeonTeller_FormClosing);
             this.Load += new System.EventHandler(this.DungeonTeller_Load);
+            this.Shown += new System.EventHandler(this.DungeonTeller_Shown);
             this.LocationChanged += new System.EventHandler(this.DungeonTeller_LocationChanged);
-            this.VisibleChanged += new System.EventHandler(this.DungeonTeller_VisibleChanged);
             this.Resize += new System.EventHandler(this.DungeonTeller_Resize);
             this.grbx_Main.ResumeLayout(false);
             this.grbx_Main.PerformLayout();
@@ -229,13 +215,12 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Timer timer_antiAFK;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.NotifyIcon notifyIcon1;
+        public System.Windows.Forms.NotifyIcon notifyIcon1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem Restore;
         private System.Windows.Forms.ToolStripMenuItem Exit;
-        private System.Windows.Forms.Label lbl_bgStatus;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.LinkLabel lnk_options;
+        private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
 
     }
 }
