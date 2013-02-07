@@ -26,7 +26,9 @@ namespace Dungeon_Teller
         const int WM_KEYDOWN = 0x100;
         const int WM_KEYUP = 0x101;
         const int VK_RETURN = 0x0D;
-        const int VK_SPACE = 0x20;
+        const int VK_LEFT = 0x25;
+        const int VK_RIGHT = 0x27;
+
 
         SoundPlayer ready = new SoundPlayer(Properties.Resources.Ready);
         Random rand = new Random();
@@ -115,7 +117,7 @@ namespace Dungeon_Teller
             get { return inQueueLFR; }
             set
             {
-                if (inQueueLFR != value)
+                if ((inQueueLFR == 0 && value != 0) || (inQueueLFR != 0 && value == 0))
                 {
                     inQueueLFR = value;
                     InQueueLFR_Changed();
@@ -182,9 +184,9 @@ namespace Dungeon_Teller
             }
         }
 
-        string notifyMessage;
         bool resetLFD = false;
         bool resetLFR = false;
+        string queueReadyName;
 
         private void IsQueueReady_Changed()
         {
@@ -192,25 +194,27 @@ namespace Dungeon_Teller
             {
                 if (IsQueueReady == 1)
                 {
+                    queueReadyName = "Dungeon Finder";
                     resetLFD = true;
                     lbl_LFDStatus.ForeColor = System.Drawing.Color.Green;
                     lbl_LFDStatus.Text = "ready";
-                    notifyIcon1.BalloonTipText = "Dungeon Finder queue is ready!";
-                    notifyMessage = "Your Dungeon Finder queue is now ready!";
                 }
 
                 if (IsQueueReady == 2)
                 {
+                    queueReadyName = "Raid Finder";
                     resetLFR = true;
                     lbl_LFRStatus.ForeColor = System.Drawing.Color.Green;
                     lbl_LFRStatus.Text = "ready";
-                    notifyIcon1.BalloonTipText = "Raid Finder queue is ready!";
-                    notifyMessage = "Your Raid Finder queue is now ready!";
                 }
 
                 timer_antiAFK.Stop();
 
-                if (settings.BalloonTips) notifyIcon1.ShowBalloonTip(500);
+                if (settings.BalloonTips)
+                {
+                    notifyIcon1.BalloonTipText = queueReadyName + " queue is ready!";
+                    notifyIcon1.ShowBalloonTip(500);
+                }
 
                 if (settings.Sound) ready.Play();
 
@@ -248,21 +252,17 @@ namespace Dungeon_Teller
 
                 if (settings.DesktopNotification)
                 {
-
-                    DialogResult result = MessageBox.Show(this, "Your queue is ready!\n\n Do you want to quit Dungeon Teller?", "Queue ready", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
-                    if (result == DialogResult.Yes) this.Close();
+                   MessageBox.Show(this, "Your " + queueReadyName + " queue is ready!", "Queue ready", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
-                if (settings.NmaNotification)
+                if (settings.PushNotification)
                 {
-                    Notification.pushNMA(settings.NmaAPIKey, "Queue ready", notifyMessage);
+                    Notification.sendPushOver(settings.PushOverUserKey, "Queue ready!", "Your " + queueReadyName + " queue is now ready!");
                 }
-
-                if (settings.ProwlNotification)
+                if (settings.MailNotification)
                 {
-                    Notification.pushProwl(settings.ProwlAPIKey, "Queue ready", notifyMessage);
+                    Notification.sendMail(settings.MailAddress, "Queue ready", "Your " + queueReadyName + " queue is now ready!");
                 }
-
             }
             else
             {
@@ -293,13 +293,11 @@ namespace Dungeon_Teller
                 InQueueLFD = Convert.ToUInt32(Memory.Read<uint>(Memory.BaseAddress + Offset.inQueueLFD));
                 InQueueLFR = Convert.ToUInt32(Memory.Read<uint>(Memory.BaseAddress + Offset.inQueueLFR));
                 IsQueueReady = Convert.ToByte(Memory.Read<byte>(Memory.BaseAddress + Offset.isQueueReady));
-
-
             }
-            catch
+            catch (Exception ep)
             {
                 Check.Stop();
-                MessageBox.Show("World of Warcraft has quit!\nThe program will now quit!", "DT", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Unexpected Error: " + ep.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Application.Exit();
             }
         }
@@ -308,8 +306,10 @@ namespace Dungeon_Teller
         {
             timer_antiAFK.Interval = rand.Next(30000, 90000);
 
-            SendMessage(hWnd_wow, WM_KEYDOWN, VK_SPACE, IntPtr.Zero);
-            SendMessage(hWnd_wow, WM_KEYUP, VK_SPACE, IntPtr.Zero);
+            SendMessage(hWnd_wow, WM_KEYDOWN, VK_LEFT, IntPtr.Zero);
+            SendMessage(hWnd_wow, WM_KEYUP, VK_LEFT, IntPtr.Zero);
+            SendMessage(hWnd_wow, WM_KEYDOWN, VK_RIGHT, IntPtr.Zero);
+            SendMessage(hWnd_wow, WM_KEYUP, VK_RIGHT, IntPtr.Zero);
         }
 
 

@@ -122,48 +122,24 @@ namespace Dungeon_Teller.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool NmaNotification {
+        public bool PushNotification {
             get {
-                return ((bool)(this["NmaNotification"]));
+                return ((bool)(this["PushNotification"]));
             }
             set {
-                this["NmaNotification"] = value;
+                this["PushNotification"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string NmaAPIKey {
+        public string PushOverUserKey {
             get {
-                return ((string)(this["NmaAPIKey"]));
+                return ((string)(this["PushOverUserKey"]));
             }
             set {
-                this["NmaAPIKey"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool ProwlNotification {
-            get {
-                return ((bool)(this["ProwlNotification"]));
-            }
-            set {
-                this["ProwlNotification"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string ProwlAPIKey {
-            get {
-                return ((string)(this["ProwlAPIKey"]));
-            }
-            set {
-                this["ProwlAPIKey"] = value;
+                this["PushOverUserKey"] = value;
             }
         }
         

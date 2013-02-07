@@ -59,19 +59,10 @@ namespace Dungeon_Teller
 
         private void cb_nma_CheckedChanged(object sender, EventArgs e)
         {
-            tb_nmaAPIKey.Enabled = !tb_nmaAPIKey.Enabled;
-            lnk_nma.Enabled = !lnk_nma.Enabled;
+            tb_pushOverUserKey.Enabled = !tb_pushOverUserKey.Enabled;
+            lnk_pushOver.Enabled = !lnk_pushOver.Enabled;
             lbl_nma.Enabled = !lbl_nma.Enabled;
-            btn_nmaTest.Enabled = !btn_nmaTest.Enabled;
-        }
-
-        
-        private void cb_prowl_CheckedChanged(object sender, EventArgs e)
-        {
-            tb_prowlAPIKey.Enabled = !tb_prowlAPIKey.Enabled;
-            lnk_prowl.Enabled = !lnk_prowl.Enabled;
-            lbl_prowl.Enabled = !lbl_prowl.Enabled;
-            btn_prowlTest.Enabled = !btn_prowlTest.Enabled;
+            btn_pushOverTest.Enabled = !btn_pushOverTest.Enabled;
         }
 
         private void cb_mail_CheckedChanged(object sender, EventArgs e)
@@ -88,17 +79,11 @@ namespace Dungeon_Teller
 
         private bool applySettings()
         {
-            if (cb_nmaNotification.Checked && tb_nmaAPIKey.Text == "")
+            if (cb_pushOver.Checked && tb_pushOverUserKey.Text == "")
             {
                 MessageBox.Show("NMA push notifications are checked but no API Key is given!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-            else if (cb_prowlNotification.Checked && tb_prowlAPIKey.Text == "")
-            {
-                MessageBox.Show("Prowl push notifications are checked but no API Key is given!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-
             else if (cb_mailNotification.Checked && tb_mailTo.Text == "")
             {
                 MessageBox.Show("Mail notifications are checked but no mail address is given!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -121,11 +106,8 @@ namespace Dungeon_Teller
 
                 settings.AutoSelect = cb_autoSelect.Checked;
 
-                settings.NmaNotification = cb_nmaNotification.Checked;
-                settings.NmaAPIKey = tb_nmaAPIKey.Text;
-
-                settings.ProwlNotification = cb_prowlNotification.Checked;
-                settings.ProwlAPIKey = tb_prowlAPIKey.Text;
+                settings.PushNotification = cb_pushOver.Checked;
+                settings.PushOverUserKey = tb_pushOverUserKey.Text;
 
                 settings.MailNotification = cb_mailNotification.Checked;
                 settings.MailAddress = tb_mailTo.Text;
@@ -164,7 +146,7 @@ namespace Dungeon_Teller
 
         private void lnk_nma_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("https://www.notifymyandroid.com/register.jsp");
+            Process.Start("https://pushover.net/");
         }
 
         private void lnk_prowl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -188,24 +170,14 @@ namespace Dungeon_Teller
 
             cb_autoSelect.Checked = settings.AutoSelect;
 
-            cb_nmaNotification.Checked = settings.NmaNotification;
-            tb_nmaAPIKey.Text = settings.NmaAPIKey;
-            if (settings.NmaNotification)
+            cb_pushOver.Checked = settings.PushNotification;
+            tb_pushOverUserKey.Text = settings.PushOverUserKey;
+            if (settings.PushNotification)
             {
                 lbl_nma.Enabled = true;
-                tb_nmaAPIKey.Enabled = true;
-                lnk_nma.Enabled = true;
-                btn_nmaTest.Enabled = true;
-            }
-
-            cb_prowlNotification.Checked = settings.ProwlNotification;
-            tb_prowlAPIKey.Text = settings.ProwlAPIKey;
-            if (settings.ProwlNotification)
-            {
-                lbl_prowl.Enabled = true;
-                tb_prowlAPIKey.Enabled = true;
-                lnk_prowl.Enabled = true;
-                btn_prowlTest.Enabled = true;
+                tb_pushOverUserKey.Enabled = true;
+                lnk_pushOver.Enabled = true;
+                btn_pushOverTest.Enabled = true;
             }
 
             cb_mailNotification.Checked = settings.MailNotification;
@@ -233,12 +205,7 @@ namespace Dungeon_Teller
 
         private void btn_nmaTest_Click(object sender, EventArgs e)
         {
-            Notification.pushNMA(tb_nmaAPIKey.Text, "Test Event", "Test message");
-        }
-
-        private void btn_prowlTest_Click(object sender, EventArgs e)
-        {
-            Notification.pushProwl(tb_prowlAPIKey.Text, "Test Event", "Test message");
+            Notification.sendPushOver(tb_pushOverUserKey.Text, "Test Event", "Test message");
         }
 
         private void Options_FormClosed(object sender, FormClosedEventArgs e)
@@ -248,7 +215,7 @@ namespace Dungeon_Teller
 
         private void btn_mailTest_Click(object sender, EventArgs e)
         {
-            Notification.sendMail(tb_mailTo.Text, "Dungeon Teller Test", "This is just a test");
+            Notification.sendMail(tb_mailTo.Text, "Dungeon Teller Test", "This is just a tets.");
         }
     }
 }

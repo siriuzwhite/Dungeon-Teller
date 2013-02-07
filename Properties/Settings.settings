@@ -26,16 +26,10 @@
     <Setting Name="LockWindow" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="NmaNotification" Type="System.Boolean" Scope="User">
+    <Setting Name="PushNotification" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="NmaAPIKey" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="ProwlNotification" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
-    <Setting Name="ProwlAPIKey" Type="System.String" Scope="User">
+    <Setting Name="PushOverUserKey" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="MailNotification" Type="System.Boolean" Scope="User">

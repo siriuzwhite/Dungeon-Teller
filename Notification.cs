@@ -13,30 +13,19 @@ namespace Dungeon_Teller
 {
     class Notification
     {
-        public static void pushProwl(string prowlApiKey, string prowlEvent, string prowlMessage)
+        public static void sendPushOver(string userKey, string title, string message)
         {
-            WebClient wb = new WebClient();
+            WebClient client = new WebClient();
             NameValueCollection data = new NameValueCollection();
 
-            data["apikey"] = prowlApiKey;
-            data["application"] = "Dungeon Teller";
-            data["event"] = prowlEvent;
-            data["description"] = prowlMessage;
+            var parameters = new NameValueCollection {
+                { "token", "X52StO16VHy9Jho2mac2G0RNNJD6qP" },
+                { "user", userKey },
+                { "title", title },
+                { "message", message }
+            };
 
-            Byte[] response = wb.UploadValues("https://api.prowlapp.com/publicapi/add", "POST", data);
-        }
-
-        public static void pushNMA(string nmaApiKey, string nmaEvent, string nmaMessage)
-        {
-            WebClient wb = new WebClient();
-            NameValueCollection data = new NameValueCollection();
-
-            data["apikey"] = nmaApiKey;
-            data["application"] = "Dungeon Teller";
-            data["event"] = nmaEvent;
-            data["description"] = nmaMessage; 
-
-            Byte[] response = wb.UploadValues("https://www.notifymyandroid.com/publicapi/notify", "POST", data);
+            client.UploadValues("https://api.pushover.net/1/messages.json", parameters);
         }
 
         public static void sendMail(string toAddress, string subject, string message)
