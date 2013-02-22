@@ -190,5 +190,17 @@ namespace Dungeon_Teller.Properties {
                 this["BringToFront"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool PauseFocus {
+            get {
+                return ((bool)(this["PauseFocus"]));
+            }
+            set {
+                this["PauseFocus"] = value;
+            }
+        }
     }
 }

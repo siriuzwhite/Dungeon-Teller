@@ -13,6 +13,7 @@ namespace Dungeon_Teller
     public partial class Options : Form
     {
         DungeonTeller dt;
+        Properties.Settings settings = Properties.Settings.Default;
 
         public Options(DungeonTeller dt)
         {
@@ -20,8 +21,6 @@ namespace Dungeon_Teller
             AddEvents(this.Controls);
             this.dt = dt;
         }
-
-        Properties.Settings settings = Properties.Settings.Default;
 
         void AddEvents(System.Windows.Forms.Control.ControlCollection Controls)
         {
@@ -105,6 +104,7 @@ namespace Dungeon_Teller
                 settings.Opacity = (int)num_opacity.Value;
 
                 settings.AutoSelect = cb_autoSelect.Checked;
+                settings.PauseFocus = cb_pauseFocus.Checked;
 
                 settings.PushNotification = cb_pushOver.Checked;
                 settings.PushOverUserKey = tb_pushOverUserKey.Text;
@@ -169,6 +169,7 @@ namespace Dungeon_Teller
             num_opacity.Value = settings.Opacity;
 
             cb_autoSelect.Checked = settings.AutoSelect;
+            cb_pauseFocus.Checked = settings.PauseFocus;
 
             cb_pushOver.Checked = settings.PushNotification;
             tb_pushOverUserKey.Text = settings.PushOverUserKey;

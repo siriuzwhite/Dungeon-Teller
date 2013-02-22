@@ -30,14 +30,18 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DungeonTeller));
-            this.Check = new System.Windows.Forms.Timer(this.components);
+            this.timerMemoryRead = new System.Windows.Forms.Timer(this.components);
             this.lbl_LFDStatus = new System.Windows.Forms.Label();
             this.lbl_LFRStatus = new System.Windows.Forms.Label();
             this.grbx_Main = new System.Windows.Forms.GroupBox();
+            this.lbl_BG2Status = new System.Windows.Forms.Label();
+            this.lbl_BG1Status = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.timer_antiAFK = new System.Windows.Forms.Timer(this.components);
+            this.label1 = new System.Windows.Forms.Label();
+            this.timerAntiAFK = new System.Windows.Forms.Timer(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -45,21 +49,23 @@
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Exit = new System.Windows.Forms.ToolStripMenuItem();
             this.lnk_options = new System.Windows.Forms.LinkLabel();
+            this.button1 = new System.Windows.Forms.Button();
             this.grbx_Main.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // Check
+            // timerMemoryRead
             // 
-            this.Check.Tick += new System.EventHandler(this.Check_Tick);
+            this.timerMemoryRead.Interval = 250;
+            this.timerMemoryRead.Tick += new System.EventHandler(this.timerMemoryRead_Tick);
             // 
             // lbl_LFDStatus
             // 
             this.lbl_LFDStatus.AutoSize = true;
             this.lbl_LFDStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_LFDStatus.ForeColor = System.Drawing.Color.Red;
-            this.lbl_LFDStatus.Location = new System.Drawing.Point(257, 42);
+            this.lbl_LFDStatus.Location = new System.Drawing.Point(257, 16);
             this.lbl_LFDStatus.Name = "lbl_LFDStatus";
             this.lbl_LFDStatus.Size = new System.Drawing.Size(90, 20);
             this.lbl_LFDStatus.TabIndex = 5;
@@ -70,7 +76,7 @@
             this.lbl_LFRStatus.AutoSize = true;
             this.lbl_LFRStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_LFRStatus.ForeColor = System.Drawing.Color.Red;
-            this.lbl_LFRStatus.Location = new System.Drawing.Point(259, 72);
+            this.lbl_LFRStatus.Location = new System.Drawing.Point(257, 45);
             this.lbl_LFRStatus.Name = "lbl_LFRStatus";
             this.lbl_LFRStatus.Size = new System.Drawing.Size(90, 20);
             this.lbl_LFRStatus.TabIndex = 6;
@@ -78,51 +84,97 @@
             // 
             // grbx_Main
             // 
+            this.grbx_Main.Controls.Add(this.lbl_BG2Status);
+            this.grbx_Main.Controls.Add(this.lbl_BG1Status);
+            this.grbx_Main.Controls.Add(this.label3);
             this.grbx_Main.Controls.Add(this.label2);
+            this.grbx_Main.Controls.Add(this.label4);
+            this.grbx_Main.Controls.Add(this.pictureBox1);
             this.grbx_Main.Controls.Add(this.label1);
             this.grbx_Main.Controls.Add(this.lbl_LFRStatus);
             this.grbx_Main.Controls.Add(this.lbl_LFDStatus);
-            this.grbx_Main.Controls.Add(this.pictureBox1);
             this.grbx_Main.Location = new System.Drawing.Point(12, 3);
             this.grbx_Main.Name = "grbx_Main";
-            this.grbx_Main.Size = new System.Drawing.Size(360, 129);
+            this.grbx_Main.Size = new System.Drawing.Size(356, 137);
             this.grbx_Main.TabIndex = 5;
             this.grbx_Main.TabStop = false;
             this.grbx_Main.Text = "Queue Status";
+            // 
+            // lbl_BG2Status
+            // 
+            this.lbl_BG2Status.AutoSize = true;
+            this.lbl_BG2Status.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_BG2Status.ForeColor = System.Drawing.Color.Red;
+            this.lbl_BG2Status.Location = new System.Drawing.Point(257, 103);
+            this.lbl_BG2Status.Name = "lbl_BG2Status";
+            this.lbl_BG2Status.Size = new System.Drawing.Size(90, 20);
+            this.lbl_BG2Status.TabIndex = 12;
+            this.lbl_BG2Status.Text = "not queued";
+            // 
+            // lbl_BG1Status
+            // 
+            this.lbl_BG1Status.AutoSize = true;
+            this.lbl_BG1Status.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_BG1Status.ForeColor = System.Drawing.Color.Red;
+            this.lbl_BG1Status.Location = new System.Drawing.Point(257, 74);
+            this.lbl_BG1Status.Name = "lbl_BG1Status";
+            this.lbl_BG1Status.Size = new System.Drawing.Size(90, 20);
+            this.lbl_BG1Status.TabIndex = 11;
+            this.lbl_BG1Status.Text = "not queued";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(123, 103);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(118, 20);
+            this.label3.TabIndex = 9;
+            this.label3.Text = "Battleground 2:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(123, 72);
+            this.label2.Location = new System.Drawing.Point(123, 45);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(95, 20);
             this.label2.TabIndex = 8;
             this.label2.Text = "Raid Finder:";
             // 
-            // label1
+            // label4
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(123, 42);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(128, 20);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "Dungeon Finder:";
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(123, 74);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(118, 20);
+            this.label4.TabIndex = 10;
+            this.label4.Text = "Battleground 1:";
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::Dungeon_Teller.Properties.Resources.NotInQueue;
-            this.pictureBox1.Location = new System.Drawing.Point(27, 31);
+            this.pictureBox1.Location = new System.Drawing.Point(21, 34);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(72, 72);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // timer_antiAFK
+            // label1
             // 
-            this.timer_antiAFK.Interval = 30000;
-            this.timer_antiAFK.Tick += new System.EventHandler(this.timer_antiAFK_Tick);
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(123, 16);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(128, 20);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "Dungeon Finder:";
+            // 
+            // timerAntiAFK
+            // 
+            this.timerAntiAFK.Interval = 30000;
+            this.timerAntiAFK.Tick += new System.EventHandler(this.timer_antiAFK_Tick);
             // 
             // notifyIcon1
             // 
@@ -174,11 +226,22 @@
             this.lnk_options.Text = "Options";
             this.lnk_options.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnk_options_LinkClicked);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(122, 132);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 7;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // DungeonTeller
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(384, 165);
+            this.ClientSize = new System.Drawing.Size(376, 164);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.lnk_options);
             this.Controls.Add(this.grbx_Main);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -206,14 +269,14 @@
 
         #endregion
 
-        private System.Windows.Forms.Timer Check;
+        private System.Windows.Forms.Timer timerMemoryRead;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label lbl_LFDStatus;
         private System.Windows.Forms.Label lbl_LFRStatus;
         private System.Windows.Forms.GroupBox grbx_Main;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Timer timer_antiAFK;
+        private System.Windows.Forms.Timer timerAntiAFK;
         private System.Windows.Forms.ToolTip toolTip1;
         public System.Windows.Forms.NotifyIcon notifyIcon1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
@@ -221,6 +284,11 @@
         private System.Windows.Forms.ToolStripMenuItem Exit;
         private System.Windows.Forms.LinkLabel lnk_options;
         private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
+        private System.Windows.Forms.Label lbl_BG2Status;
+        private System.Windows.Forms.Label lbl_BG1Status;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button button1;
 
     }
 }

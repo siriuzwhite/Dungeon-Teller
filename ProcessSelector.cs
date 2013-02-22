@@ -14,14 +14,20 @@ namespace Dungeon_Teller
 {
     public partial class ProcessSelector : Form
     {
+        List<ListBoxObject> pList = new List<ListBoxObject> { };
+        Properties.Settings settings = Properties.Settings.Default;
+        private const int SW_RESTORE = 9;
 
         public ProcessSelector()
         {
             InitializeComponent();
         }
 
-        List<ListBoxObject> pList = new List<ListBoxObject> { };
-        Properties.Settings settings = Properties.Settings.Default;
+        [DllImport("user32.dll")]
+        static extern bool SetForegroundWindow(IntPtr hWnd);
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
 
         private void updateProcessList()
         {
@@ -105,14 +111,6 @@ namespace Dungeon_Teller
         {
             this.lbl_processCount.Visible = !this.lbl_processCount.Visible;
         }
-
-        [DllImport("user32.dll")]
-        static extern bool SetForegroundWindow(IntPtr hWnd);
-        [DllImport("user32.dll", CharSet = CharSet.Auto)]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
-
-        private const int SW_RESTORE = 9;
 
         private void lbx_WoWIds_DoubleClick(object sender, EventArgs e)
         {

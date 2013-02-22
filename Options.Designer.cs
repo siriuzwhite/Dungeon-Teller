@@ -58,6 +58,7 @@
             this.cb_antiAfk = new System.Windows.Forms.CheckBox();
             this.cb_autoJoin = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.cb_pauseFocus = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_opacity)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -97,6 +98,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.cb_pauseFocus);
             this.groupBox1.Controls.Add(this.cb_autoSelect);
             this.groupBox1.Controls.Add(this.cb_trayOnly);
             this.groupBox1.Controls.Add(this.num_opacity);
@@ -104,7 +106,7 @@
             this.groupBox1.Controls.Add(this.cb_lockWindow);
             this.groupBox1.Location = new System.Drawing.Point(340, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(210, 153);
+            this.groupBox1.Size = new System.Drawing.Size(210, 176);
             this.groupBox1.TabIndex = 13;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "General options";
@@ -112,7 +114,7 @@
             // cb_autoSelect
             // 
             this.cb_autoSelect.AutoSize = true;
-            this.cb_autoSelect.Location = new System.Drawing.Point(16, 65);
+            this.cb_autoSelect.Location = new System.Drawing.Point(15, 65);
             this.cb_autoSelect.Name = "cb_autoSelect";
             this.cb_autoSelect.Size = new System.Drawing.Size(150, 17);
             this.cb_autoSelect.TabIndex = 21;
@@ -123,7 +125,7 @@
             // cb_trayOnly
             // 
             this.cb_trayOnly.AutoSize = true;
-            this.cb_trayOnly.Location = new System.Drawing.Point(16, 19);
+            this.cb_trayOnly.Location = new System.Drawing.Point(15, 19);
             this.cb_trayOnly.Name = "cb_trayOnly";
             this.cb_trayOnly.Size = new System.Drawing.Size(78, 17);
             this.cb_trayOnly.TabIndex = 20;
@@ -133,7 +135,7 @@
             // 
             // num_opacity
             // 
-            this.num_opacity.Location = new System.Drawing.Point(13, 113);
+            this.num_opacity.Location = new System.Drawing.Point(14, 136);
             this.num_opacity.Name = "num_opacity";
             this.num_opacity.Size = new System.Drawing.Size(85, 20);
             this.num_opacity.TabIndex = 18;
@@ -146,7 +148,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(10, 97);
+            this.label2.Location = new System.Drawing.Point(12, 120);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(109, 13);
             this.label2.TabIndex = 17;
@@ -157,7 +159,7 @@
             this.cb_lockWindow.AutoSize = true;
             this.cb_lockWindow.Checked = true;
             this.cb_lockWindow.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cb_lockWindow.Location = new System.Drawing.Point(16, 42);
+            this.cb_lockWindow.Location = new System.Drawing.Point(15, 42);
             this.cb_lockWindow.Name = "cb_lockWindow";
             this.cb_lockWindow.Size = new System.Drawing.Size(159, 17);
             this.cb_lockWindow.TabIndex = 12;
@@ -374,12 +376,22 @@
             // 
             this.groupBox3.Controls.Add(this.cb_antiAfk);
             this.groupBox3.Controls.Add(this.cb_autoJoin);
-            this.groupBox3.Location = new System.Drawing.Point(340, 171);
+            this.groupBox3.Location = new System.Drawing.Point(340, 195);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(212, 130);
+            this.groupBox3.Size = new System.Drawing.Size(212, 106);
             this.groupBox3.TabIndex = 20;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Keyboard emulation options";
+            // 
+            // cb_pauseFocus
+            // 
+            this.cb_pauseFocus.AutoSize = true;
+            this.cb_pauseFocus.Location = new System.Drawing.Point(15, 88);
+            this.cb_pauseFocus.Name = "cb_pauseFocus";
+            this.cb_pauseFocus.Size = new System.Drawing.Size(151, 17);
+            this.cb_pauseFocus.TabIndex = 22;
+            this.cb_pauseFocus.Text = "Pause when WoW in front";
+            this.cb_pauseFocus.UseVisualStyleBackColor = true;
             // 
             // Options
             // 
@@ -443,5 +455,6 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.CheckBox cb_antiAfk;
         private System.Windows.Forms.CheckBox cb_autoJoin;
+        private System.Windows.Forms.CheckBox cb_pauseFocus;
     }
 }
