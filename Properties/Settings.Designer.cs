@@ -202,5 +202,41 @@ namespace Dungeon_Teller.Properties {
                 this["PauseFocus"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool LFDModule {
+            get {
+                return ((bool)(this["LFDModule"]));
+            }
+            set {
+                this["LFDModule"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool LFRModule {
+            get {
+                return ((bool)(this["LFRModule"]));
+            }
+            set {
+                this["LFRModule"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool BGModule {
+            get {
+                return ((bool)(this["BGModule"]));
+            }
+            set {
+                this["BGModule"] = value;
+            }
+        }
     }
 }

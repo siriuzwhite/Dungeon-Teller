@@ -73,9 +73,9 @@ namespace Dungeon_Teller.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap InQueue {
+        internal static System.Drawing.Bitmap dungeon_finder_icon {
             get {
-                object obj = ResourceManager.GetObject("InQueue", resourceCulture);
+                object obj = ResourceManager.GetObject("dungeon_finder_icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,9 +83,9 @@ namespace Dungeon_Teller.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap NotInQueue {
+        internal static System.Drawing.Bitmap pvp_finder_icon {
             get {
-                object obj = ResourceManager.GetObject("NotInQueue", resourceCulture);
+                object obj = ResourceManager.GetObject("pvp_finder_icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -93,9 +93,9 @@ namespace Dungeon_Teller.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap QueueReady {
+        internal static System.Drawing.Bitmap raid_finder_icon {
             get {
-                object obj = ResourceManager.GetObject("QueueReady", resourceCulture);
+                object obj = ResourceManager.GetObject("raid_finder_icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -115,6 +115,36 @@ namespace Dungeon_Teller.Properties {
         internal static System.Drawing.Bitmap Refresh {
             get {
                 object obj = ResourceManager.GetObject("Refresh", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap role_dps_32x32 {
+            get {
+                object obj = ResourceManager.GetObject("role_dps_32x32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap role_heal_32x32 {
+            get {
+                object obj = ResourceManager.GetObject("role_heal_32x32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap role_tank_32x32 {
+            get {
+                object obj = ResourceManager.GetObject("role_tank_32x32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
