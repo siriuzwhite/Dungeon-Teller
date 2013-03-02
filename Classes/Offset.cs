@@ -15,15 +15,13 @@ namespace Dungeon_Teller
         public static UInt32 playerName = 0xE28468;
         public static UInt32 playerRealm = 0xE285F6;
         public static UInt32 bgStatusBase = 0xACCAE8;
-        public static UInt32 bgStatusNext = 0x4;
-        public static UInt32 bgStatus = 0x34;
+        public const UInt32 bgStatusNext = 0x4;
+        public const UInt32 bgStatus = 0x34;
         public static UInt32 LFGQueueStats = 0xD6EA40;
         public static UInt32 bgTimeBase = 0xACCAE8;
-        public static UInt32 bgTimeNext = 0x4;
-        public static UInt32 bgTime = 0x22;
+        public const UInt32 bgTimeNext = 0x4;
+        public const UInt32 bgTime = 0x22;
         public static UInt32 LfgDungeons = 0xFFCA6C - 0x400000; // g_LfgDungeons from Script_GetLFGQueueStats()
-
-
 
         static Offset()
         {
@@ -33,8 +31,9 @@ namespace Dungeon_Teller
             foreach (FieldInfo field in fields)
             {
                 var val = field.GetValue(typeof(Offset));
-                var rebased = (uint)val - 0x400000;
-                field.SetValue(typeof(Offset), rebased);
+                MessageBox.Show(val.ToString());
+                //var rebased = (uint)val - 0x400000;
+                //field.SetValue(typeof(Offset), rebased);
             }
              */
         }

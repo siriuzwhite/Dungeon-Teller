@@ -197,7 +197,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Ability_warrior_focusedrage.ico" />
-    <Content Include="lfg_eye.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

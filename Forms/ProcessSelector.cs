@@ -31,6 +31,7 @@ namespace Dungeon_Teller
 
         private void updateProcessList()
         {
+            pList.Clear();
             lbx_WoWIds.DataSource = null;
             pList.Clear();
             Process[] pr = Process.GetProcessesByName("WoW");
@@ -39,7 +40,6 @@ namespace Dungeon_Teller
 
             foreach (Process p in pr)
             {
-                pList.Clear();
                 Memory.OpenProcess(p.Id);
 
                 string playerName = Memory.Read<string>(Memory.BaseAddress + Offset.playerName);
@@ -147,7 +147,7 @@ namespace Dungeon_Teller
             {
                 Process[] pr = Process.GetProcessesByName("WoW");
 
-                if (pr.Length != 0)
+                if (pr.Length == 1)
                 {
                     openDungeonTeller(pr[0].Id);
                 }
