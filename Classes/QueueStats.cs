@@ -1,114 +1,172 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Runtime.InteropServices;
 
 namespace Dungeon_Teller
 {
-    class QueueStats
-    {
-        static QueueStats()
-        {
-            LfgDungeons = new DBC<LfgDungeonsRec>(new IntPtr(Offset.LfgDungeons));
-        }
+	class QueueStats
+	{
+		static QueueStats()
+		{
+			LfgDungeons = new DBC<LfgDungeonsRec>(new IntPtr(Offset.dbc.LfgDungeons.val));
+			BattleMasterList = new DBC<BattleMasterListRec>(new IntPtr(Offset.dbc.BattleMasterList.val));
+			Map = new DBC<MapRec>(new IntPtr(Offset.dbc.Map.val));
+		}
 
-        public static DBC<LfgDungeonsRec> LfgDungeons;
+		public static DBC<LfgDungeonsRec> LfgDungeons;
+		public static DBC<BattleMasterListRec> BattleMasterList;
+		public static DBC<MapRec> Map;
 
-        public struct LFGDataStruct
-        {
-            public int LfgDungeonsId;
-            public int myWait;
-            public int averageWait;
-            public int tankWait;
-            public int healerWait;
-            public int damageWait;
-            public byte tankNeeds;
-            public byte healerNeeds;
-            public byte dpsNeeds;
-            public byte pad0;
-            public uint time;
-            public int queuedTime;
-        }
+		public struct LFGDataStruct
+		{
+			public int LfgDungeonsId;
+			public int myWait;
+			public int averageWait;
+			public int tankWait;
+			public int healerWait;
+			public int damageWait;
+			public byte tankNeeds;
+			public byte healerNeeds;
+			public byte dpsNeeds;
+			public byte pad0;
+			public uint time;
+			public int queuedTime;
+		}
 
-        public struct BGDataStruct
-        {
-            public int estimatedWait;
-            public int queuedTime;
-        }
+		public struct BGDataStruct
+		{
+			public int status;
+			public string battlefieldName;
+			public int estimatedWait;
+			public int timeWaited;
+		}
 
-        public struct LfgDungeonsRec
-        {
-            public uint m_ID;
-            public uint m_name_lang;
-            public int m_minLevel;
-            public int m_maxLevel;
-            public int m_target_level;
-            public int m_target_level_min;
-            public int m_target_level_max;
-            public int m_mapID;
-            public int m_randomGroup;
-            public int m_flags;
-            public int m_typeID;
-            public int m_faction;
-            public int m_textureFilename;
-            public int m_expansionLevel;
-            public int m_order_index;
-            public int m_group_id;
-            public int m_description_lang;
-            public int field17;
-            public int totalTanks;
-            public int totalHealers;
-            public int totalDPS;
-            public int field21;
-            public int m_category; //1=Dungeon;2=Raid;3=Scenario
+		[StructLayout(LayoutKind.Explicit)]
+		public struct BattleMasterListRec
+		{
+			[FieldOffset(52)]
+			public uint _battlefieldName;
 
-            public string DungeonName
-            {
-                get
-                {
-                    byte[] bytes = Encoding.GetEncoding(0).GetBytes(Memory.Read<string>(m_name_lang));
-                    return Encoding.UTF8.GetString(bytes);
-                }
-            }
-        } 
+			public string BattlefieldName
+			{
+				get
+				{
+					return prepareString(Memory.Read<string>(_battlefieldName));
+				}
+			}
+		}
 
-        public static BGDataStruct getBgQeueStats(uint id)
-        {
-            BGDataStruct bgQueue = new BGDataStruct();
-            uint bgTimeCur;
-            int i=1;
+		[StructLayout(LayoutKind.Explicit)]
+		public struct MapRec
+		{
+			[FieldOffset(20)]
+			public uint _battlefieldName;
 
-            bgTimeCur = Convert.ToUInt32(Memory.Read<uint>(Memory.BaseAddress + Offset.bgTimeBase));
+			public string BattlefieldName
+			{
+				get
+				{
+					return prepareString(Memory.Read<string>(_battlefieldName));
+				}
+			}
+		}
 
-            while (i < id)
-            {
-                bgTimeCur = Convert.ToUInt32(Memory.Read<uint>(bgTimeCur + Offset.bgTimeNext));
-                i++;
-            }
+		[StructLayout(LayoutKind.Explicit)]
+		public struct LfgDungeonsRec
+		{
+			[FieldOffset(4)]
+			public uint _DungeonName;
+			[FieldOffset(72)]
+			public int totalTanks;
+			[FieldOffset(76)]
+			public int totalHealers;
+			[FieldOffset(80)]
+			public int totalDPS;
+			[FieldOffset(88)]
+			public int m_category; //1=Dungeon;2=Raid;3=Scenario
 
-            if ((bgTimeCur & 1) == 1 || bgTimeCur == 0)
-            {
-                bgQueue.estimatedWait = 0;
-                bgQueue.queuedTime = 0;
-            }
-            else
-            {
-                bgQueue.estimatedWait = Convert.ToInt32(Memory.Read<uint>(bgTimeCur + 72));
-                bgQueue.queuedTime = Convert.ToInt32(Memory.Read<uint>(bgTimeCur + 76));
-            }
+			public string DungeonName
+			{
+				get
+				{
+					return prepareString(Memory.Read<string>(_DungeonName));
+				}
+			}
+		}
 
-            return bgQueue;
-        }
+		private static string prepareString(string str)
+		{
+			byte[] bytes = Encoding.GetEncoding(0).GetBytes(str);
+			str = Encoding.UTF8.GetString(bytes);
 
-        public static LFGDataStruct getLfgQueueStats(uint LE_LFG_CATEGORY)
-        {
-            LFGDataStruct lfgQueue = new LFGDataStruct();
-            uint structSize = (uint)Marshal.SizeOf(lfgQueue);
-            lfgQueue = Memory.ReadStruct<LFGDataStruct>( Memory.BaseAddress + Offset.LFGQueueStats + ( structSize * (LE_LFG_CATEGORY - 1) ) );
+			return str;
+		}
 
-            return lfgQueue;
-        }
+		public static BGDataStruct getBgQeueStats(uint id)
+		{
+			BGDataStruct bgQueue = new BGDataStruct();
+			uint bgQueueCur;
+			int i = 1;
 
-    }
+			bgQueueCur = Convert.ToUInt32(Memory.Read<uint>(Memory.BaseAddress + Offset.bgQueueStats.BasePtr.val));
+
+			while (i < id)
+			{
+				bgQueueCur = Convert.ToUInt32(Memory.Read<uint>(bgQueueCur + Offset.bgQueueStats.NextPtr.val));
+				i++;
+			}
+
+			if ((bgQueueCur & 1) == 1 || bgQueueCur == 0)
+			{
+				bgQueue.status = 0;
+				bgQueue.estimatedWait = 0;
+				bgQueue.timeWaited = 0;
+				bgQueue.battlefieldName = "";
+			}
+			else
+			{
+				bgQueue.status = Memory.Read<int>(bgQueueCur + Offset.bgQueueStats.Status.val);
+				bgQueue.estimatedWait = Memory.Read<int>(bgQueueCur + Offset.bgQueueStats.EstimatedWait.val);
+				bgQueue.timeWaited = Memory.Read<int>(bgQueueCur + Offset.bgQueueStats.TimeWaited.val);
+
+				if (bgQueue.status != 2)
+				{
+					int bml_id = Memory.Read<int>(bgQueueCur + Offset.bgQueueStats.BattleMasterListIdPtr.val);
+					bgQueue.battlefieldName = BattleMasterList[bml_id].BattlefieldName;
+				}
+				else
+				{
+					int map_id = Memory.Read<int>(bgQueueCur + Offset.bgQueueStats.MapId.val);
+					bgQueue.battlefieldName = Map[map_id].BattlefieldName;
+				}
+			}
+
+			return bgQueue;
+		}
+
+		public static int getLfgProposal()
+		{
+			short dungeon_id = Memory.Read<short>(Memory.BaseAddress + Offset.lfgProposal.val);
+
+			return (int)dungeon_id;
+		}
+
+		public static int getBattleFieldMapId()
+		{
+			uint Cur = Memory.Read<uint>(Memory.BaseAddress + 0xACCAE8);
+			int MapId = Memory.Read<int>(Cur + 40);
+
+			return MapId;
+		}
+
+		public static LFGDataStruct getLfgQueueStats(uint LE_LFG_CATEGORY)
+		{
+			LFGDataStruct lfgQueue = new LFGDataStruct();
+			uint structSize = (uint)Marshal.SizeOf(lfgQueue);
+			lfgQueue = Memory.ReadStruct<LFGDataStruct>(Memory.BaseAddress + Offset.lfgQueueStats.val + (structSize * (LE_LFG_CATEGORY - 1)));
+
+			return lfgQueue;
+		}
+
+	}
 }

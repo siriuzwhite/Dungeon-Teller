@@ -206,36 +206,12 @@ namespace Dungeon_Teller.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool LFDModule {
+        public bool SettingsUpgradeRequired {
             get {
-                return ((bool)(this["LFDModule"]));
+                return ((bool)(this["SettingsUpgradeRequired"]));
             }
             set {
-                this["LFDModule"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool LFRModule {
-            get {
-                return ((bool)(this["LFRModule"]));
-            }
-            set {
-                this["LFRModule"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool BGModule {
-            get {
-                return ((bool)(this["BGModule"]));
-            }
-            set {
-                this["BGModule"] = value;
+                this["SettingsUpgradeRequired"] = value;
             }
         }
     }

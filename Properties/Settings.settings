@@ -47,13 +47,7 @@
     <Setting Name="PauseFocus" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="LFDModule" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
-    </Setting>
-    <Setting Name="LFRModule" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
-    </Setting>
-    <Setting Name="BGModule" Type="System.Boolean" Scope="User">
+    <Setting Name="SettingsUpgradeRequired" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>

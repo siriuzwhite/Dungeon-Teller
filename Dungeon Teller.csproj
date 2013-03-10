@@ -51,6 +51,7 @@
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Prefer32Bit>false</Prefer32Bit>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
@@ -84,6 +85,12 @@
     <Compile Include="Classes\dtModule.cs" />
     <Compile Include="Classes\Helper.cs" />
     <Compile Include="Classes\QueueStats.cs" />
+    <Compile Include="Forms\DesktopNotification.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DesktopNotification.Designer.cs">
+      <DependentUpon>DesktopNotification.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\DungeonTeller.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -114,6 +121,9 @@
     </Compile>
     <Compile Include="Classes\Settings.cs" />
     <Compile Include="Classes\WoWCommand.cs" />
+    <EmbeddedResource Include="Forms\DesktopNotification.resx">
+      <DependentUpon>DesktopNotification.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\DungeonTeller.resx">
       <DependentUpon>DungeonTeller.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -197,6 +207,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Ability_warrior_focusedrage.ico" />
+    <None Include="Resources\lfg-eye.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

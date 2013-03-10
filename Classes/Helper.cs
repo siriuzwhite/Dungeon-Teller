@@ -1,29 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Windows.Forms;
 
 namespace Dungeon_Teller
 {
-    class Helper
-    {
-        public static Bitmap bmpTank = Properties.Resources.role_tank_32x32;
-        public static Bitmap bmpHeal = Properties.Resources.role_heal_32x32;
-        public static Bitmap bmpDps = Properties.Resources.role_dps_32x32;
+	class Helper
+	{
+		public static Bitmap bmpTank = Properties.Resources.role_tank_32x32;
+		public static Bitmap bmpHeal = Properties.Resources.role_heal_32x32;
+		public static Bitmap bmpDps = Properties.Resources.role_dps_32x32;
 
-        public static Bitmap ConvertToGrayScale(Bitmap original)
-        {
-            //create a blank bitmap the same size as original
-            Bitmap newBitmap = new Bitmap(original.Width, original.Height);
+		public static Bitmap ConvertToGrayScale(Bitmap original)
+		{
+			//create a blank bitmap the same size as original
+			Bitmap newBitmap = new Bitmap(original.Width, original.Height);
 
-            //get a graphics object from the new image
-            Graphics g = Graphics.FromImage(newBitmap);
+			//get a graphics object from the new image
+			Graphics g = Graphics.FromImage(newBitmap);
 
-            //create the grayscale ColorMatrix
-            ColorMatrix colorMatrix = new ColorMatrix(
-               new float[][] 
+			//create the grayscale ColorMatrix
+			ColorMatrix colorMatrix = new ColorMatrix(
+			   new float[][] 
               {
                  new float[] {.3f, .3f, .3f, 0, 0},
                  new float[] {.59f, .59f, .59f, 0, 0},
@@ -32,81 +30,124 @@ namespace Dungeon_Teller
                  new float[] {0, 0, 0, 0, 1}
               });
 
-            //create some image attributes
-            ImageAttributes attributes = new ImageAttributes();
+			//create some image attributes
+			ImageAttributes attributes = new ImageAttributes();
 
-            //set the color matrix attribute
-            attributes.SetColorMatrix(colorMatrix);
+			//set the color matrix attribute
+			attributes.SetColorMatrix(colorMatrix);
 
-            //draw the original image on the new image
-            //using the grayscale color matrix
-            g.DrawImage(original, new Rectangle(0, 0, original.Width, original.Height),
-               0, 0, original.Width, original.Height, GraphicsUnit.Pixel, attributes);
+			//draw the original image on the new image
+			//using the grayscale color matrix
+			g.DrawImage(original, new Rectangle(0, 0, original.Width, original.Height),
+			   0, 0, original.Width, original.Height, GraphicsUnit.Pixel, attributes);
 
-            //dispose the Graphics object
-            g.Dispose();
-            return newBitmap;
-        }
+			//dispose the Graphics object
+			g.Dispose();
+			return newBitmap;
+		}
 
-        public static string getFormatedTimeString(int seconds)
-        {
-            double minutes = seconds / 60;
-            int secs = seconds % 60;
-            int mins = (int)Math.Floor(minutes);
+		public static string getFormatedTimeString(int seconds)
+		{
+			double minutes = seconds / 60;
+			int secs = seconds % 60;
+			int mins = (int)Math.Floor(minutes);
 
-            string FormatedTimeString = mins + " min. " + secs + " sec.";
+			string FormatedTimeString = mins + " min. " + secs + " sec.";
 
-            return FormatedTimeString;
-        }
+			return FormatedTimeString;
+		}
 
-        public static void setNotQueued(dtModule module)
-        {
-            module.lbl_Status.Text = "not queued";
-            module.lbl_Status.ForeColor = System.Drawing.Color.Red;
-            module.lbl_Wait.Text = "n/a";
-            module.lbl_QueueTime.Text = "n/a";
+		public static string excerptString(String str)
+		{
+			if (str.Length > 30)
+				str = str.Substring(0, 27) + "...";
 
-            if (module.lbl_Tank != null)
-            {
-                module.lbl_Tank.Text = "n/a";
-                module.lbl_Healer.Text = "n/a";
-                module.lbl_Dps.Text = "n/a";
-                module.pic_Tank.Image = Helper.ConvertToGrayScale(bmpTank);
-                module.pic_Heal.Image = Helper.ConvertToGrayScale(bmpHeal);
-                module.pic_Dps.Image = Helper.ConvertToGrayScale(bmpDps);
-            }
-        }
+			return str;
+		}
 
+		public static void setNotQueued(dtModule module)
+		{
+			module.lbl_Status.Text = "not queued";
+			module.lbl_Status.ForeColor = System.Drawing.Color.Red;
+			module.lbl_Wait.Text = "n/a";
+			module.lbl_QueueTime.Text = "n/a";
 
-        public static void LfgRefresh(dtModule module, uint category)
-        {
-            var LfgQueue = QueueStats.getLfgQueueStats(category);
-            var LfgDungeon = QueueStats.LfgDungeons[LfgQueue.LfgDungeonsId];
+			if (module.lbl_Tank != null)
+			{
+				module.lbl_Tank.Text = "n/a";
+				module.lbl_Healer.Text = "n/a";
+				module.lbl_Dps.Text = "n/a";
+				module.pic_Tank.Image = Helper.ConvertToGrayScale(bmpTank);
+				module.pic_Heal.Image = Helper.ConvertToGrayScale(bmpHeal);
+				module.pic_Dps.Image = Helper.ConvertToGrayScale(bmpDps);
+			}
+		}
 
-            if (LfgDungeon.DungeonName.Length > 40)
-                module.lbl_Status.Text = LfgDungeon.DungeonName.Substring(0, 37) + "...";
-            else
-                module.lbl_Status.Text = LfgDungeon.DungeonName;
+		public static void setReady(dtModule module, string name)
+		{
+			module.lbl_Status.Text = excerptString(name) + " (ready)";
 
-            if (LfgQueue.myWait != -1)
-                module.lbl_Wait.Text = Helper.getFormatedTimeString(LfgQueue.myWait);
-            else
-                module.lbl_Wait.Text = "n/a";
+			module.lbl_Status.ForeColor = System.Drawing.Color.Green;
+			module.lbl_Wait.Text = "n/a";
+			module.lbl_QueueTime.Text = "n/a";
 
-            int queuedTime = (System.Environment.TickCount - LfgQueue.queuedTime) / 1000;
-            module.lbl_QueueTime.Text = Helper.getFormatedTimeString(queuedTime);
+			if (module.lbl_Tank != null)
+			{
+				module.lbl_Tank.Text = "full";
+				module.lbl_Healer.Text = "full";
+				module.lbl_Dps.Text = "full";
+				module.pic_Tank.Image = bmpTank;
+				module.pic_Heal.Image = bmpHeal;
+				module.pic_Dps.Image = bmpDps;
+			}
+		}
 
-            int tank = LfgDungeon.totalTanks - LfgQueue.tankNeeds;
-            int healer = LfgDungeon.totalHealers - LfgQueue.healerNeeds;
-            int dps = LfgDungeon.totalDPS - LfgQueue.dpsNeeds;
+		public static void setQueued(Label lbl)
+		{
+			lbl.Text = "queued";
+			lbl.ForeColor = System.Drawing.Color.Blue;
+		}
 
-            module.pic_Tank.Image = (LfgQueue.tankNeeds == 0) ? bmpTank : Helper.ConvertToGrayScale(bmpTank);
-            module.pic_Heal.Image = (LfgQueue.healerNeeds == 0) ? bmpHeal : Helper.ConvertToGrayScale(bmpHeal);
-            module.pic_Dps.Image = (LfgQueue.dpsNeeds == 0) ? bmpDps : Helper.ConvertToGrayScale(bmpDps);
+		public static void BgRefresh(dtModule module, QueueStats.BGDataStruct queue)
+		{
+			int estimatedWait = queue.estimatedWait / 1000;
+			int queuedTime = (System.Environment.TickCount - queue.timeWaited) / 1000;
 
-            module.lbl_Tank.Text = tank + " / " + LfgDungeon.totalTanks;
-            module.lbl_Healer.Text = healer + " / " + LfgDungeon.totalHealers;
-            module.lbl_Dps.Text = dps + " / " + LfgDungeon.totalDPS;
-        }
-    }
+			module.lbl_Status.Text = excerptString(queue.battlefieldName) + " (queued)";
+
+			if (estimatedWait != 0)
+				module.lbl_Wait.Text = Helper.getFormatedTimeString(estimatedWait);
+			else
+				module.lbl_Wait.Text = "n/a";
+
+			module.lbl_QueueTime.Text = Helper.getFormatedTimeString(queuedTime);
+		}
+
+		public static void LfgRefresh(dtModule module, QueueStats.LFGDataStruct queue)
+		{
+			var LfgDungeon = QueueStats.LfgDungeons[queue.LfgDungeonsId];
+
+			module.lbl_Status.Text =  excerptString(LfgDungeon.DungeonName) + " (queued)";
+
+			if (queue.myWait != -1)
+				module.lbl_Wait.Text = Helper.getFormatedTimeString(queue.myWait);
+			else
+				module.lbl_Wait.Text = "n/a";
+
+			int queuedTime = (System.Environment.TickCount - queue.queuedTime) / 1000;
+			module.lbl_QueueTime.Text = Helper.getFormatedTimeString(queuedTime);
+
+			int tank = LfgDungeon.totalTanks - queue.tankNeeds;
+			int healer = LfgDungeon.totalHealers - queue.healerNeeds;
+			int dps = LfgDungeon.totalDPS - queue.dpsNeeds;
+
+			module.pic_Tank.Image = (queue.tankNeeds == 0) ? bmpTank : Helper.ConvertToGrayScale(bmpTank);
+			module.pic_Heal.Image = (queue.healerNeeds == 0) ? bmpHeal : Helper.ConvertToGrayScale(bmpHeal);
+			module.pic_Dps.Image = (queue.dpsNeeds == 0) ? bmpDps : Helper.ConvertToGrayScale(bmpDps);
+
+			module.lbl_Tank.Text = tank + " / " + LfgDungeon.totalTanks;
+			module.lbl_Healer.Text = healer + " / " + LfgDungeon.totalHealers;
+			module.lbl_Dps.Text = dps + " / " + LfgDungeon.totalDPS;
+		}
+	}
 }

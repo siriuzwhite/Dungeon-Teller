@@ -83,6 +83,16 @@ namespace Dungeon_Teller.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap lfg_eye {
+            get {
+                object obj = ResourceManager.GetObject("lfg_eye", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap pvp_finder_icon {
             get {
                 object obj = ResourceManager.GetObject("pvp_finder_icon", resourceCulture);

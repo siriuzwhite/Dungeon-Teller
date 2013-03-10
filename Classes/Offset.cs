@@ -1,41 +1,158 @@
 ﻿using System;
+using System.IO;
 using System.Reflection;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
+using System.Xml.Serialization;
 
 namespace Dungeon_Teller
 {
-    class Offset
-    {
-        public static UInt32 inQueueLFD = 0xD6EA58;
-        public static UInt32 inQueueLFR = 0xD6EA90;
-        public static UInt32 isQueueReady = 0xD6EAF1;
-        public static UInt32 playerName = 0xE28468;
-        public static UInt32 playerRealm = 0xE285F6;
-        public static UInt32 bgStatusBase = 0xACCAE8;
-        public const UInt32 bgStatusNext = 0x4;
-        public const UInt32 bgStatus = 0x34;
-        public static UInt32 LFGQueueStats = 0xD6EA40;
-        public static UInt32 bgTimeBase = 0xACCAE8;
-        public const UInt32 bgTimeNext = 0x4;
-        public const UInt32 bgTime = 0x22;
-        public static UInt32 LfgDungeons = 0xFFCA6C - 0x400000; // g_LfgDungeons from Script_GetLFGQueueStats()
+	[XmlRoot("offsets")]
+	public class OffsetsXML
+	{
 
-        static Offset()
-        {
-            /*
-            var fields = typeof(Offset).GetFields(BindingFlags.Static | BindingFlags.Public);
+		public BaseAddress playerName = new BaseAddress();
+		public BaseAddress playerRealm = new BaseAddress();
+		public BaseAddress lfgQueueStats = new BaseAddress();
+		public BaseAddress lfgProposal = new BaseAddress();
+		public BGQueueStats bgQueueStats = new BGQueueStats();
+		public DBC dbc = new DBC();
 
-            foreach (FieldInfo field in fields)
-            {
-                var val = field.GetValue(typeof(Offset));
-                MessageBox.Show(val.ToString());
-                //var rebased = (uint)val - 0x400000;
-                //field.SetValue(typeof(Offset), rebased);
-            }
-             */
-        }
-    }
+		[Serializable]
+		public class BaseAddress
+		{
+			[XmlIgnore]
+			public uint val { get; set; }
+
+			[XmlText]
+			public string Value
+			{
+				get
+				{
+					return "0x" + val.ToString("x").ToUpper();
+				}
+				set
+				{
+					var cmp = value.Substring(0, 2);
+					if (cmp == "0x")
+					{
+						value = value.TrimStart('0', 'x');
+						val = uint.Parse(value,
+							System.Globalization.NumberStyles.HexNumber);
+
+						if (!rebased)
+							val -= 0x400000;
+
+					}
+					else
+					{
+						val = uint.Parse(value);
+
+						if (!rebased)
+							val -= 0x400000;
+					}
+				}
+			}
+
+			[XmlAttribute]
+			public bool rebased;
+		}
+
+		public class SingleOffset
+		{
+			[XmlIgnore]
+			public uint val { get; set; }
+
+			[XmlText]
+			public string Value
+			{
+				get
+				{
+					return "0x" + val.ToString("x").ToUpper();
+				}
+				set
+				{
+					var cmp = value.Substring(0, 2);
+					if (cmp == "0x")
+					{
+						value = value.TrimStart('0', 'x');
+						val = uint.Parse(value,
+							System.Globalization.NumberStyles.HexNumber);
+					}
+					else
+					{
+						val = uint.Parse(value);
+					}
+				}
+			}
+		}
+
+		[Serializable]
+		public class BGQueueStats
+		{
+			public BaseAddress BasePtr = new BaseAddress();
+			public SingleOffset NextPtr = new SingleOffset();
+			public SingleOffset BattleMasterListIdPtr = new SingleOffset();
+			public SingleOffset MapId = new SingleOffset();
+			public SingleOffset Status = new SingleOffset();
+			public SingleOffset EstimatedWait = new SingleOffset();
+			public SingleOffset TimeWaited = new SingleOffset();
+		}
+
+		[Serializable]
+		public class DBC
+		{
+			public BaseAddress LfgDungeons = new BaseAddress();
+			public BaseAddress BattleMasterList = new BaseAddress();
+			public BaseAddress Map = new BaseAddress();
+		}
+	}
+
+	class Offset : OffsetsXML
+	{
+
+		static Offset()
+		{
+			XmlSerializer serializer = new XmlSerializer(typeof(OffsetsXML));
+			TextReader reader = new StreamReader("offsets.xml");
+			OffsetsXML xml = (OffsetsXML)serializer.Deserialize(reader);
+
+			Offset.playerName = xml.playerName;
+			Offset.playerRealm = xml.playerRealm;
+			Offset.lfgQueueStats = xml.lfgQueueStats;
+			Offset.lfgProposal = xml.lfgProposal;
+			Offset.bgQueueStats = xml.bgQueueStats;
+			Offset.dbc = xml.dbc;
+		}
+
+		new public static BaseAddress playerName;
+		new public static BaseAddress playerRealm;
+		new public static BaseAddress lfgQueueStats;
+		new public static BaseAddress lfgProposal;
+		new public static BGQueueStats bgQueueStats;
+		new public static DBC dbc;
+	}
+
 }
+
+/*
+playerName				--> from CE ;)
+playerRealm				--> from CE ;)
+
+//LFG Offsets
+lfgQueueStats;			--> from GetLFGQueueStats(category)
+lfgProposal;			--> from GetLFGProposal()
+
+//Battleground Offsets
+BasePtr					--> from GetBattlefieldStatus(index)
+NextPtr					--> from GetBattlefieldStatus(index)
+BattleMasterListIdPtr	--> from GetBattlefieldStatus(index)
+MapId					--> from GetBattlefieldStatus(index)
+Status					--> from GetBattlefieldStatus(index)
+EstimatedWait			--> from GetBattlefieldEstimatedWaitTime(index)
+TimeWaited				--> from GetBattlefieldTimeWaited(index)
+
+//DBC Offsets
+lfgDungeons				--> LfgDungeons.dbc from GetLFGQueueStats(category)
+battleMasterList		--> BattleMasterList.dbc from GetBattlefieldStatus(index)
+map						--> Map.dbc from GetBattlefieldStatus(index)
+*/
+
