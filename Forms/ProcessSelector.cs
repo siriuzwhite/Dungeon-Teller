@@ -49,7 +49,7 @@ namespace Dungeon_Teller.Forms
 				if (playerName.Length != 0 && playerRealm.Length != 0)
 				{
 					pCount++;
-					string wow = p.Id + ": " + p.ProcessName + ".exe @" + playerName + " (" + playerRealm + ")";
+					string wow = String.Format("{0}: {1}.exe @{2} ({3})",p.Id.ToString(), p.ProcessName, playerName, playerRealm);
 					pList.Add(new ListBoxObject(p.Id, wow));
 				}
 

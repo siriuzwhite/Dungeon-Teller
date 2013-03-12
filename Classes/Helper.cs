@@ -52,7 +52,7 @@ namespace Dungeon_Teller.Classes
 			int secs = seconds % 60;
 			int mins = (int)Math.Floor(minutes);
 
-			string FormatedTimeString = mins + " min. " + secs + " sec.";
+			string FormatedTimeString = String.Format("{0} mins {1} secs", mins, secs);
 
 			return FormatedTimeString;
 		}
@@ -85,7 +85,7 @@ namespace Dungeon_Teller.Classes
 
 		public static void setReady(dtModule module, string name)
 		{
-			module.lbl_Status.Text = excerptString(name) + " (ready)";
+			module.lbl_Status.Text = String.Format("{0} (ready)", excerptString(name));
 
 			module.lbl_Status.ForeColor = System.Drawing.Color.Green;
 			module.lbl_Wait.Text = "n/a";
@@ -113,7 +113,7 @@ namespace Dungeon_Teller.Classes
 			int estimatedWait = queue.estimatedWait / 1000;
 			int queuedTime = (System.Environment.TickCount - queue.timeWaited) / 1000;
 
-			module.lbl_Status.Text = excerptString(queue.battlefieldName) + " (queued)";
+			module.lbl_Status.Text = String.Format("{0} (queued)", excerptString(queue.battlefieldName));
 
 			if (estimatedWait != 0)
 				module.lbl_Wait.Text = Helper.getFormatedTimeString(estimatedWait);
@@ -127,7 +127,7 @@ namespace Dungeon_Teller.Classes
 		{
 			var LfgDungeon = QueueStats.LfgDungeons[queue.LfgDungeonsId];
 
-			module.lbl_Status.Text =  excerptString(LfgDungeon.DungeonName) + " (queued)";
+			module.lbl_Status.Text =  String.Format("{0} (queued)", excerptString(LfgDungeon.DungeonName));
 
 			if (queue.myWait != -1)
 				module.lbl_Wait.Text = Helper.getFormatedTimeString(queue.myWait);

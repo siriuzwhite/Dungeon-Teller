@@ -34,6 +34,7 @@
 			this.btn_apply = new System.Windows.Forms.Button();
 			this.btn_cancel = new System.Windows.Forms.Button();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.cb_updates = new System.Windows.Forms.CheckBox();
 			this.cb_pauseFocus = new System.Windows.Forms.CheckBox();
 			this.cb_autoSelect = new System.Windows.Forms.CheckBox();
 			this.cb_trayOnly = new System.Windows.Forms.CheckBox();
@@ -52,14 +53,14 @@
 			this.lbl_mailAddress = new System.Windows.Forms.Label();
 			this.tb_pushOverUserKey = new System.Windows.Forms.TextBox();
 			this.cb_mailNotification = new System.Windows.Forms.CheckBox();
-			this.lbl_nma = new System.Windows.Forms.Label();
+			this.lbl_pushover = new System.Windows.Forms.Label();
 			this.cb_pushOver = new System.Windows.Forms.CheckBox();
 			this.btn_restore = new System.Windows.Forms.Button();
 			this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
 			this.cb_antiAfk = new System.Windows.Forms.CheckBox();
 			this.cb_autoJoin = new System.Windows.Forms.CheckBox();
+			this.link_rep = new System.Windows.Forms.LinkLabel();
 			this.groupBox3 = new System.Windows.Forms.GroupBox();
-			this.cb_updates = new System.Windows.Forms.CheckBox();
 			this.groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.num_opacity)).BeginInit();
 			this.groupBox2.SuspendLayout();
@@ -68,6 +69,7 @@
 			// 
 			// btn_ok
 			// 
+			this.btn_ok.DialogResult = System.Windows.Forms.DialogResult.OK;
 			this.btn_ok.Location = new System.Drawing.Point(317, 315);
 			this.btn_ok.Name = "btn_ok";
 			this.btn_ok.Size = new System.Drawing.Size(75, 23);
@@ -89,6 +91,7 @@
 			// 
 			// btn_cancel
 			// 
+			this.btn_cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
 			this.btn_cancel.Location = new System.Drawing.Point(398, 315);
 			this.btn_cancel.Name = "btn_cancel";
 			this.btn_cancel.Size = new System.Drawing.Size(75, 23);
@@ -112,6 +115,17 @@
 			this.groupBox1.TabIndex = 13;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "General options";
+			// 
+			// cb_updates
+			// 
+			this.cb_updates.AutoSize = true;
+			this.cb_updates.Location = new System.Drawing.Point(15, 111);
+			this.cb_updates.Name = "cb_updates";
+			this.cb_updates.Size = new System.Drawing.Size(113, 17);
+			this.cb_updates.TabIndex = 23;
+			this.cb_updates.Text = "Check for updates";
+			this.toolTip1.SetToolTip(this.cb_updates, "If checked program and offset update check at startup is enabled");
+			this.cb_updates.UseVisualStyleBackColor = true;
 			// 
 			// cb_pauseFocus
 			// 
@@ -243,7 +257,7 @@
 			this.groupBox2.Controls.Add(this.cb_balloonTips);
 			this.groupBox2.Controls.Add(this.tb_pushOverUserKey);
 			this.groupBox2.Controls.Add(this.cb_mailNotification);
-			this.groupBox2.Controls.Add(this.lbl_nma);
+			this.groupBox2.Controls.Add(this.lbl_pushover);
 			this.groupBox2.Controls.Add(this.cb_desktopNotification);
 			this.groupBox2.Controls.Add(this.cb_pushOver);
 			this.groupBox2.Location = new System.Drawing.Point(12, 12);
@@ -327,15 +341,15 @@
 			this.cb_mailNotification.UseVisualStyleBackColor = true;
 			this.cb_mailNotification.CheckedChanged += new System.EventHandler(this.cb_mail_CheckedChanged);
 			// 
-			// lbl_nma
+			// lbl_pushover
 			// 
-			this.lbl_nma.AutoSize = true;
-			this.lbl_nma.Enabled = false;
-			this.lbl_nma.Location = new System.Drawing.Point(26, 140);
-			this.lbl_nma.Name = "lbl_nma";
-			this.lbl_nma.Size = new System.Drawing.Size(126, 13);
-			this.lbl_nma.TabIndex = 1;
-			this.lbl_nma.Text = "Your Pushover User Key:";
+			this.lbl_pushover.AutoSize = true;
+			this.lbl_pushover.Enabled = false;
+			this.lbl_pushover.Location = new System.Drawing.Point(26, 140);
+			this.lbl_pushover.Name = "lbl_pushover";
+			this.lbl_pushover.Size = new System.Drawing.Size(126, 13);
+			this.lbl_pushover.TabIndex = 1;
+			this.lbl_pushover.Text = "Your Pushover User Key:";
 			// 
 			// cb_pushOver
 			// 
@@ -386,6 +400,20 @@
 			this.toolTip1.SetToolTip(this.cb_autoJoin, "If checked auto joining when a queue is ready is enabled");
 			this.cb_autoJoin.UseVisualStyleBackColor = true;
 			// 
+			// link_rep
+			// 
+			this.link_rep.AutoSize = true;
+			this.link_rep.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.link_rep.Location = new System.Drawing.Point(137, 320);
+			this.link_rep.Name = "link_rep";
+			this.link_rep.RightToLeft = System.Windows.Forms.RightToLeft.No;
+			this.link_rep.Size = new System.Drawing.Size(33, 13);
+			this.link_rep.TabIndex = 71;
+			this.link_rep.TabStop = true;
+			this.link_rep.Text = "+Rep";
+			this.toolTip1.SetToolTip(this.link_rep, "Add some Reputation on OwnedCore to me :-)");
+			this.link_rep.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.link_rep_LinkClicked);
+			// 
 			// groupBox3
 			// 
 			this.groupBox3.Controls.Add(this.cb_antiAfk);
@@ -397,21 +425,14 @@
 			this.groupBox3.TabStop = false;
 			this.groupBox3.Text = "Keyboard emulation options";
 			// 
-			// cb_updates
-			// 
-			this.cb_updates.AutoSize = true;
-			this.cb_updates.Location = new System.Drawing.Point(15, 111);
-			this.cb_updates.Name = "cb_updates";
-			this.cb_updates.Size = new System.Drawing.Size(113, 17);
-			this.cb_updates.TabIndex = 23;
-			this.cb_updates.Text = "Check for updates";
-			this.cb_updates.UseVisualStyleBackColor = true;
-			// 
 			// Options
 			// 
+			this.AcceptButton = this.btn_ok;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.CancelButton = this.btn_cancel;
 			this.ClientSize = new System.Drawing.Size(566, 351);
+			this.Controls.Add(this.link_rep);
 			this.Controls.Add(this.groupBox3);
 			this.Controls.Add(this.btn_restore);
 			this.Controls.Add(this.groupBox2);
@@ -419,14 +440,15 @@
 			this.Controls.Add(this.btn_cancel);
 			this.Controls.Add(this.btn_apply);
 			this.Controls.Add(this.btn_ok);
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "Options";
 			this.ShowInTaskbar = false;
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Dungeon Teller - Options";
-			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Options_FormClosed);
+			this.TopMost = true;
 			this.Load += new System.EventHandler(this.Options_Load);
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();
@@ -436,6 +458,7 @@
 			this.groupBox3.ResumeLayout(false);
 			this.groupBox3.PerformLayout();
 			this.ResumeLayout(false);
+			this.PerformLayout();
 
 		}
 
@@ -447,7 +470,7 @@
 		private System.Windows.Forms.GroupBox groupBox1;
 		private System.Windows.Forms.GroupBox groupBox2;
 		private System.Windows.Forms.TextBox tb_pushOverUserKey;
-		private System.Windows.Forms.Label lbl_nma;
+		private System.Windows.Forms.Label lbl_pushover;
 		private System.Windows.Forms.CheckBox cb_pushOver;
 		private System.Windows.Forms.CheckBox cb_lockWindow;
 		private System.Windows.Forms.CheckBox cb_balloonTips;
@@ -471,5 +494,6 @@
 		private System.Windows.Forms.CheckBox cb_autoJoin;
 		private System.Windows.Forms.CheckBox cb_pauseFocus;
 		private System.Windows.Forms.CheckBox cb_updates;
+		private System.Windows.Forms.LinkLabel link_rep;
 	}
 }

@@ -63,7 +63,7 @@ namespace Dungeon_Teller.Forms
 		{
 			tb_pushOverUserKey.Enabled = !tb_pushOverUserKey.Enabled;
 			lnk_pushOver.Enabled = !lnk_pushOver.Enabled;
-			lbl_nma.Enabled = !lbl_nma.Enabled;
+			lbl_pushover.Enabled = !lbl_pushover.Enabled;
 			btn_pushOverTest.Enabled = !btn_pushOverTest.Enabled;
 		}
 
@@ -152,11 +152,6 @@ namespace Dungeon_Teller.Forms
 			Process.Start("https://pushover.net/");
 		}
 
-		private void lnk_prowl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-		{
-			Process.Start("https://www.prowlapp.com/register.php");
-		}
-
 		public void overwriteControlsFromSettings()
 		{
 			cb_antiAfk.Checked = settings.AntiAFK;
@@ -179,7 +174,7 @@ namespace Dungeon_Teller.Forms
 			tb_pushOverUserKey.Text = settings.PushOverUserKey;
 			if (settings.PushNotification)
 			{
-				lbl_nma.Enabled = true;
+				lbl_pushover.Enabled = true;
 				tb_pushOverUserKey.Enabled = true;
 				lnk_pushOver.Enabled = true;
 				btn_pushOverTest.Enabled = true;
@@ -216,14 +211,15 @@ namespace Dungeon_Teller.Forms
 			Notification.sendPushOver(tb_pushOverUserKey.Text, "Test Event", "Test message");
 		}
 
-		private void Options_FormClosed(object sender, FormClosedEventArgs e)
-		{
-			dt.optOpen = false;
-		}
-
 		private void btn_mailTest_Click(object sender, EventArgs e)
 		{
 			Notification.sendMail(tb_mailTo.Text, "Dungeon Teller Test", "This is just a tets.");
+		}
+
+		private void link_rep_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+		{
+			Process.Start("http://www.ownedcore.com/forums/reputation.php?do=addreputation&p=2657518");
+			settings.HasContributed = true;
 		}
 	}
 }

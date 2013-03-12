@@ -40,7 +40,7 @@ namespace Dungeon_Teller.Classes
 			}
 			catch (Exception ep)
 			{
-				MessageBox.Show("Failed to send email with the following error:" + ep.Message);
+				MessageBox.Show( String.Format("Failed to send email with the following error: ", ep.Message) );
 			}
 		}
 	}

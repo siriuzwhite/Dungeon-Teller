@@ -217,7 +217,7 @@ namespace Dungeon_Teller.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://dungeonteller.du.ohost.de/offsets/updates/")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://dungeonteller.ohost.de/updater/")]
         public string UpdateBaseUrl {
             get {
                 return ((string)(this["UpdateBaseUrl"]));
@@ -241,7 +241,7 @@ namespace Dungeon_Teller.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
         public int TimesRun {
             get {
                 return ((int)(this["TimesRun"]));
@@ -272,6 +272,18 @@ namespace Dungeon_Teller.Properties {
             }
             set {
                 this["WowVersion"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1363093519")]
+        public int ForceOffsets {
+            get {
+                return ((int)(this["ForceOffsets"]));
+            }
+            set {
+                this["ForceOffsets"] = value;
             }
         }
     }
