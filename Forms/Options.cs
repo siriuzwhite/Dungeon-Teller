@@ -1,16 +1,17 @@
-﻿using System;
-using System.Windows.Forms;
+﻿using Dungeon_Teller.Classes;
+using System;
 using System.Diagnostics;
+using System.Windows.Forms;
 
-namespace Dungeon_Teller
+namespace Dungeon_Teller.Forms
 {
 	public partial class Options : Form
 	{
-		DungeonTeller dt;
+		DungeonTellerMain dt;
 		ProcessSelector ps;
 		Properties.Settings settings = Properties.Settings.Default;
 
-		public Options(DungeonTeller dt)
+		public Options(DungeonTellerMain dt)
 		{
 			InitializeComponent();
 			AddEvents(this.Controls);
@@ -82,7 +83,7 @@ namespace Dungeon_Teller
 		{
 			if (cb_pushOver.Checked && tb_pushOverUserKey.Text == "")
 			{
-				MessageBox.Show("NMA push notifications are checked but no API Key is given!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show("PushOver notifications are checked but no API Key is given!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return false;
 			}
 			else if (cb_mailNotification.Checked && tb_mailTo.Text == "")
@@ -106,6 +107,7 @@ namespace Dungeon_Teller
 				settings.AutoSelect = cb_autoSelect.Checked;
 				settings.PauseFocus = cb_pauseFocus.Checked;
 				settings.Opacity = (int)num_opacity.Value;
+				settings.CheckForUpdates = cb_updates.Checked;
 
 				settings.PushNotification = cb_pushOver.Checked;
 				settings.PushOverUserKey = tb_pushOverUserKey.Text;
@@ -171,6 +173,7 @@ namespace Dungeon_Teller
 			cb_autoSelect.Checked = settings.AutoSelect;
 			cb_pauseFocus.Checked = settings.PauseFocus;
 			num_opacity.Value = settings.Opacity;
+			cb_updates.Checked = settings.CheckForUpdates;
 
 			cb_pushOver.Checked = settings.PushNotification;
 			tb_pushOverUserKey.Text = settings.PushOverUserKey;

@@ -1,4 +1,4 @@
-﻿namespace Dungeon_Teller
+﻿namespace Dungeon_Teller.Forms
 {
 	partial class ProcessSelector
 	{

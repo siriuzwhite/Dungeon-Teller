@@ -1,7 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Dungeon_Teller.Classes;
+using Dungeon_Teller.Classes.Config;
+using Dungeon_Teller.Forms;
+using System;
 using System.IO;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace Dungeon_Teller
@@ -11,17 +12,26 @@ namespace Dungeon_Teller
 		/// <summary>
 		/// The main entry point for the application.
 		/// </summary>
+		/// 
 		[STAThread]
 		static void Main()
 		{
-			if (File.Exists("offsets.xml"))
+			Properties.Settings.Default.TimesRun++;
+
+			if (File.Exists(Offsets.filename))
 			{
 				Application.EnableVisualStyles();
 				Application.SetCompatibleTextRenderingDefault(false);
+
+				if (Properties.Settings.Default.CheckForUpdates)
+				{
+					Application.Run(new Updater());
+				}
+
 				Application.Run(new ProcessSelector());
 			}
 			else
-				MessageBox.Show("Error: 'offsets.xml' not found", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show("Error: '" + Offsets.filename + "' not found", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 		}
 
 	}

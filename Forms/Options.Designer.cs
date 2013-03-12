@@ -1,4 +1,4 @@
-﻿namespace Dungeon_Teller
+﻿namespace Dungeon_Teller.Forms
 {
 	partial class Options
 	{
@@ -59,6 +59,7 @@
 			this.cb_antiAfk = new System.Windows.Forms.CheckBox();
 			this.cb_autoJoin = new System.Windows.Forms.CheckBox();
 			this.groupBox3 = new System.Windows.Forms.GroupBox();
+			this.cb_updates = new System.Windows.Forms.CheckBox();
 			this.groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.num_opacity)).BeginInit();
 			this.groupBox2.SuspendLayout();
@@ -98,6 +99,7 @@
 			// 
 			// groupBox1
 			// 
+			this.groupBox1.Controls.Add(this.cb_updates);
 			this.groupBox1.Controls.Add(this.cb_pauseFocus);
 			this.groupBox1.Controls.Add(this.cb_autoSelect);
 			this.groupBox1.Controls.Add(this.cb_trayOnly);
@@ -119,7 +121,8 @@
 			this.cb_pauseFocus.Size = new System.Drawing.Size(151, 17);
 			this.cb_pauseFocus.TabIndex = 22;
 			this.cb_pauseFocus.Text = "Pause when WoW in front";
-			this.toolTip1.SetToolTip(this.cb_pauseFocus, "If checked Dungeon Teller won't do anything while WoW is the the foreground window");
+			this.toolTip1.SetToolTip(this.cb_pauseFocus, "If checked Dungeon Teller won\'t do anything while WoW is the the foreground windo" +
+        "w");
 			this.cb_pauseFocus.UseVisualStyleBackColor = true;
 			// 
 			// cb_autoSelect
@@ -146,7 +149,7 @@
 			// 
 			// num_opacity
 			// 
-			this.num_opacity.Location = new System.Drawing.Point(14, 140);
+			this.num_opacity.Location = new System.Drawing.Point(13, 156);
 			this.num_opacity.Name = "num_opacity";
 			this.num_opacity.Size = new System.Drawing.Size(85, 20);
 			this.num_opacity.TabIndex = 18;
@@ -172,7 +175,7 @@
 			// label2
 			// 
 			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(12, 124);
+			this.label2.Location = new System.Drawing.Point(11, 140);
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(109, 13);
 			this.label2.TabIndex = 17;
@@ -343,7 +346,7 @@
 			this.cb_pushOver.TabIndex = 0;
 			this.cb_pushOver.Text = "Send push notifications to your mobile via Pushover";
 			this.toolTip1.SetToolTip(this.cb_pushOver, "If checked a push message will be send via Notify My Android to your mobile when " +
-		"a queue is ready");
+        "a queue is ready");
 			this.cb_pushOver.UseVisualStyleBackColor = true;
 			this.cb_pushOver.CheckedChanged += new System.EventHandler(this.cb_nma_CheckedChanged);
 			// 
@@ -393,6 +396,16 @@
 			this.groupBox3.TabIndex = 20;
 			this.groupBox3.TabStop = false;
 			this.groupBox3.Text = "Keyboard emulation options";
+			// 
+			// cb_updates
+			// 
+			this.cb_updates.AutoSize = true;
+			this.cb_updates.Location = new System.Drawing.Point(15, 111);
+			this.cb_updates.Name = "cb_updates";
+			this.cb_updates.Size = new System.Drawing.Size(113, 17);
+			this.cb_updates.TabIndex = 23;
+			this.cb_updates.Text = "Check for updates";
+			this.cb_updates.UseVisualStyleBackColor = true;
 			// 
 			// Options
 			// 
@@ -457,5 +470,6 @@
 		private System.Windows.Forms.CheckBox cb_antiAfk;
 		private System.Windows.Forms.CheckBox cb_autoJoin;
 		private System.Windows.Forms.CheckBox cb_pauseFocus;
+		private System.Windows.Forms.CheckBox cb_updates;
 	}
 }

@@ -50,5 +50,20 @@
     <Setting Name="SettingsUpgradeRequired" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
+    <Setting Name="UpdateBaseUrl" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://dungeonteller.du.ohost.de/offsets/updates/</Value>
+    </Setting>
+    <Setting Name="CheckForUpdates" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="TimesRun" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="HasContributed" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="WowVersion" Type="System.String" Scope="User">
+      <Value Profile="(Default)">5.2.0.16683</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

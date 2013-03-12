@@ -1,10 +1,10 @@
-﻿using System;
+﻿using EASendMail;
+using System;
 using System.Collections.Specialized;
 using System.Net;
-using EASendMail;
 using System.Windows.Forms;
 
-namespace Dungeon_Teller
+namespace Dungeon_Teller.Classes
 {
 	class Notification
 	{

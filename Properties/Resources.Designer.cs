@@ -73,6 +73,26 @@ namespace Dungeon_Teller.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap bar {
+            get {
+                object obj = ResourceManager.GetObject("bar", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap download {
+            get {
+                object obj = ResourceManager.GetObject("download", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap dungeon_finder_icon {
             get {
                 object obj = ResourceManager.GetObject("dungeon_finder_icon", resourceCulture);
@@ -155,6 +175,16 @@ namespace Dungeon_Teller.Properties {
         internal static System.Drawing.Bitmap role_tank_32x32 {
             get {
                 object obj = ResourceManager.GetObject("role_tank_32x32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap thumps_up {
+            get {
+                object obj = ResourceManager.GetObject("thumps_up", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

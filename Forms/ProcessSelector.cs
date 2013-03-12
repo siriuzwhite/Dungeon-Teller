@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Dungeon_Teller.Classes;
+using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
-namespace Dungeon_Teller
+namespace Dungeon_Teller.Forms
 {
 	public partial class ProcessSelector : Form
 	{
@@ -16,12 +17,11 @@ namespace Dungeon_Teller
 		{
 			InitializeComponent();
 
-			if (Properties.Settings.Default.SettingsUpgradeRequired)
+			if (settings.SettingsUpgradeRequired)
 			{
-				Properties.Settings.Default.Upgrade();
-				Properties.Settings.Default.SettingsUpgradeRequired = false;
+				settings.Upgrade();
+				settings.SettingsUpgradeRequired = false;
 			}
-
 		}
 
 		[DllImport("user32.dll")]
@@ -43,8 +43,8 @@ namespace Dungeon_Teller
 			{
 				Memory.OpenProcess(p.Id);
 
-				string playerName = Memory.Read<string>(Memory.BaseAddress + Offset.playerName.val);
-				string playerRealm = Memory.Read<string>(Memory.BaseAddress + Offset.playerRealm.val);
+				string playerName = Memory.Read<string>(Memory.BaseAddress + Offsets.playerName.val);
+				string playerRealm = Memory.Read<string>(Memory.BaseAddress + Offsets.playerRealm.val);
 
 				if (playerName.Length != 0 && playerRealm.Length != 0)
 				{
@@ -79,11 +79,11 @@ namespace Dungeon_Teller
 		private void openDungeonTeller(int pid)
 		{
 			Memory.OpenProcess(pid);
-			string playerName = Memory.Read<string>(Memory.BaseAddress + Offset.playerName.val);
-			string playerRealm = Memory.Read<string>(Memory.BaseAddress + Offset.playerRealm.val);
+			string playerName = Memory.Read<string>(Memory.BaseAddress + Offsets.playerName.val);
+			string playerRealm = Memory.Read<string>(Memory.BaseAddress + Offsets.playerRealm.val);
 			if (playerName.Length != 0 && playerRealm.Length != 0)
 			{
-				DungeonTeller dt = new DungeonTeller();
+				DungeonTellerMain dt = new DungeonTellerMain();
 				dt.Show();
 				this.Hide();
 			}

@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 using System.Security;
 using System.Text;
 
-namespace Dungeon_Teller
+namespace Dungeon_Teller.Classes
 {
 	class Memory
 	{

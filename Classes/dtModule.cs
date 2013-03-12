@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace Dungeon_Teller
+namespace Dungeon_Teller.Classes
 {
 	class dtModule
 	{

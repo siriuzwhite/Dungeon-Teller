@@ -214,5 +214,65 @@ namespace Dungeon_Teller.Properties {
                 this["SettingsUpgradeRequired"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://dungeonteller.du.ohost.de/offsets/updates/")]
+        public string UpdateBaseUrl {
+            get {
+                return ((string)(this["UpdateBaseUrl"]));
+            }
+            set {
+                this["UpdateBaseUrl"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool CheckForUpdates {
+            get {
+                return ((bool)(this["CheckForUpdates"]));
+            }
+            set {
+                this["CheckForUpdates"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int TimesRun {
+            get {
+                return ((int)(this["TimesRun"]));
+            }
+            set {
+                this["TimesRun"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool HasContributed {
+            get {
+                return ((bool)(this["HasContributed"]));
+            }
+            set {
+                this["HasContributed"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5.2.0.16683")]
+        public string WowVersion {
+            get {
+                return ((string)(this["WowVersion"]));
+            }
+            set {
+                this["WowVersion"] = value;
+            }
+        }
     }
 }

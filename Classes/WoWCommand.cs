@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
-namespace Dungeon_Teller
+namespace Dungeon_Teller.Classes
 {
 	class WoWCommand
 	{

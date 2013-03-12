@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
-namespace Dungeon_Teller
+namespace Dungeon_Teller.Classes
 {
 	[StructLayout(LayoutKind.Sequential)]
 	struct WoWClientDB

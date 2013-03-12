@@ -1,16 +1,16 @@
 ﻿using System;
-using System.Text;
 using System.Runtime.InteropServices;
+using System.Text;
 
-namespace Dungeon_Teller
+namespace Dungeon_Teller.Classes
 {
 	class QueueStats
 	{
 		static QueueStats()
 		{
-			LfgDungeons = new DBC<LfgDungeonsRec>(new IntPtr(Offset.dbc.LfgDungeons.val));
-			BattleMasterList = new DBC<BattleMasterListRec>(new IntPtr(Offset.dbc.BattleMasterList.val));
-			Map = new DBC<MapRec>(new IntPtr(Offset.dbc.Map.val));
+			LfgDungeons = new DBC<LfgDungeonsRec>(new IntPtr(Offsets.dbc.LfgDungeons.val));
+			BattleMasterList = new DBC<BattleMasterListRec>(new IntPtr(Offsets.dbc.BattleMasterList.val));
+			Map = new DBC<MapRec>(new IntPtr(Offsets.dbc.Map.val));
 		}
 
 		public static DBC<LfgDungeonsRec> LfgDungeons;
@@ -108,11 +108,11 @@ namespace Dungeon_Teller
 			uint bgQueueCur;
 			int i = 1;
 
-			bgQueueCur = Convert.ToUInt32(Memory.Read<uint>(Memory.BaseAddress + Offset.bgQueueStats.BasePtr.val));
+			bgQueueCur = Convert.ToUInt32(Memory.Read<uint>(Memory.BaseAddress + Offsets.bgQueueStats.BasePtr.val));
 
 			while (i < id)
 			{
-				bgQueueCur = Convert.ToUInt32(Memory.Read<uint>(bgQueueCur + Offset.bgQueueStats.NextPtr.val));
+				bgQueueCur = Convert.ToUInt32(Memory.Read<uint>(bgQueueCur + Offsets.bgQueueStats.NextPtr.val));
 				i++;
 			}
 
@@ -125,18 +125,18 @@ namespace Dungeon_Teller
 			}
 			else
 			{
-				bgQueue.status = Memory.Read<int>(bgQueueCur + Offset.bgQueueStats.Status.val);
-				bgQueue.estimatedWait = Memory.Read<int>(bgQueueCur + Offset.bgQueueStats.EstimatedWait.val);
-				bgQueue.timeWaited = Memory.Read<int>(bgQueueCur + Offset.bgQueueStats.TimeWaited.val);
+				bgQueue.status = Memory.Read<int>(bgQueueCur + Offsets.bgQueueStats.Status.val);
+				bgQueue.estimatedWait = Memory.Read<int>(bgQueueCur + Offsets.bgQueueStats.EstimatedWait.val);
+				bgQueue.timeWaited = Memory.Read<int>(bgQueueCur + Offsets.bgQueueStats.TimeWaited.val);
 
 				if (bgQueue.status != 2)
 				{
-					int bml_id = Memory.Read<int>(bgQueueCur + Offset.bgQueueStats.BattleMasterListIdPtr.val);
+					int bml_id = Memory.Read<int>(bgQueueCur + Offsets.bgQueueStats.BattleMasterListIdPtr.val);
 					bgQueue.battlefieldName = BattleMasterList[bml_id].BattlefieldName;
 				}
 				else
 				{
-					int map_id = Memory.Read<int>(bgQueueCur + Offset.bgQueueStats.MapId.val);
+					int map_id = Memory.Read<int>(bgQueueCur + Offsets.bgQueueStats.MapId.val);
 					bgQueue.battlefieldName = Map[map_id].BattlefieldName;
 				}
 			}
@@ -146,7 +146,7 @@ namespace Dungeon_Teller
 
 		public static int getLfgProposal()
 		{
-			short dungeon_id = Memory.Read<short>(Memory.BaseAddress + Offset.lfgProposal.val);
+			short dungeon_id = Memory.Read<short>(Memory.BaseAddress + Offsets.lfgProposal.val);
 
 			return (int)dungeon_id;
 		}
@@ -163,7 +163,7 @@ namespace Dungeon_Teller
 		{
 			LFGDataStruct lfgQueue = new LFGDataStruct();
 			uint structSize = (uint)Marshal.SizeOf(lfgQueue);
-			lfgQueue = Memory.ReadStruct<LFGDataStruct>(Memory.BaseAddress + Offset.lfgQueueStats.val + (structSize * (LE_LFG_CATEGORY - 1)));
+			lfgQueue = Memory.ReadStruct<LFGDataStruct>(Memory.BaseAddress + Offsets.lfgQueueStats.val + (structSize * (LE_LFG_CATEGORY - 1)));
 
 			return lfgQueue;
 		}
