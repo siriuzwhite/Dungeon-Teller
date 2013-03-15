@@ -135,15 +135,24 @@ namespace Dungeon_Teller.Classes
 			{
 				if (typeof(T) == typeof(string))
 				{
-					var chars = new List<char>();
+					List<byte> byte_list = new List<byte>();
 					uint offset = 0;
-					char lastChar;
-					while ((lastChar = (char)Read<byte>(address + offset)) != '\0')
+
+					while (true)
 					{
+						byte byte_step = Memory.Read<byte>(address + offset);
+
+						if (byte_step != 0)
+							byte_list.Add(byte_step);
+						else
+							break;
+
 						offset++;
-						chars.Add(lastChar);
 					}
-					ret = new string(chars.ToArray());
+
+					byte[] bytes = byte_list.ToArray();
+
+					ret = Encoding.UTF8.GetString(bytes);
 
 					return (T)ret;
 				}

@@ -51,7 +51,7 @@ namespace Dungeon_Teller.Classes
 			{
 				get
 				{
-					return prepareString(Memory.Read<string>(_battlefieldName));
+					return Memory.Read<string>(_battlefieldName);
 				}
 			}
 		}
@@ -66,7 +66,7 @@ namespace Dungeon_Teller.Classes
 			{
 				get
 				{
-					return prepareString(Memory.Read<string>(_battlefieldName));
+					return Memory.Read<string>(_battlefieldName);
 				}
 			}
 		}
@@ -89,17 +89,9 @@ namespace Dungeon_Teller.Classes
 			{
 				get
 				{
-					return prepareString(Memory.Read<string>(_DungeonName));
+					return Memory.Read<string>(_DungeonName);
 				}
 			}
-		}
-
-		private static string prepareString(string str)
-		{
-			byte[] bytes = Encoding.GetEncoding(0).GetBytes(str);
-			str = Encoding.UTF8.GetString(bytes);
-
-			return str;
 		}
 
 		public static BGDataStruct getBgQeueStats(uint id)
