@@ -664,7 +664,6 @@ namespace Dungeon_Teller.Forms
 		{
 			pid_wow = Memory.ProcessId;
 			hWnd_wow = Process.GetProcessById(pid_wow).MainWindowHandle;
-
 			lbl_attachedTo.Text = String.Format("(attached to PID: {0})", pid_wow);
 
 			checkContributed();
