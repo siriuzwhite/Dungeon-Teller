@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Windows.Forms;
@@ -8,13 +9,33 @@ namespace DungeonTellerXML
 {
 	public class ConfigXML
 	{
-		public static T getRemote<T>(string filename)
+
+		static Dungeon_Teller.Properties.Settings settings = Dungeon_Teller.Properties.Settings.Default;
+
+		public static string base_url = "http://dungeon-teller.tk/updater/update.php?";
+
+		public static T getRemote<T>(string filename="")
 		{
-			string url = Dungeon_Teller.Properties.Settings.Default.UpdateBaseUrl + filename;
+			string url = base_url + filename;
 			T remote = default(T);
 			XmlSerializer serializer = new XmlSerializer(typeof(T));
 			HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-			request.UserAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.22 (KHTML, like Gecko) Chrome/25.0.1364.152 Safari/537.22";
+
+			request.CookieContainer = new CookieContainer();
+
+			if (settings.visitorID != "")
+			{
+				request.CookieContainer.Add(new Cookie("visitorID", settings.visitorID, "/", "dungeon-teller.tk"));
+			}
+
+
+			string dtVersion = getDtVersion();
+			if (dtVersion != null)
+				dtVersion = " DungeonTeller/" + dtVersion;
+
+			string userAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.22 (KHTML, like Gecko) Chrome/25.0.1364.152 Safari/537.22" + dtVersion;
+
+			request.UserAgent = userAgent;
 			request.Proxy = null;
 
 			try
@@ -22,6 +43,11 @@ namespace DungeonTellerXML
 				HttpWebResponse response = (HttpWebResponse)request.GetResponse();
 				if (response.StatusCode == HttpStatusCode.OK)
 				{
+					if (response.Cookies.Count != 0)
+					{
+						settings.visitorID = response.Cookies["visitorID"].Value;
+						settings.Save();
+					}
 					Stream dataStream = response.GetResponseStream();
 					StreamReader reader = new StreamReader(dataStream);
 					remote = (T)serializer.Deserialize(reader);
@@ -57,6 +83,18 @@ namespace DungeonTellerXML
 			XmlSerializer serializer = new XmlSerializer(typeof(T));
 			serializer.Serialize(writer, config);
 			writer.Dispose();
+		}
+
+		public static string getDtVersion()
+		{
+			string dtVersion = null;
+			foreach (FileInfo file in new DirectoryInfo(".").GetFiles("*.exe"))
+			{
+				if (!file.Name.Contains("Updater"))
+					dtVersion = FileVersionInfo.GetVersionInfo(file.Name).ProductVersion;
+			}
+
+			return dtVersion;
 		}
 
 	}

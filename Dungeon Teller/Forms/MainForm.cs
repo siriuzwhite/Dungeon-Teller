@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Dungeon_Teller.Forms
 {
-	public partial class DungeonTellerMain : Form
+	public partial class MainForm : Form
 	{
 		private const int SW_RESTORE = 9;
 
@@ -125,7 +125,7 @@ namespace Dungeon_Teller.Forms
 			}
 		}
 
-		public DungeonTellerMain()
+		public MainForm()
 		{
 			InitializeComponent();
 
@@ -664,7 +664,7 @@ namespace Dungeon_Teller.Forms
 		{
 			pid_wow = Memory.ProcessId;
 			hWnd_wow = Process.GetProcessById(pid_wow).MainWindowHandle;
-			lbl_attachedTo.Text = String.Format("(attached to PID: {0})", pid_wow);
+			lnk_attachedTo.Text = String.Format("(attached to PID: {0})", pid_wow);
 
 			checkContributed();
 
@@ -716,7 +716,7 @@ namespace Dungeon_Teller.Forms
 			Helper.BgRefresh(bg2Module, bg2Queue);
 		}
 
-		private void lnk_processSelector_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+		private void lnk_attached_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
 		{
 			ProcessSelector selector = new ProcessSelector();
 			DialogResult selected = selector.ShowDialog();

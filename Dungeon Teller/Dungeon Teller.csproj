@@ -60,11 +60,6 @@
     <ApplicationIcon>Ability_warrior_focusedrage.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DungeonTellerXML">
-      <HintPath>..\DungeonTellerXMLConfig\bin\Release\DungeonTellerXML.dll</HintPath>
-      <EmbedInteropTypes>False</EmbedInteropTypes>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -88,6 +83,7 @@
     <Compile Include="Classes\Helper.cs" />
     <Compile Include="Classes\Offsets.cs" />
     <Compile Include="Classes\QueueStats.cs" />
+    <Compile Include="Classes\UpdateStarter.cs" />
     <Compile Include="Classes\UpdateState.cs" />
     <Compile Include="Forms\Dialogs\DesktopNotification.cs">
       <SubType>Form</SubType>
@@ -95,11 +91,11 @@
     <Compile Include="Forms\Dialogs\DesktopNotification.Designer.cs">
       <DependentUpon>DesktopNotification.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\DungeonTellerMain.cs">
+    <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\DungeonTellerMain.Designer.cs">
-      <DependentUpon>DungeonTellerMain.cs</DependentUpon>
+    <Compile Include="Forms\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\Memory.cs" />
     <Compile Include="Forms\Options.cs">
@@ -148,8 +144,8 @@
     <EmbeddedResource Include="Forms\Dialogs\RepDialog.resx">
       <DependentUpon>RepDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\DungeonTellerMain.resx">
-      <DependentUpon>DungeonTellerMain.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Options.resx">
@@ -159,15 +155,14 @@
       <DependentUpon>ProcessSelector.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Updater.resx">
-      <DependentUpon>Updater.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Dialogs\UpdaterDialog.resx">
       <DependentUpon>UpdaterDialog.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Updater.resx">
+      <DependentUpon>Updater.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="app.config">
@@ -185,20 +180,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Attach.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Refresh.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Ability_warrior_focusedrage.ico" />
-    <None Include="Resources\Icon.bmp" />
-    <None Include="Resources\Ready.wav" />
-    <None Include="Resources\QueueReady.png" />
-    <None Include="Resources\InQueue.png" />
-    <None Include="Resources\NotInQueue.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
@@ -223,31 +204,23 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\role_tank_32x32.png" />
-    <None Include="Resources\role_heal_32x32.png" />
-    <None Include="Resources\role_dps_32x32.png" />
-    <None Include="Resources\role_tank_64x64.png" />
-    <None Include="Resources\role_heal_64x64.png" />
-    <None Include="Resources\role_dps_64x64.png" />
-    <None Include="Resources\raid_finder_icon.png" />
-    <None Include="Resources\dungeon_finder_icon.png" />
-    <None Include="Resources\pvp_finder_icon.png" />
-    <None Include="Resources\Image1.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\lfg_eye.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Ability_warrior_focusedrage.ico" />
-    <None Include="Resources\file_missing.png" />
-    <None Include="Resources\thumps_up.png" />
-    <None Include="Resources\download.png" />
-    <None Include="Resources\bar.gif" />
+    <Content Include="offsets.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Resources\lfg-eye.gif" />
+    <None Include="Resources\Ready.wav" />
+    <None Include="Resources\bar1.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DungeonTellerXMLConfig\DungeonTellerXML.csproj">
+      <Project>{5203da63-7a23-4bd2-ad17-945135cc7fdd}</Project>
+      <Name>DungeonTellerXML</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy "$(TargetDir)$(TargetFileName)" "$(SolutionDir)bin\" /Y</PostBuildEvent>
+    <PostBuildEvent>xcopy "$(TargetDir)$(TargetFileName)" "$(SolutionDir)\bin\" /Y</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

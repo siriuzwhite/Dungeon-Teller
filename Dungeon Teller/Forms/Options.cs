@@ -7,16 +7,16 @@ namespace Dungeon_Teller.Forms
 {
 	public partial class Options : Form
 	{
-		DungeonTellerMain dt;
+		MainForm main;
 		ProcessSelector ps;
 		Properties.Settings settings = Properties.Settings.Default;
 
-		public Options(DungeonTellerMain dt)
+		public Options(MainForm main)
 		{
 			InitializeComponent();
 			AddEvents(this.Controls);
 			this.combo_pushProvider.SelectedIndex = 0;
-			this.dt = dt;
+			this.main = main;
 		}
 
 		public Options(ProcessSelector ps)
@@ -105,21 +105,21 @@ namespace Dungeon_Teller.Forms
 				settings.MailNotification = cb_mailNotification.Checked;
 				settings.MailAddress = tb_mailTo.Text;
 
-				if (settings.LockWindow) dt.lockToBottomRight();
+				if (settings.LockWindow) main.lockToBottomRight();
 
 				if (settings.TrayOnly)
 				{
-					dt.Hide();
+					main.Hide();
 					this.Focus();
 				}
 				else
 				{
-					dt.Show();
+					main.Show();
 					this.Focus();
 				}
 
-				dt.Opacity = (double)settings.Opacity / 100;
-				dt.Refresh();
+				main.Opacity = (double)settings.Opacity / 100;
+				main.Refresh();
 
 				return true;
 			}

@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Windows.Forms;
 using Dungeon_Teller.Classes;
 using Dungeon_Teller.Forms;
+using System.Threading;
 
 namespace Dungeon_Teller
 {
@@ -13,12 +14,24 @@ namespace Dungeon_Teller
 		/// The main entry point for the application.
 		/// </summary>
 		/// 
+
+		private static Mutex mutex;
+
 		[STAThread]
 		static void Main()
 		{
-			Application.EnableVisualStyles();
-			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new DungeonTellerMain());
+			bool dtRunning;
+			mutex = new Mutex(false, "DungeonTeller-{25dsfgdsdfsd54325sdf}", out dtRunning);
+			if (!dtRunning)
+			{
+				MessageBox.Show("Another instance of Dungeon Teller is already running!", "Dungeon Teller", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+			}
+			else
+			{
+				Application.EnableVisualStyles();
+				Application.SetCompatibleTextRenderingDefault(false);
+				Application.Run(new MainForm());
+			}
 		}
 	}
 }

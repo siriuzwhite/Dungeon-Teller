@@ -3,7 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows Desktop
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dungeon Teller", "Dungeon Teller\Dungeon Teller.csproj", "{E2F965FE-A126-4A2C-A4DA-570BCC80AE57}"
 	ProjectSection(ProjectDependencies) = postProject
-		{0F95922D-8E8D-43F5-9C91-BAAAA065F4DF} = {0F95922D-8E8D-43F5-9C91-BAAAA065F4DF}
 		{5203DA63-7A23-4BD2-AD17-945135CC7FDD} = {5203DA63-7A23-4BD2-AD17-945135CC7FDD}
 	EndProjectSection
 EndProject

@@ -1,6 +1,6 @@
-﻿namespace Dungeon_Teller.Forms
+﻿namespace Updater.Forms
 {
-	partial class Updater
+	partial class CheckForUpdate
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -28,53 +28,51 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Updater));
-			this.worker = new System.ComponentModel.BackgroundWorker();
-			this.label1 = new System.Windows.Forms.Label();
+			this.label2 = new System.Windows.Forms.Label();
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
+			this.bw_loadXML = new System.ComponentModel.BackgroundWorker();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			this.SuspendLayout();
 			// 
-			// worker
+			// label2
 			// 
-			this.worker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
-			this.worker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.worker_RunWorkerCompleted);
-			// 
-			// label1
-			// 
-			this.label1.AutoSize = true;
-			this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-			this.label1.Location = new System.Drawing.Point(27, 9);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(190, 24);
-			this.label1.TabIndex = 1;
-			this.label1.Text = "Checking for Updates";
+			this.label2.AutoSize = true;
+			this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+			this.label2.Location = new System.Drawing.Point(28, 9);
+			this.label2.Name = "label2";
+			this.label2.Size = new System.Drawing.Size(190, 24);
+			this.label2.TabIndex = 3;
+			this.label2.Text = "Checking for Updates";
 			// 
 			// pictureBox1
 			// 
-			this.pictureBox1.Image = global::Dungeon_Teller.Properties.Resources.bar;
+			this.pictureBox1.Image = global::Updater.Properties.Resources.bar;
 			this.pictureBox1.Location = new System.Drawing.Point(58, 45);
 			this.pictureBox1.Name = "pictureBox1";
 			this.pictureBox1.Size = new System.Drawing.Size(128, 15);
-			this.pictureBox1.TabIndex = 2;
+			this.pictureBox1.TabIndex = 4;
 			this.pictureBox1.TabStop = false;
 			// 
-			// Updater
+			// bw_loadXML
+			// 
+			this.bw_loadXML.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bw_loadXML_DoWork);
+			this.bw_loadXML.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bw_loadXML_RunWorkerCompleted);
+			// 
+			// CheckForUpdate
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(245, 83);
+			this.ClientSize = new System.Drawing.Size(236, 78);
 			this.Controls.Add(this.pictureBox1);
-			this.Controls.Add(this.label1);
+			this.Controls.Add(this.label2);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
-			this.Name = "Updater";
-			this.ShowInTaskbar = false;
+			this.Name = "CheckForUpdate";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-			this.Text = "Dungeon Teller - Updater";
-			this.Shown += new System.EventHandler(this.Updater_Shown);
+			this.Text = "Updater";
+			this.Load += new System.EventHandler(this.CheckForUpdate_Load);
+			this.Shown += new System.EventHandler(this.CheckForUpdate_Shown);
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
@@ -83,8 +81,8 @@
 
 		#endregion
 
-		private System.ComponentModel.BackgroundWorker worker;
-		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.PictureBox pictureBox1;
+		private System.ComponentModel.BackgroundWorker bw_loadXML;
 	}
 }

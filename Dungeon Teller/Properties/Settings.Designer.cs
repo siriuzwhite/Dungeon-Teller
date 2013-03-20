@@ -205,18 +205,6 @@ namespace Dungeon_Teller.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://dungeonteller.ohost.de/updater/")]
-        public string UpdateBaseUrl {
-            get {
-                return ((string)(this["UpdateBaseUrl"]));
-            }
-            set {
-                this["UpdateBaseUrl"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool CheckForUpdates {
             get {
@@ -320,6 +308,18 @@ namespace Dungeon_Teller.Properties {
             }
             set {
                 this["UpdateXML"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string visitorID {
+            get {
+                return ((string)(this["visitorID"]));
+            }
+            set {
+                this["visitorID"] = value;
             }
         }
     }

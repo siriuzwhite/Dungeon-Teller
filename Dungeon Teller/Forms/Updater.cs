@@ -27,8 +27,8 @@ namespace Dungeon_Teller.Forms
 		private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
 		{
 
-			OffsetXML remote = Offsets.getRemote<OffsetXML>(settings.OffSetXML);
-			UpdateXML update = UpdateXML.getRemote<UpdateXML>(settings.UpdateXML);
+			UpdateXML update = UpdateXML.getRemote<UpdateXML>();
+			OffsetXML remote;
 
 			UpdaterDialog updater = new UpdaterDialog();
 
@@ -51,6 +51,7 @@ namespace Dungeon_Teller.Forms
 
 					if (DownloadMissingXML == DialogResult.Yes)
 					{
+						remote = Offsets.getRemote<OffsetXML>( String.Format("offset={0}", update.wow_version) );
 						Offsets.writeLocal(remote, settings.OffSetXML);
 						Offsets.reinitialize();
 						settings.WowVersion = update.wow_version;
@@ -72,8 +73,7 @@ namespace Dungeon_Teller.Forms
 
 						if (UpgradeTool == DialogResult.Yes)
 						{
-							Process.Start(update.download_url);
-							Application.Exit();
+							invokeUpdate(update);
 						}
 
 					}
@@ -83,6 +83,7 @@ namespace Dungeon_Teller.Forms
 
 						if (UpdateOffsets == DialogResult.OK)
 						{
+							remote = Offsets.getRemote<OffsetXML>(String.Format("offset={0}", update.wow_version));
 							Offsets.writeLocal(remote, settings.OffSetXML);
 							Offsets.reinitialize();
 							settings.WowVersion = update.wow_version;
@@ -92,6 +93,17 @@ namespace Dungeon_Teller.Forms
 					}
 				}
 			}
+		}
+
+		public void invokeUpdate(UpdateXML update)
+		{
+			Directory.CreateDirectory("temp");
+			ConfigXML.writeLocal<UpdateXML>(update, "temp\\update.xml");
+			foreach (string newPath in Directory.GetFiles("libs", "*.*"))
+				File.Copy(newPath, newPath.Replace("libs", "temp"), true);
+
+			UpdateStarter.start("update");
+			Application.Exit();
 		}
 
 		private void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)

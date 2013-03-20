@@ -47,9 +47,6 @@
     <Setting Name="SettingsUpgradeRequired" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="UpdateBaseUrl" Type="System.String" Scope="User">
-      <Value Profile="(Default)">http://dungeonteller.ohost.de/updater/</Value>
-    </Setting>
     <Setting Name="CheckForUpdates" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
@@ -76,6 +73,9 @@
     </Setting>
     <Setting Name="UpdateXML" Type="System.String" Scope="User">
       <Value Profile="(Default)">update.xml</Value>
+    </Setting>
+    <Setting Name="visitorID" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>

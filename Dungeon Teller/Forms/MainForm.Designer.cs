@@ -1,6 +1,6 @@
 ﻿namespace Dungeon_Teller.Forms
 {
-	partial class DungeonTellerMain
+	partial class MainForm
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -29,7 +29,7 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DungeonTellerMain));
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
 			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.restoreMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -85,16 +85,15 @@
 			this.label16 = new System.Windows.Forms.Label();
 			this.pictureBox4 = new System.Windows.Forms.PictureBox();
 			this.panel_lfgEye = new System.Windows.Forms.Panel();
+			this.lnk_attachedTo = new System.Windows.Forms.LinkLabel();
 			this.lbl_msg = new System.Windows.Forms.Label();
 			this.label7 = new System.Windows.Forms.Label();
 			this.pic_lfgEye = new System.Windows.Forms.PictureBox();
-			this.lbl_attachedTo = new System.Windows.Forms.Label();
 			this.timerLfdRefresh = new System.Windows.Forms.Timer(this.components);
 			this.timerLfrRefresh = new System.Windows.Forms.Timer(this.components);
 			this.timerBg1Refresh = new System.Windows.Forms.Timer(this.components);
 			this.timerBg2Refresh = new System.Windows.Forms.Timer(this.components);
 			this.panel_main = new System.Windows.Forms.FlowLayoutPanel();
-			this.lnk_processSelector = new System.Windows.Forms.LinkLabel();
 			this.contextMenuStrip1.SuspendLayout();
 			this.gb_lfd.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -157,7 +156,7 @@
 			this.exitMenuItem.Text = "Exit";
 			this.exitMenuItem.Click += new System.EventHandler(this.exitMenuItem_Click);
 			// 
-			// timerMemoryRead
+			// memoryScanner
 			// 
 			this.memoryScanner.Interval = 250;
 			this.memoryScanner.Tick += new System.EventHandler(this.timerMemoryRead_Tick);
@@ -417,9 +416,9 @@
 			// 
 			// lbl_LfrDps
 			// 
-			this.lbl_LfrDps.Location = new System.Drawing.Point(416, 70);
+			this.lbl_LfrDps.Location = new System.Drawing.Point(415, 71);
 			this.lbl_LfrDps.Name = "lbl_LfrDps";
-			this.lbl_LfrDps.Size = new System.Drawing.Size(39, 13);
+			this.lbl_LfrDps.Size = new System.Drawing.Size(43, 13);
 			this.lbl_LfrDps.TabIndex = 68;
 			this.lbl_LfrDps.Text = "n/a";
 			this.lbl_LfrDps.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -667,14 +666,25 @@
 			// 
 			// panel_lfgEye
 			// 
+			this.panel_lfgEye.Controls.Add(this.lnk_attachedTo);
 			this.panel_lfgEye.Controls.Add(this.lbl_msg);
 			this.panel_lfgEye.Controls.Add(this.label7);
 			this.panel_lfgEye.Controls.Add(this.pic_lfgEye);
-			this.panel_lfgEye.Controls.Add(this.lbl_attachedTo);
 			this.panel_lfgEye.Location = new System.Drawing.Point(3, 407);
 			this.panel_lfgEye.Name = "panel_lfgEye";
 			this.panel_lfgEye.Size = new System.Drawing.Size(210, 125);
 			this.panel_lfgEye.TabIndex = 70;
+			// 
+			// lnk_attachedTo
+			// 
+			this.lnk_attachedTo.Location = new System.Drawing.Point(6, 23);
+			this.lnk_attachedTo.Name = "lnk_attachedTo";
+			this.lnk_attachedTo.Size = new System.Drawing.Size(204, 16);
+			this.lnk_attachedTo.TabIndex = 73;
+			this.lnk_attachedTo.TabStop = true;
+			this.lnk_attachedTo.Text = "attach it to WoW";
+			this.lnk_attachedTo.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+			this.lnk_attachedTo.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnk_attached_LinkClicked);
 			// 
 			// lbl_msg
 			// 
@@ -686,7 +696,6 @@
 			this.lbl_msg.TabIndex = 72;
 			this.lbl_msg.Text = "No WoW process selected";
 			this.lbl_msg.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			this.lbl_msg.Visible = true;
 			// 
 			// label7
 			// 
@@ -700,6 +709,7 @@
 			// 
 			// pic_lfgEye
 			// 
+			this.pic_lfgEye.Enabled = false;
 			this.pic_lfgEye.Image = global::Dungeon_Teller.Properties.Resources.lfg_eye;
 			this.pic_lfgEye.Location = new System.Drawing.Point(71, 39);
 			this.pic_lfgEye.Margin = new System.Windows.Forms.Padding(0);
@@ -707,19 +717,6 @@
 			this.pic_lfgEye.Size = new System.Drawing.Size(64, 64);
 			this.pic_lfgEye.TabIndex = 69;
 			this.pic_lfgEye.TabStop = false;
-			this.pic_lfgEye.Enabled = false;
-			this.pic_lfgEye.Visible = true;
-			// 
-			// lbl_attachedTo
-			// 
-			this.lbl_attachedTo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-			this.lbl_attachedTo.Location = new System.Drawing.Point(0, 24);
-			this.lbl_attachedTo.Name = "lbl_attachedTo";
-			this.lbl_attachedTo.Size = new System.Drawing.Size(210, 13);
-			this.lbl_attachedTo.TabIndex = 70;
-			this.lbl_attachedTo.Text = "(attached to PID: XXXX )";
-			this.lbl_attachedTo.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			this.lbl_attachedTo.Visible = true;
 			// 
 			// timerLfdRefresh
 			// 
@@ -747,36 +744,24 @@
 			this.panel_main.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.panel_main.Controls.Add(this.panel_inner);
 			this.panel_main.Controls.Add(this.lnk_options);
-			this.panel_main.Controls.Add(this.lnk_processSelector);
 			this.panel_main.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
 			this.panel_main.Location = new System.Drawing.Point(0, 1);
 			this.panel_main.Name = "panel_main";
-			this.panel_main.Size = new System.Drawing.Size(477, 567);
+			this.panel_main.Size = new System.Drawing.Size(477, 554);
 			this.panel_main.TabIndex = 70;
 			// 
-			// lnk_processSelector
-			// 
-			this.lnk_processSelector.AutoSize = true;
-			this.lnk_processSelector.Location = new System.Drawing.Point(3, 554);
-			this.lnk_processSelector.Name = "lnk_processSelector";
-			this.lnk_processSelector.Size = new System.Drawing.Size(87, 13);
-			this.lnk_processSelector.TabIndex = 70;
-			this.lnk_processSelector.TabStop = true;
-			this.lnk_processSelector.Text = "Process Selector";
-			this.lnk_processSelector.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnk_processSelector_LinkClicked);
-			// 
-			// DungeonTellerMain
+			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.AutoSize = true;
 			this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.ClientSize = new System.Drawing.Size(514, 692);
+			this.ClientSize = new System.Drawing.Size(514, 689);
 			this.Controls.Add(this.panel_main);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MaximizeBox = false;
-			this.Name = "DungeonTellerMain";
+			this.Name = "MainForm";
 			this.RightToLeft = System.Windows.Forms.RightToLeft.No;
 			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
@@ -878,12 +863,11 @@
 		private System.Windows.Forms.PictureBox pictureBox4;
 		private System.Windows.Forms.PictureBox pic_lfgEye;
 		private System.Windows.Forms.Panel panel_lfgEye;
-		private System.Windows.Forms.Label lbl_attachedTo;
 		private System.Windows.Forms.Label label7;
 		private System.Windows.Forms.Label lbl_msg;
 		private System.Windows.Forms.FlowLayoutPanel panel_main;
 		private System.Windows.Forms.NotifyIcon notifyIcon1;
-		private System.Windows.Forms.LinkLabel lnk_processSelector;
+		private System.Windows.Forms.LinkLabel lnk_attachedTo;
 
 	}
 }
