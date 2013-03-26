@@ -116,8 +116,8 @@
 			this.link_rep.TabIndex = 72;
 			this.link_rep.TabStop = true;
 			this.link_rep.Text = "+Rep";
-			this.link_rep.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.link_rep_LinkClicked);
 			this.toolTip1.SetToolTip(this.link_rep, "Add some Reputation on OwnedCore to me :-)");
+			this.link_rep.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.link_rep_LinkClicked);
 			// 
 			// DesktopNotification
 			// 

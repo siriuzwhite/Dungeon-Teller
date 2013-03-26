@@ -86,14 +86,16 @@
 			this.pictureBox4 = new System.Windows.Forms.PictureBox();
 			this.panel_lfgEye = new System.Windows.Forms.Panel();
 			this.lnk_attachedTo = new System.Windows.Forms.LinkLabel();
-			this.lbl_msg = new System.Windows.Forms.Label();
 			this.label7 = new System.Windows.Forms.Label();
 			this.pic_lfgEye = new System.Windows.Forms.PictureBox();
+			this.lbl_msg = new System.Windows.Forms.Label();
 			this.timerLfdRefresh = new System.Windows.Forms.Timer(this.components);
 			this.timerLfrRefresh = new System.Windows.Forms.Timer(this.components);
 			this.timerBg1Refresh = new System.Windows.Forms.Timer(this.components);
 			this.timerBg2Refresh = new System.Windows.Forms.Timer(this.components);
 			this.panel_main = new System.Windows.Forms.FlowLayoutPanel();
+			this.panel_footer = new System.Windows.Forms.Panel();
+			this.lnk_about = new System.Windows.Forms.LinkLabel();
 			this.contextMenuStrip1.SuspendLayout();
 			this.gb_lfd.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -113,6 +115,7 @@
 			this.panel_lfgEye.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pic_lfgEye)).BeginInit();
 			this.panel_main.SuspendLayout();
+			this.panel_footer.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// notifyIcon1
@@ -169,7 +172,7 @@
 			// lnk_options
 			// 
 			this.lnk_options.AutoSize = true;
-			this.lnk_options.Location = new System.Drawing.Point(3, 541);
+			this.lnk_options.Location = new System.Drawing.Point(4, 0);
 			this.lnk_options.Name = "lnk_options";
 			this.lnk_options.Size = new System.Drawing.Size(43, 13);
 			this.lnk_options.TabIndex = 6;
@@ -605,8 +608,9 @@
 			this.panel_inner.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
 			this.panel_inner.Location = new System.Drawing.Point(3, 3);
 			this.panel_inner.Name = "panel_inner";
-			this.panel_inner.Size = new System.Drawing.Size(471, 535);
+			this.panel_inner.Size = new System.Drawing.Size(471, 527);
 			this.panel_inner.TabIndex = 69;
+			this.panel_inner.SizeChanged += new System.EventHandler(this.panel_inner_SizeChanged);
 			// 
 			// gb_bg2
 			// 
@@ -667,12 +671,12 @@
 			// panel_lfgEye
 			// 
 			this.panel_lfgEye.Controls.Add(this.lnk_attachedTo);
-			this.panel_lfgEye.Controls.Add(this.lbl_msg);
 			this.panel_lfgEye.Controls.Add(this.label7);
 			this.panel_lfgEye.Controls.Add(this.pic_lfgEye);
+			this.panel_lfgEye.Controls.Add(this.lbl_msg);
 			this.panel_lfgEye.Location = new System.Drawing.Point(3, 407);
 			this.panel_lfgEye.Name = "panel_lfgEye";
-			this.panel_lfgEye.Size = new System.Drawing.Size(210, 125);
+			this.panel_lfgEye.Size = new System.Drawing.Size(210, 117);
 			this.panel_lfgEye.TabIndex = 70;
 			// 
 			// lnk_attachedTo
@@ -685,17 +689,6 @@
 			this.lnk_attachedTo.Text = "attach it to WoW";
 			this.lnk_attachedTo.TextAlign = System.Drawing.ContentAlignment.TopCenter;
 			this.lnk_attachedTo.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnk_attached_LinkClicked);
-			// 
-			// lbl_msg
-			// 
-			this.lbl_msg.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-			this.lbl_msg.ForeColor = System.Drawing.Color.Red;
-			this.lbl_msg.Location = new System.Drawing.Point(0, 103);
-			this.lbl_msg.Name = "lbl_msg";
-			this.lbl_msg.Size = new System.Drawing.Size(210, 23);
-			this.lbl_msg.TabIndex = 72;
-			this.lbl_msg.Text = "No WoW process selected";
-			this.lbl_msg.TextAlign = System.Drawing.ContentAlignment.TopCenter;
 			// 
 			// label7
 			// 
@@ -717,6 +710,17 @@
 			this.pic_lfgEye.Size = new System.Drawing.Size(64, 64);
 			this.pic_lfgEye.TabIndex = 69;
 			this.pic_lfgEye.TabStop = false;
+			// 
+			// lbl_msg
+			// 
+			this.lbl_msg.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+			this.lbl_msg.ForeColor = System.Drawing.Color.Red;
+			this.lbl_msg.Location = new System.Drawing.Point(0, 100);
+			this.lbl_msg.Name = "lbl_msg";
+			this.lbl_msg.Size = new System.Drawing.Size(210, 23);
+			this.lbl_msg.TabIndex = 72;
+			this.lbl_msg.Text = "No WoW process selected";
+			this.lbl_msg.TextAlign = System.Drawing.ContentAlignment.TopCenter;
 			// 
 			// timerLfdRefresh
 			// 
@@ -743,12 +747,33 @@
 			this.panel_main.AutoSize = true;
 			this.panel_main.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.panel_main.Controls.Add(this.panel_inner);
-			this.panel_main.Controls.Add(this.lnk_options);
+			this.panel_main.Controls.Add(this.panel_footer);
 			this.panel_main.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
 			this.panel_main.Location = new System.Drawing.Point(0, 1);
 			this.panel_main.Name = "panel_main";
 			this.panel_main.Size = new System.Drawing.Size(477, 554);
 			this.panel_main.TabIndex = 70;
+			// 
+			// panel_footer
+			// 
+			this.panel_footer.Controls.Add(this.lnk_about);
+			this.panel_footer.Controls.Add(this.lnk_options);
+			this.panel_footer.Location = new System.Drawing.Point(3, 536);
+			this.panel_footer.Name = "panel_footer";
+			this.panel_footer.Size = new System.Drawing.Size(213, 15);
+			this.panel_footer.TabIndex = 70;
+			// 
+			// lnk_about
+			// 
+			this.lnk_about.Anchor = System.Windows.Forms.AnchorStyles.Right;
+			this.lnk_about.AutoSize = true;
+			this.lnk_about.Location = new System.Drawing.Point(175, 0);
+			this.lnk_about.Name = "lnk_about";
+			this.lnk_about.Size = new System.Drawing.Size(35, 13);
+			this.lnk_about.TabIndex = 7;
+			this.lnk_about.TabStop = true;
+			this.lnk_about.Text = "About";
+			this.lnk_about.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnk_about_LinkClicked);
 			// 
 			// MainForm
 			// 
@@ -756,11 +781,12 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.AutoSize = true;
 			this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.ClientSize = new System.Drawing.Size(514, 689);
+			this.ClientSize = new System.Drawing.Size(479, 557);
 			this.Controls.Add(this.panel_main);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MaximizeBox = false;
+			this.MaximumSize = new System.Drawing.Size(495, 595);
 			this.Name = "MainForm";
 			this.RightToLeft = System.Windows.Forms.RightToLeft.No;
 			this.ShowInTaskbar = false;
@@ -797,6 +823,8 @@
 			((System.ComponentModel.ISupportInitialize)(this.pic_lfgEye)).EndInit();
 			this.panel_main.ResumeLayout(false);
 			this.panel_main.PerformLayout();
+			this.panel_footer.ResumeLayout(false);
+			this.panel_footer.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -868,6 +896,8 @@
 		private System.Windows.Forms.FlowLayoutPanel panel_main;
 		private System.Windows.Forms.NotifyIcon notifyIcon1;
 		private System.Windows.Forms.LinkLabel lnk_attachedTo;
+		private System.Windows.Forms.Panel panel_footer;
+		private System.Windows.Forms.LinkLabel lnk_about;
 
 	}
 }

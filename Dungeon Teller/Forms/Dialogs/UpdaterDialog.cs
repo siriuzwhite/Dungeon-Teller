@@ -34,11 +34,11 @@ namespace Dungeon_Teller.Forms.Dialogs
 					desc= String.Format("{0} could not be found. Do you want to download the latest offsets?", settings.OffSetXML);
 					break;
 				case UpdateState.UpgradeTool:
-					title="Dungeon Telle Upgrade available!";
+					title="Program update available!";
 					desc = String.Format("Dungeon Teller v{0} is available. Do you want to open the download site?", version);
 					break;
 				case UpdateState.UpdateOffsets:
-					title="New offsets available!";
+					title="Offset update available!";
 					desc = String.Format("Your offsets version: {0]\nLatest offsets version: {1}\nDo you want to update them now?", settings.WowVersion, version);
 					break;
 			}

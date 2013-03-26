@@ -17,7 +17,8 @@ namespace Dungeon_Teller.Forms
 		Properties.Settings settings = Properties.Settings.Default;
 		SoundPlayer ready = new SoundPlayer(Properties.Resources.Ready);
 		Random rand = new Random();
-		private Options opt;
+		private Options options;
+		private About about;
 		private int pid_wow;
 		private IntPtr hWnd_wow;
 
@@ -129,7 +130,8 @@ namespace Dungeon_Teller.Forms
 		{
 			InitializeComponent();
 
-			opt = new Options(this);
+			options = new Options(this);
+			about = new About();
 
 			this.pic_LfdTank.Image = Helper.ConvertToGrayScale(Helper.bmpTank);
 			this.pic_LfdHeal.Image = Helper.ConvertToGrayScale(Helper.bmpHeal);
@@ -193,7 +195,7 @@ namespace Dungeon_Teller.Forms
 				gb_lfd.Show();
 				timerLfdRefresh.Start();
 			}
-			else
+			else if (PveQueueReadyStatus == 0)
 			{
 				gb_lfd.Hide();
 				timerLfdRefresh.Stop();
@@ -210,7 +212,7 @@ namespace Dungeon_Teller.Forms
 				gb_lfr.Show();
 				timerLfrRefresh.Start();
 			}
-			else
+			else if (PveQueueReadyStatus == 0)
 			{
 				gb_lfr.Hide();
 				timerLfrRefresh.Stop();
@@ -225,10 +227,12 @@ namespace Dungeon_Teller.Forms
 
 			if (category == 1)
 			{
+				timerLfdRefresh.Stop();
 				QueueStatus_IsReady("Dungeon Finder", name);
 			}
 			else if (category == 2)
 			{
+				timerLfrRefresh.Stop();
 				QueueStatus_IsReady("Raid Finder", name);
 			}
 			else
@@ -237,10 +241,14 @@ namespace Dungeon_Teller.Forms
 
 				if (resetLFD)
 				{
+					gb_lfd.Hide();
+					timerLfdRefresh.Stop();
 					Helper.setNotQueued(lfdModule);
 				}
 				if (resetLFR)
 				{
+					gb_lfr.Hide();
+					timerLfrRefresh.Stop();
 					Helper.setNotQueued(lfrModule);
 				}
 			}
@@ -593,7 +601,7 @@ namespace Dungeon_Teller.Forms
 
 		private void lnk_options_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
 		{
-			opt.ShowDialog();
+			options.ShowDialog();
 		}
 
 		private void exitMenuItem_Click(object sender, EventArgs e)
@@ -603,7 +611,7 @@ namespace Dungeon_Teller.Forms
 
 		private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			opt.ShowDialog();
+			options.ShowDialog();
 		}
 
 		private void contextMenuStrip1_Opened(object sender, EventArgs e)
@@ -725,6 +733,18 @@ namespace Dungeon_Teller.Forms
 			{
 				startScanning();
 			}
+		}
+
+		private void panel_inner_SizeChanged(object sender, EventArgs e)
+		{
+			var width = panel_inner.Width;
+			panel_footer.Width = width;
+			panel_inner.Width = width;
+		}
+
+		private void lnk_about_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+		{
+			about.ShowDialog();
 		}
 
 	}
