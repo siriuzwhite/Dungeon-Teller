@@ -1,4 +1,4 @@
-﻿namespace Updater.Forms
+﻿namespace Dungeon_Teller.Updater.Forms
 {
 	partial class CheckForUpdate
 	{
@@ -47,7 +47,7 @@
 			// 
 			// pictureBox1
 			// 
-			this.pictureBox1.Image = global::Updater.Properties.Resources.bar;
+			this.pictureBox1.Image = global::Dungeon_Teller.Updater.Properties.Resources.bar;
 			this.pictureBox1.Location = new System.Drawing.Point(58, 45);
 			this.pictureBox1.Name = "pictureBox1";
 			this.pictureBox1.Size = new System.Drawing.Size(128, 15);

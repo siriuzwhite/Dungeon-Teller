@@ -130,6 +130,13 @@ namespace Dungeon_Teller.Forms
 		{
 			InitializeComponent();
 
+			if (settings.SettingsUpgradeRequired)
+			{
+				settings.Upgrade();
+				settings.WowVersion = (string)settings.Properties["WowVersion"].DefaultValue;
+				settings.SettingsUpgradeRequired = false;
+			}
+
 			options = new Options(this);
 			about = new About();
 

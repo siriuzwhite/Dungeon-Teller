@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Xml.Serialization;
 
-namespace DungeonTellerXML
+namespace Dungeon_Teller.XML
 {
 	[XmlRoot("offsets")]
 	public class OffsetXML : ConfigXML

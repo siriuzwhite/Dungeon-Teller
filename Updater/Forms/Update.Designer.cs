@@ -1,4 +1,4 @@
-﻿namespace Updater.Forms
+﻿namespace Dungeon_Teller.Updater.Forms
 {
 	partial class Update
 	{
@@ -31,7 +31,7 @@
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Update));
 			this.lbl_status = new System.Windows.Forms.Label();
 			this.bw_extractUpdate = new System.ComponentModel.BackgroundWorker();
-			this.progress_status = new Updater.Controls.CustomProgressBar();
+			this.progress_status = new Dungeon_Teller.Updater.Controls.CustomProgressBar();
 			this.SuspendLayout();
 			// 
 			// lbl_status

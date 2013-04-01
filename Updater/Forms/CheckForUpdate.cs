@@ -1,5 +1,4 @@
-﻿using DungeonTellerXML;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,9 +9,10 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
-using Updater.Classes;
+using Dungeon_Teller.Updater.Classes;
+using Dungeon_Teller.XML;
 
-namespace Updater.Forms
+namespace Dungeon_Teller.Updater.Forms
 {
 	public partial class CheckForUpdate : Form
 	{

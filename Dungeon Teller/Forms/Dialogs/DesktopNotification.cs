@@ -35,12 +35,5 @@ namespace Dungeon_Teller
 			public string queueReadyName;
 			public string mapName;
 		}
-
-		private void link_rep_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-		{
-			Process.Start("http://www.ownedcore.com/forums/reputation.php?do=addreputation&p=2657518");
-			Properties.Settings.Default.HasContributed = true;
-		}
-
 	}
 }

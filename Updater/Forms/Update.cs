@@ -1,5 +1,4 @@
-﻿using DungeonTellerXML;
-using Ionic.Zip;
+﻿using Ionic.Zip;
 using System;
 using System.ComponentModel;
 using System.Drawing;
@@ -7,15 +6,14 @@ using System.IO;
 using System.Net;
 using System.Reflection;
 using System.Windows.Forms;
-using Updater.Classes;
+using Dungeon_Teller.Updater.Classes;
+using Dungeon_Teller.XML;
 
-namespace Updater.Forms
+namespace Dungeon_Teller.Updater.Forms
 {
 
 	public partial class Update : Form
 	{
-
-		Dungeon_Teller.Properties.Settings settings = Dungeon_Teller.Properties.Settings.Default;
 		MemoryStream download;
 		UpdateXML update;
 		Uri uri;
@@ -56,7 +54,7 @@ namespace Updater.Forms
 		public void downloadUpdate(Uri url)
 		{
 			WebClient client = new WebClient();
-			client.Headers.Add(HttpRequestHeader.Cookie, "visitorID=" + settings.visitorID);
+			client.Headers.Add(HttpRequestHeader.Cookie, "visitorID=" + ConfigXML.visitorID);
 
 			client.DownloadDataCompleted += new DownloadDataCompletedEventHandler(DownloadDataCompleted);
 			client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(DownloadProgressChanged);

@@ -29,26 +29,29 @@
 		private void InitializeComponent()
 		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Updater));
-			this.worker = new System.ComponentModel.BackgroundWorker();
-			this.label1 = new System.Windows.Forms.Label();
+			this.workerLoadUpdateXml = new System.ComponentModel.BackgroundWorker();
+			this.lbl_status = new System.Windows.Forms.Label();
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
+			this.workerLoadOffsets = new System.ComponentModel.BackgroundWorker();
+			this.workerLoadUpdater = new System.ComponentModel.BackgroundWorker();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			this.SuspendLayout();
 			// 
-			// worker
+			// workerLoadUpdateXml
 			// 
-			this.worker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
-			this.worker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.worker_RunWorkerCompleted);
+			this.workerLoadUpdateXml.WorkerReportsProgress = true;
+			this.workerLoadUpdateXml.DoWork += new System.ComponentModel.DoWorkEventHandler(this.workerLoadUpdateXml_DoWork);
+			this.workerLoadUpdateXml.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.workerLoadUpdateXml_RunWorkerCompleted);
 			// 
-			// label1
+			// lbl_status
 			// 
-			this.label1.AutoSize = true;
-			this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-			this.label1.Location = new System.Drawing.Point(27, 9);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(190, 24);
-			this.label1.TabIndex = 1;
-			this.label1.Text = "Checking for Updates";
+			this.lbl_status.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+			this.lbl_status.Location = new System.Drawing.Point(12, 9);
+			this.lbl_status.Name = "lbl_status";
+			this.lbl_status.Size = new System.Drawing.Size(221, 24);
+			this.lbl_status.TabIndex = 1;
+			this.lbl_status.Text = "Checking for updates ...";
+			this.lbl_status.TextAlign = System.Drawing.ContentAlignment.TopCenter;
 			// 
 			// pictureBox1
 			// 
@@ -59,13 +62,23 @@
 			this.pictureBox1.TabIndex = 2;
 			this.pictureBox1.TabStop = false;
 			// 
+			// workerLoadOffsets
+			// 
+			this.workerLoadOffsets.DoWork += new System.ComponentModel.DoWorkEventHandler(this.workerLoadOffsets_DoWork);
+			this.workerLoadOffsets.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.workerLoadOffsets_RunWorkerCompleted);
+			// 
+			// workerLoadUpdater
+			// 
+			this.workerLoadUpdater.DoWork += new System.ComponentModel.DoWorkEventHandler(this.workerLoadUpdater_DoWork);
+			this.workerLoadUpdater.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.workerLoadUpdater_RunWorkerCompleted);
+			// 
 			// Updater
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(245, 83);
 			this.Controls.Add(this.pictureBox1);
-			this.Controls.Add(this.label1);
+			this.Controls.Add(this.lbl_status);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MaximizeBox = false;
@@ -74,17 +87,19 @@
 			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Dungeon Teller - Updater";
+			this.TopMost = true;
 			this.Shown += new System.EventHandler(this.Updater_Shown);
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
 			this.ResumeLayout(false);
-			this.PerformLayout();
 
 		}
 
 		#endregion
 
-		private System.ComponentModel.BackgroundWorker worker;
-		private System.Windows.Forms.Label label1;
+		private System.ComponentModel.BackgroundWorker workerLoadUpdateXml;
+		private System.Windows.Forms.Label lbl_status;
 		private System.Windows.Forms.PictureBox pictureBox1;
+		private System.ComponentModel.BackgroundWorker workerLoadOffsets;
+		private System.ComponentModel.BackgroundWorker workerLoadUpdater;
 	}
 }

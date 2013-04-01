@@ -241,7 +241,7 @@ namespace Dungeon_Teller.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("5.2.0.16683")]
+        [global::System.Configuration.DefaultSettingValueAttribute("5.2.0.16769")]
         public string WowVersion {
             get {
                 return ((string)(this["WowVersion"]));
@@ -308,18 +308,6 @@ namespace Dungeon_Teller.Properties {
             }
             set {
                 this["UpdateXML"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string visitorID {
-            get {
-                return ((string)(this["visitorID"]));
-            }
-            set {
-                this["visitorID"] = value;
             }
         }
     }

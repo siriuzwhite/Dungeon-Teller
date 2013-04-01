@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Updater.Classes
+namespace Dungeon_Teller.Updater.Classes
 {
 	class Restarter
 	{

@@ -60,7 +60,6 @@
 			this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
 			this.cb_antiAfk = new System.Windows.Forms.CheckBox();
 			this.cb_autoJoin = new System.Windows.Forms.CheckBox();
-			this.link_rep = new System.Windows.Forms.LinkLabel();
 			this.groupBox3 = new System.Windows.Forms.GroupBox();
 			this.groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.num_opacity)).BeginInit();
@@ -417,20 +416,6 @@
 			this.toolTip1.SetToolTip(this.cb_autoJoin, "If checked auto joining when a queue is ready is enabled");
 			this.cb_autoJoin.UseVisualStyleBackColor = true;
 			// 
-			// link_rep
-			// 
-			this.link_rep.AutoSize = true;
-			this.link_rep.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.link_rep.Location = new System.Drawing.Point(137, 320);
-			this.link_rep.Name = "link_rep";
-			this.link_rep.RightToLeft = System.Windows.Forms.RightToLeft.No;
-			this.link_rep.Size = new System.Drawing.Size(33, 13);
-			this.link_rep.TabIndex = 71;
-			this.link_rep.TabStop = true;
-			this.link_rep.Text = "+Rep";
-			this.toolTip1.SetToolTip(this.link_rep, "Add some Reputation on OwnedCore to me :-)");
-			this.link_rep.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.link_rep_LinkClicked);
-			// 
 			// groupBox3
 			// 
 			this.groupBox3.Controls.Add(this.cb_antiAfk);
@@ -449,7 +434,6 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.btn_cancel;
 			this.ClientSize = new System.Drawing.Size(566, 347);
-			this.Controls.Add(this.link_rep);
 			this.Controls.Add(this.groupBox3);
 			this.Controls.Add(this.btn_restore);
 			this.Controls.Add(this.groupBox2);
@@ -473,7 +457,6 @@
 			this.groupBox3.ResumeLayout(false);
 			this.groupBox3.PerformLayout();
 			this.ResumeLayout(false);
-			this.PerformLayout();
 
 		}
 
@@ -504,7 +487,6 @@
 		private System.Windows.Forms.CheckBox cb_autoJoin;
 		private System.Windows.Forms.CheckBox cb_pauseFocus;
 		private System.Windows.Forms.CheckBox cb_updates;
-		private System.Windows.Forms.LinkLabel link_rep;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.ComboBox combo_pushProvider;
 		private System.Windows.Forms.Button btn_mailTest;

@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Updater.Forms
+namespace Dungeon_Teller.Updater.Forms
 {
 	public partial class UpdateCompleted : Form
 	{
@@ -30,11 +30,6 @@ namespace Updater.Forms
 		{
 			Process.Start("Dungeon Teller.exe");
 			Application.Exit();
-		}
-
-		private void link_rep_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-		{
-			Process.Start("http://www.ownedcore.com/forums/reputation.php?do=addreputation&p=2657518");
 		}
 
 		private void startDungeonTeller_Tick(object sender, EventArgs e)

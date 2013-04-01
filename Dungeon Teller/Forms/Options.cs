@@ -251,12 +251,6 @@ namespace Dungeon_Teller.Forms
 			Notification.sendMail(tb_mailTo.Text, "Dungeon Teller Test", "This is just a tets.");
 		}
 
-		private void link_rep_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-		{
-			Process.Start("http://www.ownedcore.com/forums/reputation.php?do=addreputation&p=2657518");
-			settings.HasContributed = true;
-		}
-
 		private void combo_pushProvider_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			if (combo_pushProvider.SelectedIndex != 0)

@@ -1,4 +1,4 @@
-﻿namespace Updater.Forms
+﻿namespace Dungeon_Teller.Updater.Forms
 {
 	partial class UpdateCompleted
 	{
@@ -36,7 +36,6 @@
 			this.pic_image = new System.Windows.Forms.PictureBox();
 			this.btn_cancel = new System.Windows.Forms.Button();
 			this.btn_start = new System.Windows.Forms.Button();
-			this.link_rep = new System.Windows.Forms.LinkLabel();
 			this.timer_startDungeonTeller = new System.Windows.Forms.Timer(this.components);
 			this.panel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pic_image)).BeginInit();
@@ -59,11 +58,10 @@
 			this.lbl_desc.Location = new System.Drawing.Point(87, 39);
 			this.lbl_desc.MaximumSize = new System.Drawing.Size(310, 45);
 			this.lbl_desc.Name = "lbl_desc";
-			this.lbl_desc.Size = new System.Drawing.Size(300, 39);
+			this.lbl_desc.Size = new System.Drawing.Size(301, 39);
 			this.lbl_desc.TabIndex = 2;
-			this.lbl_desc.Text = "If you also want Dungeon Teller to be continued in the future then please take a " +
-    "moment and give me some motivation with sending me some reputation at Ownedcore." +
-    "";
+			this.lbl_desc.Text = "If you want Dungeon Teller to be continued in the future then please take a momen" +
+    "t and give me some motivation and send me some reputation on Ownedcore.";
 			// 
 			// lbl_heading
 			// 
@@ -78,7 +76,7 @@
 			// 
 			// pic_image
 			// 
-			this.pic_image.Image = global::Updater.Properties.Resources.Ok;
+			this.pic_image.Image = global::Dungeon_Teller.Updater.Properties.Resources.Ok;
 			this.pic_image.Location = new System.Drawing.Point(13, 11);
 			this.pic_image.Name = "pic_image";
 			this.pic_image.Size = new System.Drawing.Size(64, 64);
@@ -108,19 +106,6 @@
 			this.btn_start.UseVisualStyleBackColor = true;
 			this.btn_start.Click += new System.EventHandler(this.btn_start_Click);
 			// 
-			// link_rep
-			// 
-			this.link_rep.AutoSize = true;
-			this.link_rep.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.link_rep.Location = new System.Drawing.Point(12, 107);
-			this.link_rep.Name = "link_rep";
-			this.link_rep.RightToLeft = System.Windows.Forms.RightToLeft.No;
-			this.link_rep.Size = new System.Drawing.Size(33, 13);
-			this.link_rep.TabIndex = 73;
-			this.link_rep.TabStop = true;
-			this.link_rep.Text = "+Rep";
-			this.link_rep.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.link_rep_LinkClicked);
-			// 
 			// timer_startDungeonTeller
 			// 
 			this.timer_startDungeonTeller.Interval = 1000;
@@ -131,7 +116,6 @@
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(403, 137);
-			this.Controls.Add(this.link_rep);
 			this.Controls.Add(this.btn_cancel);
 			this.Controls.Add(this.btn_start);
 			this.Controls.Add(this.panel1);
@@ -155,7 +139,6 @@
 		private System.Windows.Forms.PictureBox pic_image;
 		private System.Windows.Forms.Button btn_cancel;
 		private System.Windows.Forms.Button btn_start;
-		private System.Windows.Forms.LinkLabel link_rep;
 		private System.Windows.Forms.Timer timer_startDungeonTeller;
 	}
 }

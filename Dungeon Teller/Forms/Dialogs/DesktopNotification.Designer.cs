@@ -36,7 +36,6 @@
 			this.lbl_desc = new System.Windows.Forms.Label();
 			this.lbl_heading = new System.Windows.Forms.Label();
 			this.pic_image = new System.Windows.Forms.PictureBox();
-			this.link_rep = new System.Windows.Forms.LinkLabel();
 			this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
 			this.panel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pic_image)).BeginInit();
@@ -105,20 +104,6 @@
 			this.pic_image.TabIndex = 0;
 			this.pic_image.TabStop = false;
 			// 
-			// link_rep
-			// 
-			this.link_rep.AutoSize = true;
-			this.link_rep.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.link_rep.Location = new System.Drawing.Point(9, 98);
-			this.link_rep.Name = "link_rep";
-			this.link_rep.RightToLeft = System.Windows.Forms.RightToLeft.No;
-			this.link_rep.Size = new System.Drawing.Size(33, 13);
-			this.link_rep.TabIndex = 72;
-			this.link_rep.TabStop = true;
-			this.link_rep.Text = "+Rep";
-			this.toolTip1.SetToolTip(this.link_rep, "Add some Reputation on OwnedCore to me :-)");
-			this.link_rep.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.link_rep_LinkClicked);
-			// 
 			// DesktopNotification
 			// 
 			this.AcceptButton = this.btn_accept;
@@ -126,7 +111,6 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.btn_cancel;
 			this.ClientSize = new System.Drawing.Size(418, 122);
-			this.Controls.Add(this.link_rep);
 			this.Controls.Add(this.panel1);
 			this.Controls.Add(this.btn_cancel);
 			this.Controls.Add(this.btn_accept);
@@ -155,7 +139,6 @@
 		private System.Windows.Forms.Panel panel1;
 		private System.Windows.Forms.Label lbl_heading;
 		private System.Windows.Forms.Label lbl_desc;
-		private System.Windows.Forms.LinkLabel link_rep;
 		private System.Windows.Forms.ToolTip toolTip1;
 	}
 }

@@ -1,4 +1,4 @@
-﻿namespace Updater.Controls
+﻿namespace Dungeon_Teller.Updater.Controls
 {
 	partial class CustomProgressBar
 	{

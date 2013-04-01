@@ -1,4 +1,4 @@
-﻿using DungeonTellerXML;
+﻿using Dungeon_Teller.XML;
 using System.Xml.Serialization;
 
 namespace Dungeon_Teller.Classes

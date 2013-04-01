@@ -1,5 +1,4 @@
-﻿using DungeonTellerXML;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -7,9 +6,9 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Updater.Forms;
+using Dungeon_Teller.Updater.Forms;
 
-namespace Updater
+namespace Dungeon_Teller.Updater
 {
 	static class Program
 	{

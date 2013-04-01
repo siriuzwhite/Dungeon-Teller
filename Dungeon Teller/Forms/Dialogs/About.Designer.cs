@@ -56,7 +56,7 @@
 			this.lbl_wow.Name = "lbl_wow";
 			this.lbl_wow.Size = new System.Drawing.Size(475, 23);
 			this.lbl_wow.TabIndex = 1;
-			this.lbl_wow.Text = "Compatible with: 5.2.0.16669";
+			this.lbl_wow.Text = "Compatible with: x.x.x.xxxxx";
 			this.lbl_wow.TextAlign = System.Drawing.ContentAlignment.TopCenter;
 			// 
 			// lbl_version
@@ -67,7 +67,7 @@
 			this.lbl_version.Name = "lbl_version";
 			this.lbl_version.Size = new System.Drawing.Size(475, 23);
 			this.lbl_version.TabIndex = 2;
-			this.lbl_version.Text = "Version: 0.7.2.0";
+			this.lbl_version.Text = "Version: x.x.x.x";
 			this.lbl_version.TextAlign = System.Drawing.ContentAlignment.TopCenter;
 			// 
 			// linkLabel1

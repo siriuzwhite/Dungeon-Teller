@@ -35,11 +35,11 @@ namespace Dungeon_Teller.Forms.Dialogs
 					break;
 				case UpdateState.UpgradeTool:
 					title="Program update available!";
-					desc = String.Format("Dungeon Teller v{0} is available. Do you want to open the download site?", version);
+					desc = String.Format("Dungeon Teller v{0} is available. Do you want to start the updater?", version);
 					break;
 				case UpdateState.UpdateOffsets:
 					title="Offset update available!";
-					desc = String.Format("Your offsets version: {0]\nLatest offsets version: {1}\nDo you want to update them now?", settings.WowVersion, version);
+					desc = String.Format("Your offsets version: {0}\nLatest offsets version: {1}\nDo you want to update them now?", settings.WowVersion, version);
 					break;
 			}
 
@@ -47,12 +47,6 @@ namespace Dungeon_Teller.Forms.Dialogs
 			lbl_desc.Text = desc;
 
 			return this.ShowDialog();
-		}
-
-		private void link_rep_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-		{
-			Process.Start("http://www.ownedcore.com/forums/reputation.php?do=addreputation&p=2657518");
-			Properties.Settings.Default.HasContributed = true;
 		}
 	}
 }

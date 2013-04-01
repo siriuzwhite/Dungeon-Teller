@@ -18,12 +18,6 @@ namespace Dungeon_Teller.Forms
 		public ProcessSelector()
 		{
 			InitializeComponent();
-
-			if (settings.SettingsUpgradeRequired)
-			{
-				settings.Upgrade();
-				settings.SettingsUpgradeRequired = false;
-			}
 		}
 
 		[DllImport("user32.dll")]

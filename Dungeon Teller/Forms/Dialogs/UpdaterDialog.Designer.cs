@@ -36,7 +36,6 @@
 			this.lbl_title = new System.Windows.Forms.Label();
 			this.pic_image = new System.Windows.Forms.PictureBox();
 			this.btn_yes = new System.Windows.Forms.Button();
-			this.link_rep = new System.Windows.Forms.LinkLabel();
 			this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
 			this.panel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pic_image)).BeginInit();
@@ -45,7 +44,7 @@
 			// btn_no
 			// 
 			this.btn_no.DialogResult = System.Windows.Forms.DialogResult.No;
-			this.btn_no.Location = new System.Drawing.Point(265, 91);
+			this.btn_no.Location = new System.Drawing.Point(295, 91);
 			this.btn_no.Name = "btn_no";
 			this.btn_no.Size = new System.Drawing.Size(75, 23);
 			this.btn_no.TabIndex = 1;
@@ -60,7 +59,7 @@
 			this.panel1.Controls.Add(this.pic_image);
 			this.panel1.Location = new System.Drawing.Point(0, 0);
 			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(354, 85);
+			this.panel1.Size = new System.Drawing.Size(385, 85);
 			this.panel1.TabIndex = 4;
 			// 
 			// lbl_desc
@@ -99,33 +98,18 @@
 			// btn_yes
 			// 
 			this.btn_yes.DialogResult = System.Windows.Forms.DialogResult.Yes;
-			this.btn_yes.Location = new System.Drawing.Point(181, 90);
+			this.btn_yes.Location = new System.Drawing.Point(214, 91);
 			this.btn_yes.Name = "btn_yes";
 			this.btn_yes.Size = new System.Drawing.Size(75, 23);
 			this.btn_yes.TabIndex = 5;
 			this.btn_yes.Text = "Yes";
 			this.btn_yes.UseVisualStyleBackColor = true;
 			// 
-			// link_rep
-			// 
-			this.link_rep.AutoSize = true;
-			this.link_rep.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.link_rep.Location = new System.Drawing.Point(12, 96);
-			this.link_rep.Name = "link_rep";
-			this.link_rep.RightToLeft = System.Windows.Forms.RightToLeft.No;
-			this.link_rep.Size = new System.Drawing.Size(33, 13);
-			this.link_rep.TabIndex = 73;
-			this.link_rep.TabStop = true;
-			this.link_rep.Text = "+Rep";
-			this.toolTip1.SetToolTip(this.link_rep, "Add some Reputation on OwnedCore to me :-)");
-			this.link_rep.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.link_rep_LinkClicked);
-			// 
 			// UpdaterDialog
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(352, 125);
-			this.Controls.Add(this.link_rep);
+			this.ClientSize = new System.Drawing.Size(382, 123);
 			this.Controls.Add(this.btn_yes);
 			this.Controls.Add(this.panel1);
 			this.Controls.Add(this.btn_no);
@@ -142,7 +126,6 @@
 			this.panel1.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pic_image)).EndInit();
 			this.ResumeLayout(false);
-			this.PerformLayout();
 
 		}
 
@@ -154,7 +137,6 @@
 		private System.Windows.Forms.Label lbl_title;
 		private System.Windows.Forms.PictureBox pic_image;
 		private System.Windows.Forms.Button btn_yes;
-		private System.Windows.Forms.LinkLabel link_rep;
 		private System.Windows.Forms.ToolTip toolTip1;
 	}
 }

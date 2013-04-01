@@ -57,7 +57,7 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="WowVersion" Type="System.String" Scope="User">
-      <Value Profile="(Default)">5.2.0.16683</Value>
+      <Value Profile="(Default)">5.2.0.16769</Value>
     </Setting>
     <Setting Name="OffsetsLastUpdated" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">1363093519</Value>
@@ -73,9 +73,6 @@
     </Setting>
     <Setting Name="UpdateXML" Type="System.String" Scope="User">
       <Value Profile="(Default)">update.xml</Value>
-    </Setting>
-    <Setting Name="visitorID" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>

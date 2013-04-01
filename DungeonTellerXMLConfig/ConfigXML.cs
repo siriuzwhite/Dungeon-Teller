@@ -1,16 +1,18 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Windows.Forms;
 using System.Xml.Serialization;
 
-namespace DungeonTellerXML
+namespace Dungeon_Teller.XML
 {
 	public class ConfigXML
 	{
 
-		static Dungeon_Teller.Properties.Settings settings = Dungeon_Teller.Properties.Settings.Default;
+		static RegistryKey reg = Registry.CurrentUser.CreateSubKey("SOFTWARE\\Dungeon Teller");
+		public static string visitorID = (string)reg.GetValue("visitorID");
 
 		public static string base_url = "http://dungeon-teller.tk/updater/update.php?";
 
@@ -23,11 +25,10 @@ namespace DungeonTellerXML
 
 			request.CookieContainer = new CookieContainer();
 
-			if (settings.visitorID != "")
+			if (visitorID != null)
 			{
-				request.CookieContainer.Add(new Cookie("visitorID", settings.visitorID, "/", "dungeon-teller.tk"));
+				request.CookieContainer.Add(new Cookie("visitorID", visitorID, "/", "dungeon-teller.tk"));
 			}
-
 
 			string dtVersion = getDtVersion();
 			if (dtVersion != null)
@@ -45,8 +46,8 @@ namespace DungeonTellerXML
 				{
 					if (response.Cookies.Count != 0)
 					{
-						settings.visitorID = response.Cookies["visitorID"].Value;
-						settings.Save();
+						visitorID = response.Cookies["visitorID"].Value;
+						reg.SetValue("visitorID", visitorID);
 					}
 					Stream dataStream = response.GetResponseStream();
 					StreamReader reader = new StreamReader(dataStream);
