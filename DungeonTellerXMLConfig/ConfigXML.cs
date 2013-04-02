@@ -14,7 +14,7 @@ namespace Dungeon_Teller.XML
 		static RegistryKey reg = Registry.CurrentUser.CreateSubKey("SOFTWARE\\Dungeon Teller");
 		public static string visitorID = (string)reg.GetValue("visitorID");
 
-		public static string base_url = "http://dungeon-teller.tk/updater/update.php?";
+        public static string base_url = "http://dungeonteller.net78.net/update.php?";
 
 		public static T getRemote<T>(string filename="")
 		{
@@ -27,7 +27,7 @@ namespace Dungeon_Teller.XML
 
 			if (visitorID != null)
 			{
-				request.CookieContainer.Add(new Cookie("visitorID", visitorID, "/", "dungeon-teller.tk"));
+                request.CookieContainer.Add(new Cookie("visitorID", visitorID, "/", "dungeonteller.net78.net"));
 			}
 
 			string dtVersion = getDtVersion();
