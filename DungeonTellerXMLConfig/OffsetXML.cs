@@ -104,3 +104,26 @@ namespace Dungeon_Teller.XML
 		}
 	}
 }
+
+/*
+playerName                              --> from CE ;)
+playerRealm                             --> from CE ;)
+
+//LFG Offsets
+lfgQueueStats;                  --> from GetLFGQueueStats(category)
+lfgProposal;                    --> from GetLFGProposal()
+
+//Battleground Offsets
+BasePtr                                 --> from GetBattlefieldStatus(index)
+NextPtr                                 --> from GetBattlefieldStatus(index)
+BattleMasterListIdPtr   --> from GetBattlefieldStatus(index)
+MapId                                   --> from GetBattlefieldStatus(index)
+Status                                  --> from GetBattlefieldStatus(index)
+EstimatedWait                   --> from GetBattlefieldEstimatedWaitTime(index)
+TimeWaited                              --> from GetBattlefieldTimeWaited(index)
+
+//DBC Offsets
+lfgDungeons                             --> LfgDungeons.dbc from GetLFGQueueStats(category)
+battleMasterList                --> BattleMasterList.dbc from GetBattlefieldStatus(index)
+map                                             --> Map.dbc from GetBattlefieldStatus(index)
+*/
